@@ -72,18 +72,14 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-2">
             <Link href="/blog">
-              <a>
-                <Button variant="ghost" size="sm">
-                  {t('nav.docs')}
-                </Button>
-              </a>
+              <Button variant="ghost" size="sm">
+                {t('nav.docs')}
+              </Button>
             </Link>
             <Link href="/">
-              <a>
-                <Button variant="ghost" size="sm">
-                  {t('nav.api')}
-                </Button>
-              </a>
+              <Button variant="ghost" size="sm">
+                {t('nav.api')}
+              </Button>
             </Link>
             <LanguageSwitcher />
           </div>
