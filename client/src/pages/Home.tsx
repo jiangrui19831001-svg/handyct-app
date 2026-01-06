@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -6,8 +8,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AlertCircle, CheckCircle2, Download, Upload, Zap } from 'lucide-react';
 import { CDISC_STANDARDS, validateSDTMCompliance, convertCSVToSDTM, generateFDAComplianceReport } from '@/lib/cdisc';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 export default function Home() {
+  const { t } = useTranslation();
   const [selectedStandard, setSelectedStandard] = useState<string>('sdtm');
   const [selectedVersion, setSelectedVersion] = useState<string>('');
   const [csvData, setCsvData] = useState<string>('');
@@ -67,12 +71,21 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm">
-              文档
-            </Button>
-            <Button variant="ghost" size="sm">
-              API
-            </Button>
+            <Link href="/blog">
+              <a>
+                <Button variant="ghost" size="sm">
+                  {t('nav.docs')}
+                </Button>
+              </a>
+            </Link>
+            <Link href="/">
+              <a>
+                <Button variant="ghost" size="sm">
+                  {t('nav.api')}
+                </Button>
+              </a>
+            </Link>
+            <LanguageSwitcher />
           </div>
         </div>
       </header>
