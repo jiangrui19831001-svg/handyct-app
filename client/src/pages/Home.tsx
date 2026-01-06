@@ -73,7 +73,7 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <Link href="/blog">
               <Button variant="ghost" size="sm">
-                {t('nav.docs')}
+                {t('nav.blog')}
               </Button>
             </Link>
             <Link href="/">
