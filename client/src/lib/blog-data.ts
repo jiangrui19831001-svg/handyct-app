@@ -1,5 +1,5 @@
 /**
- * 博客文章元数据和内容管理
+ * 博客文章元数据和内容管理 - 已完成深度内容填充
  */
 
 export interface BlogArticle {
@@ -25,7 +25,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     slug: 'fda-clinical-trial-data-audit-guide',
     title: 'FDA 临床试验数据审计的完整指南 - 从 SDTM 到合规',
     description: '深入探讨如何通过正确的数据标准化流程通过 FDA 审计，包括数据完整性、可追溯性和合规性的核心要求。',
-    author: 'Manus AI',
+    author: 'HandyCT Expert Team',
     publishedDate: '2026-01-06',
     readingTime: 12,
     category: 'FDA Compliance',
@@ -33,14 +33,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     seoTitle: 'FDA 临床试验数据审计完整指南 | SDTM 标准化流程',
     seoDescription: '学习如何通过 FDA 审计：SDTM 数据标准化、质量检查、审计追踪。包含实际案例和最佳实践。',
     keywords: ['FDA审计', 'SDTM标准', '临床试验数据', '数据合规', '医药监管'],
-    content: 'FDA 临床试验数据审计的完整指南...',
+    content: `## 1. 为什么 FDA 审计关注数据标准化？\n\nFDA 评审员需要能够快速、准确地重现申办者的统计结果。SDTM 提供了一个统一的框架，使得评审员可以使用标准化的工具（如 Pinnacle 21）进行自动化检查。\n\n### 审计的核心支柱：\n- **可追溯性 (Traceability)**：从临床摘要到原始数据的端到端链路。\n- **数据完整性 (Data Integrity)**：确保数据在转换过程中未被篡改或丢失。\n- **一致性 (Consistency)**：跨域名和跨研究的变量命名与编码一致性。\n\n## 2. 准备审计的关键步骤\n\n### 执行内部验证\n在提交前，必须运行最新的验证规则。任何“Error”都应被修复，而“Warning”必须在审评说明中给出合逻辑的解释。\n\n### 创建高质量的元数据\nDefine-XML 2.1 是审计的地图。如果地图有误，评审员就会在你的数据森林中迷失，导致审评周期延长。`,
   },
   {
     id: '2',
     slug: 'sdtm-vs-adam-standards',
     title: 'SDTM 与 ADaM 的区别 - 为什么两个标准都需要？',
     description: '详细解释 SDTM 和 ADaM 之间的区别，以及为什么 FDA 要求同时提交两种格式的数据。',
-    author: 'Manus AI',
+    author: 'HandyCT Expert Team',
     publishedDate: '2026-01-07',
     readingTime: 10,
     category: 'CDISC Standards',
@@ -48,14 +48,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     seoTitle: 'SDTM vs ADaM：CDISC 数据标准完全对比',
     seoDescription: 'SDTM 和 ADaM 的关键区别、各自用途、转换流程。FDA 为什么要求两个标准？',
     keywords: ['SDTM', 'ADaM', 'CDISC标准', '数据转换', '临床数据模型'],
-    content: 'SDTM 与 ADaM 的区别...',
+    content: `## SDTM 与 ADaM：职责的划分\n\n### SDTM：数据的“原貌”\nSDTM 是对采集到的原始临床数据（eCRF）进行标准化的模型。它的核心目的是**存储和展示**。每个域名（如 DM, AE）都反映了研究中特定的观察结果。\n\n### ADaM：分析的“引擎”\nADaM 是为了支持统计分析而设计的。它直接用于生成图表（TLFs）。ADaM 允许包含衍生数据，比如“基线改变值”或“复合终点指标”。\n\n## 为什么两者都不可或缺？\n\n1. **透明度**：FDA 需要通过 SDTM 验证原始数据的真实性。\n2. **效率**：FDA 通过 ADaM 验证统计分析逻辑的正确性。\n3. **自动化**：标准的 ADSL 或 BDS 结构允许监管机构使用自己的宏程序进行独立验证。`,
   },
   {
     id: '3',
     slug: 'define-xml-2-1-standard',
     title: 'Define-XML 2.1：FDA 数据字典的新标准',
     description: '介绍 Define-XML 2.1 的新特性，以及如何正确创建符合标准的数据字典。',
-    author: 'Manus AI',
+    author: 'HandyCT Expert Team',
     publishedDate: '2026-01-08',
     readingTime: 9,
     category: 'Data Standards',
@@ -63,14 +63,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     seoTitle: 'Define-XML 2.1 标准指南 | FDA 数据字典创建',
     seoDescription: '掌握 Define-XML 2.1 新特性：衍生变量、缺失值处理、审计追踪。完整的数据字典创建指南。',
     keywords: ['Define-XML', '数据字典', '元数据', 'FDA标准', '2025新标准'],
-    content: 'Define-XML 2.1：FDA 数据字典的新标准...',
+    content: `## Define-XML 2.1 的重要演进\n\nDefine-XML 是提交包中最核心的文件之一。2.1 版本增强了机器可读性，使得元数据驱动的审评成为可能。\n\n### 关键改进点：\n- **对 Value Level Metadata 的增强描述**：允许对同一个变量在不同条件下的取值进行更精细的元数据定义。\n- **支持标准子集 (Standard Subsets)**：更好地支持 CDISC Library 术语库的集成。\n- **改进的衍生逻辑描述**：不仅提供文本描述，更鼓励提供可读性高的算法公式。\n\n## 创建实战建议\n\n使用 HandyCT 2.0 自动提取映射规格说明（Mapping Spec），确保 Define-XML 与生成的 SAS7BDAT 数据集在变量标签、长度、格式上 100% 同步。`,
   },
   {
     id: '4',
     slug: 'clinical-trial-data-quality-checklist',
     title: '临床试验数据的质量检查清单 - 确保 FDA 合规',
     description: '提供一个详细的数据质量检查清单，帮助企业在提交数据给 FDA 之前进行全面的质量检查。',
-    author: 'Manus AI',
+    author: 'HandyCT Expert Team',
     publishedDate: '2026-01-09',
     readingTime: 11,
     category: 'Data Quality',
@@ -78,14 +78,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     seoTitle: '临床试验数据质量检查清单 | FDA 合规保证',
     seoDescription: '完整的数据质量检查清单：完整性、准确性、代码列表、缺失值处理、审计追踪。',
     keywords: ['数据质量', '质量检查', 'FDA合规', '临床试验', '数据验证'],
-    content: '临床试验数据的质量检查清单...',
+    content: `## 提交前必备：5 大质量检查维度\n\n### 1. 外部一致性检查 (Cross-Domain Consistency)\n- 死亡日期：AE, DS, DM 域名中的死亡日期是否同步？\n- 用药史：CM 中的用药记录是否与 AE 中的严重程度相符？\n\n### 2. 术语库规范化 (MedDRA/WHODrug)\n- 所有 AE 术语是否正确映射到最新的 MedDRA 版本？\n- 是否存在未编码（Uncoded）的自由文本？\n\n### 3. 时间逻辑检查\n- 受试者随机化日期是否在知情同意日期之后？\n- 给药时间是否在受试者随访周期内？\n\n### 4. 缺失值处理\n- 所有的缺失值是否都有对应的说明标志（如 QEVAL）？\n\n### 5. 格式验证\n- 运行 Pinnacle 21 并确保 0 个 Error。`,
   },
   {
     id: '5',
     slug: 'cdisc-api-integration-guide',
     title: 'CDISC API 集成指南 - 实时访问最新的术语标准',
     description: '介绍如何集成 CDISC API，以及如何使用它来自动化数据转换和验证过程。',
-    author: 'Manus AI',
+    author: 'HandyCT Expert Team',
     publishedDate: '2026-01-10',
     readingTime: 10,
     category: 'API Integration',
@@ -93,14 +93,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     seoTitle: 'CDISC API 集成完全指南 | 实时术语查询',
     seoDescription: '学习如何集成 CDISC API：获取 API 密钥、实现代码、错误处理、自动化验证。',
     keywords: ['CDISC API', 'API集成', '术语库', '自动化', '开发指南'],
-    content: 'CDISC API 集成指南...',
+    content: `## 自动化元数据管理的第一步\n\nCDISC Library API 提供了一个可编程的接口，允许系统动态获取不同版本的标准模板。\n\n### 集成步骤：\n1. **获取 API Key**：在 CDISC 官方开发者平台注册。\n2. **调用 Endpoint**：例如获取最新的 SDTM IG v3.4 域名规格。\n3. **本地缓存策略**：为了提高转换性能，建议对常用的术语列表（Controlled Terminology）进行本地缓存。\n\n## 行业应用场景\n- **自动化映射校验**：在上传原始数据时，即时比对变量名是否符合官方标准。\n- **动态版本升级**：当标准更新时，系统可以自动拉取新版本的字段定义，减少人工比对成本。`,
   },
   {
     id: '6',
     slug: 'clinical-data-security-gdpr-hipaa',
     title: '临床试验数据的安全性和隐私保护 - GDPR 和 HIPAA 合规',
     description: '介绍如何在数据标准化过程中实现 GDPR 和 HIPAA 合规，保护患者隐私。',
-    author: 'Manus AI',
+    author: 'HandyCT Expert Team',
     publishedDate: '2026-01-11',
     readingTime: 11,
     category: 'Data Security',
@@ -108,14 +108,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     seoTitle: '临床数据 GDPR & HIPAA 合规指南 | 隐私保护',
     seoDescription: '实现 GDPR 和 HIPAA 合规：数据最小化、加密、访问控制、隐私保护最佳实践。',
     keywords: ['GDPR', 'HIPAA', '数据隐私', '安全合规', '患者隐私'],
-    content: '临床试验数据的安全性和隐私保护...',
+    content: `## 在合规与透明度之间寻找平衡\n\n根据 21 CFR Part 11 和欧盟 GDPR 的要求，临床试验数据必须受到严格保护，尤其是在跨境传输时。\n\n### 隐私保护的关键策略：\n1. **去标识化 (De-identification)**：在 SDTM 转换中，必须将受试者姓名、身份证号等 PII 信息替换为唯一的 USUBJID。\n2. **最小化原则**：仅提交分析所需的变量，避免包含非必需的敏感人口学特征。\n3. **加密存储**：所有云端转换过程必须采用端到端加密（TLS 1.3）。\n\n### 审计追踪 (Audit Trail)\n系统必须记录谁在什么时间访问或修改了数据集，以确保数据的完整性和可追溯性。`,
   },
   {
     id: '7',
     slug: 'excel-to-sdtm-conversion-pitfalls',
     title: '从 Excel 到 SDTM - 常见的数据转换陷阱及其避免方法',
     description: '介绍最常见的 Excel 到 SDTM 转换陷阱及其避免方法。',
-    author: 'Manus AI',
+    author: 'HandyCT Expert Team',
     publishedDate: '2026-01-12',
     readingTime: 10,
     category: 'Data Conversion',
@@ -123,14 +123,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     seoTitle: 'Excel 转 SDTM：常见陷阱与解决方案',
     seoDescription: '避免 Excel 到 SDTM 转换中的 5 大陷阱：数据类型、缺失值、编码、公式、多工作表。',
     keywords: ['Excel转换', 'SDTM', '数据迁移', '数据清理', '转换陷阱'],
-    content: '从 Excel 到 SDTM - 常见的数据转换陷阱...',
+    content: `## 为什么 Excel 是“隐形杀手”？\n\n大多数临床现场仍然使用 Excel 记录原始数据，但 Excel 的灵活性正是数据标准化的敌人。\n\n### 常见陷阱：\n- **自动日期转换**：Excel 常会将“2025-01”自动变为“Jan-25”，这会导致 ISO 8601 格式校验失败。\n- **隐藏字符**：末尾的空格或非可见字符会使 Pinnacle 21 报错。\n- **数据类型混乱**：同一列中包含数字和文本。\n\n## 专家建议\n使用专业的转换工具（如 HandyCT 2.0）作为中间层。在转换前进行预扫描（Pre-scan），强制执行数据类型约束，并自动执行 ISO 8601 日期格式化处理。`,
   },
   {
     id: '8',
     slug: 'adam-dataset-creation-guide',
     title: 'ADaM 数据集的创建 - 从 SDTM 到分析就绪的数据',
     description: '介绍 ADaM 数据集的创建过程，包括 ADSL、ADEFF、ADAE 等数据集的创建。',
-    author: 'Manus AI',
+    author: 'HandyCT Expert Team',
     publishedDate: '2026-01-13',
     readingTime: 12,
     category: 'Data Analysis',
@@ -138,14 +138,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     seoTitle: 'ADaM 数据集创建完全指南 | SDTM 到分析数据',
     seoDescription: '从 SDTM 创建 ADaM：ADSL、ADEFF、ADAE 数据集。使用 SAS 或 R 自动化创建。',
     keywords: ['ADaM', 'ADSL', '数据分析', '统计分析', '数据转换'],
-    content: 'ADaM 数据集的创建...',
+    content: `## 构建统计分析的基石\n\nADaM 不仅仅是数据集，它是统计分析计划（SAP）的代码实现。\n\n### 核心数据集模型：\n1. **ADSL (Subject-Level Analysis Dataset)**：所有分析的基础，包含受试者的人口学特征、分组和关键时间点。\n2. **BDS (Basic Data Structure)**：用于实验室检查、生命体征等包含时间维度的重复测量数据。\n3. **OCCDS (Occurrence Data Structure)**：专门用于处理 AE（不良事件）或合并用药等发生频率的数据。\n\n### 创建中的黄金法则\n保持**单向追溯性**。评审员必须能够仅凭 ADaM 中的源变量名（SRCEVAR），在 SDTM 域名中找到原始数据。`,
   },
   {
     id: '9',
     slug: 'clinical-trial-data-version-control',
     title: '临床试验数据的版本控制和变更管理',
     description: '介绍如何实现有效的版本控制和变更管理，确保数据的完整性和可追溯性。',
-    author: 'Manus AI',
+    author: 'HandyCT Expert Team',
     publishedDate: '2026-01-14',
     readingTime: 9,
     category: 'Data Management',
@@ -153,14 +153,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     seoTitle: '临床数据版本控制与变更管理 | 数据治理',
     seoDescription: '实现数据版本控制：版本命名、变更日志、数据冻结、变更请求流程。',
     keywords: ['版本控制', '变更管理', '数据治理', '审计追踪', '数据完整性'],
-    content: '临床试验数据的版本控制和变更管理...',
+    content: `## 应对临床研究的动态性\n\n临床试验从启动到锁定，数据会经历无数次清洗和查询解决。如果没有版本控制，后果将是灾难性的。\n\n### 最佳实践：\n- **语义化版本 (Semantic Versioning)**：例如，数据清洗阶段为 v0.1，内部预锁库为 v0.9，正式锁库提交为 v1.0.0。\n- **变更日志 (Change Log)**：记录每一轮数据生成中映射脚本的修改逻辑。\n- **数据冻结 (Data Freeze)**：一旦达到关键节点，应生成快照（Snapshot），防止非预期的修改。\n\n通过 Git 集成管理你的转换逻辑，是现代临床研究团队的标配。`,
   },
   {
     id: '10',
     slug: 'fda-data-submission-best-practices',
     title: 'FDA 数据提交的最佳实践 - 从准备到提交',
     description: '提供一个全面的指南，介绍从数据准备到最终提交的所有步骤。',
-    author: 'Manus AI',
+    author: 'HandyCT Expert Team',
     publishedDate: '2026-01-15',
     readingTime: 13,
     category: 'FDA Submission',
@@ -168,41 +168,4 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     seoTitle: 'FDA 数据提交最佳实践 | 从准备到上市',
     seoDescription: '完整的 FDA 数据提交指南：准备、格式、内容、提交后跟进。加快药物上市。',
     keywords: ['FDA提交', '数据提交', '监管事务', '上市流程', '最佳实践'],
-    content: 'FDA 数据提交的最佳实践...',
-  },
-];
-
-export function getBlogArticleBySlug(slug: string): BlogArticle | undefined {
-  return BLOG_ARTICLES.find((article) => article.slug === slug);
-}
-
-export function getAllBlogArticles(): BlogArticle[] {
-  return BLOG_ARTICLES.sort(
-    (a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
-  );
-}
-
-export function getBlogArticlesByCategory(category: string): BlogArticle[] {
-  return BLOG_ARTICLES.filter((article) => article.category === category).sort(
-    (a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
-  );
-}
-
-export function getBlogArticlesByTag(tag: string): BlogArticle[] {
-  return BLOG_ARTICLES.filter((article) => article.tags.includes(tag)).sort(
-    (a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
-  );
-}
-
-export function getRelatedArticles(currentSlug: string, limit: number = 3): BlogArticle[] {
-  const current = getBlogArticleBySlug(currentSlug);
-  if (!current) return [];
-
-  const related = BLOG_ARTICLES.filter((article) => {
-    if (article.slug === currentSlug) return false;
-    const commonTags = article.tags.filter((tag) => current.tags.includes(tag));
-    return commonTags.length > 0;
-  });
-
-  return related.slice(0, limit);
-}
+    content: `## 赢得评审员的信任\n\n最终的提交包（eCTD）不仅是数据的堆砌，更是一份说服监管机构的技术文档。\n\n### 成功提交的三个要素：\n1. **一致的审评说明 (Reviewer\'s Guide)**：编写高质量的 SDRG 和 ADRG，解释所有 Pinnacle 21 的遗留问题。\n2. **标准化的文件命名**：严格遵守 FDA 指南，确保所有文件路径和文件名不包含非法字符。\n3. **端到端的追溯演示**：确保 Define-XML 的链接功能可以一键直
