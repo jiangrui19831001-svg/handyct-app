@@ -1,5 +1,10 @@
 {
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist",
+  "installCommand": "pnpm install",
   "framework": "vite",
+  "regions": ["sin1"],
+  "trailingSlash": false,
   "rewrites": [
     {
       "source": "/(.*)",
