@@ -1,5 +1,5 @@
 /**
- * 博客文章元数据和内容管理 - 深度内容修复版
+ * 博客文章元数据和内容管理 - 完整功能版
  */
 
 export interface BlogArticle {
@@ -24,151 +24,151 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     id: '1',
     slug: 'fda-clinical-trial-data-audit-guide',
     title: 'FDA 临床试验数据审计的完整指南 - 从 SDTM 到合规',
-    description: '深入探讨如何通过正确的数据标准化流程通过 FDA 审计，包括数据完整性、可追溯性和合规性的核心要求。',
+    description: '深入探讨如何通过正确的数据标准化流程通过 FDA 审计。',
     author: 'HandyCT Expert Team',
     publishedDate: '2026-01-06',
     readingTime: 12,
     category: 'FDA Compliance',
-    tags: ['FDA', 'SDTM', 'Clinical Trials', 'Data Audit', 'Compliance'],
-    seoTitle: 'FDA 临床试验数据审计完整指南 | SDTM 标准化流程',
-    seoDescription: '学习如何通过 FDA 审计：SDTM 数据标准化、质量检查、审计追踪。包含实际案例和最佳实践。',
-    keywords: ['FDA审计', 'SDTM标准', '临床试验数据', '数据合规', '医药监管'],
-    content: `## 1. 为什么 FDA 审计关注数据标准化？\n\nFDA 评审员需要能够快速、准确地重现申办者的统计结果。SDTM 提供了一个统一框架。`,
+    tags: ['FDA', 'SDTM', 'Compliance'],
+    seoTitle: 'FDA 临床试验数据审计完整指南',
+    seoDescription: '学习如何通过 FDA 审计。',
+    keywords: ['FDA审计', 'SDTM', '合规'],
+    content: `## 核心审计要求\n\nFDA 评审员关注数据的可追溯性和完整性。使用 SDTM 标准是确保通过审计的第一步。`
   },
   {
     id: '2',
     slug: 'sdtm-vs-adam-standards',
     title: 'SDTM 与 ADaM 的区别 - 为什么两个标准都需要？',
-    description: '详细解释 SDTM 和 ADaM 之间的区别，以及为什么 FDA 要求同时提交两种格式的数据。',
+    description: '详细解释 SDTM 和 ADaM 之间的区别。',
     author: 'HandyCT Expert Team',
     publishedDate: '2026-01-07',
     readingTime: 10,
     category: 'CDISC Standards',
-    tags: ['SDTM', 'ADaM', 'CDISC', 'Data Standards', 'Clinical Data'],
-    seoTitle: 'SDTM vs ADaM：CDISC 数据标准完全对比',
-    seoDescription: 'SDTM 和 ADaM 的关键区别、各自用途、转换流程。',
-    keywords: ['SDTM', 'ADaM', 'CDISC标准', '数据转换'],
-    content: `## SDTM 与 ADaM：职责的划分\n\nSDTM 是对原始数据的标准化，而 ADaM 是为了支持统计分析。`,
+    tags: ['SDTM', 'ADaM', 'CDISC'],
+    seoTitle: 'SDTM vs ADaM：完全对比',
+    seoDescription: 'SDTM 和 ADaM 的关键区别。',
+    keywords: ['SDTM', 'ADaM'],
+    content: `## 职责划分\n\nSDTM 用于展示原始观察结果，而 ADaM 用于支持统计分析和生成 TLFs。`
   },
   {
     id: '3',
     slug: 'define-xml-2-1-standard',
     title: 'Define-XML 2.1：FDA 数据字典的新标准',
-    description: '介绍 Define-XML 2.1 的新特性，以及如何正确创建符合标准的数据字典。',
+    description: '介绍 Define-XML 2.1 的新特性。',
     author: 'HandyCT Expert Team',
     publishedDate: '2026-01-08',
     readingTime: 9,
     category: 'Data Standards',
-    tags: ['Define-XML', 'Metadata', 'Data Dictionary', 'CDISC', 'FDA'],
+    tags: ['Define-XML', 'Metadata'],
     seoTitle: 'Define-XML 2.1 标准指南',
     seoDescription: '掌握 Define-XML 2.1 新特性。',
-    keywords: ['Define-XML', '数据字典', '元数据'],
-    content: `## Define-XML 2.1 的重要演进\n\n它是提交包中最核心的文件，2.1 版本增强了机器可读性。`,
+    keywords: ['Define-XML', '元数据'],
+    content: `## 2.1 版本的进步\n\n增强了机器可读性，支持更复杂的变量衍生逻辑描述。`
   },
   {
     id: '4',
     slug: 'clinical-trial-data-quality-checklist',
     title: '临床试验数据的质量检查清单 - 确保 FDA 合规',
-    description: '提供一个详细的数据质量检查清单，帮助企业在提交数据给 FDA 之前进行全面的质量检查。',
+    description: '提供详细的数据质量检查清单。',
     author: 'HandyCT Expert Team',
     publishedDate: '2026-01-09',
     readingTime: 11,
     category: 'Data Quality',
-    tags: ['Data Quality', 'Quality Assurance', 'FDA Compliance'],
-    seoTitle: '临床试验数据质量检查清单',
-    seoDescription: '完整的数据质量检查清单。',
-    keywords: ['数据质量', '质量检查', 'FDA合规'],
-    content: `## 提交前必备：5 大质量检查维度\n\n包括外部一致性检查、术语库规范化、时间逻辑检查等。`,
+    tags: ['Data Quality', 'Validation'],
+    seoTitle: '临床数据质量检查清单',
+    seoDescription: '确保提交前的质量。',
+    keywords: ['质量检查', '数据验证'],
+    content: `## 关键检查点\n\n包括交叉域名一致性检查、术语库映射准确性以及 ISO 8601 时间格式校验。`
   },
   {
     id: '5',
     slug: 'cdisc-api-integration-guide',
     title: 'CDISC API 集成指南 - 实时访问最新的术语标准',
-    description: '介绍如何集成 CDISC API，以及如何使用它来自动化数据转换和验证过程。',
+    description: '如何集成 CDISC API。',
     author: 'HandyCT Expert Team',
     publishedDate: '2026-01-10',
     readingTime: 10,
     category: 'API Integration',
-    tags: ['CDISC API', 'Integration', 'Automation'],
-    seoTitle: 'CDISC API 集成完全指南',
-    seoDescription: '学习如何集成 CDISC API。',
-    keywords: ['CDISC API', 'API集成', '自动化'],
-    content: `## 自动化元数据管理的第一步\n\nCDISC Library API 提供了一个可编程的接口，用于访问标准模板。`,
+    tags: ['API', 'Integration'],
+    seoTitle: 'CDISC API 集成指南',
+    seoDescription: '自动化术语查询。',
+    keywords: ['CDISC API', '自动化'],
+    content: `## 实时标准同步\n\n通过 CDISC Library API，可以自动获取最新的 Controlled Terminology，减少人工录入错误。`
   },
   {
     id: '6',
     slug: 'clinical-data-security-gdpr-hipaa',
     title: '临床试验数据的安全性和隐私保护 - GDPR 和 HIPAA 合规',
-    description: '介绍如何在数据标准化过程中实现 GDPR 和 HIPAA 合规，保护患者隐私。',
+    description: '数据标准化过程中的隐私保护。',
     author: 'HandyCT Expert Team',
     publishedDate: '2026-01-11',
     readingTime: 11,
     category: 'Data Security',
-    tags: ['GDPR', 'HIPAA', 'Data Privacy'],
-    seoTitle: '临床数据 GDPR & HIPAA 合规指南',
-    seoDescription: '实现隐私保护最佳实践。',
-    keywords: ['GDPR', 'HIPAA', '数据隐私'],
-    content: `## 在合规与透明度之间寻找平衡\n\n根据 21 CFR Part 11 要求，临床数据必须受到严格保护。`,
+    tags: ['Privacy', 'GDPR'],
+    seoTitle: '临床数据安全指南',
+    seoDescription: '数据加密与脱敏。',
+    keywords: ['数据安全', '隐私保护'],
+    content: `## 安全协议\n\n所有提交至监管机构的数据必须经过脱敏处理，确保受试者 PII 信息不被泄露。`
   },
   {
     id: '7',
     slug: 'excel-to-sdtm-conversion-pitfalls',
     title: '从 Excel 到 SDTM - 常见的数据转换陷阱及其避免方法',
-    description: '介绍最常见的 Excel 到 SDTM 转换陷阱。',
+    description: '最常见的转换陷阱。',
     author: 'HandyCT Expert Team',
     publishedDate: '2026-01-12',
     readingTime: 10,
     category: 'Data Conversion',
-    tags: ['Excel', 'SDTM', 'Data Conversion'],
-    seoTitle: 'Excel 转 SDTM：常见陷阱与解决方案',
-    seoDescription: '避免 Excel 转换中的 5 大陷阱。',
-    keywords: ['Excel转换', 'SDTM', '转换陷阱'],
-    content: `## 为什么 Excel 是“隐形杀手”？\n\n它的灵活性正是数据标准化的敌人，需要严格的数据约束。`,
+    tags: ['Excel', 'SDTM'],
+    seoTitle: 'Excel 转 SDTM 陷阱',
+    seoDescription: '避免常见的转换错误。',
+    keywords: ['Excel', 'SDTM'],
+    content: `## 避坑指南\n\n警惕 Excel 自动日期转换和隐藏字符。建议在转换前使用脚本进行数据清理。`
   },
   {
     id: '8',
     slug: 'adam-dataset-creation-guide',
     title: 'ADaM 数据集的创建 - 从 SDTM 到分析就绪的数据',
-    description: '介绍 ADaM 数据集的创建过程。',
+    description: 'ADaM 数据集的创建过程。',
     author: 'HandyCT Expert Team',
     publishedDate: '2026-01-13',
     readingTime: 12,
     category: 'Data Analysis',
-    tags: ['ADaM', 'ADSL', 'Data Analysis'],
-    seoTitle: 'ADaM 数据集创建完全指南',
-    seoDescription: '从 SDTM 创建 ADaM：ADSL、ADEFF 数据集。',
-    keywords: ['ADaM', 'ADSL', '数据分析'],
-    content: `## 构建统计分析的基石\n\nADaM 不仅仅是数据集，它是统计分析计划的代码实现。`,
+    tags: ['ADaM', 'Analysis'],
+    seoTitle: 'ADaM 创建指南',
+    seoDescription: '从 SDTM 到分析。',
+    keywords: ['ADaM', '分析'],
+    content: `## 分析模型\n\n构建 ADSL 是所有分析的基础，确保所有派生变量具备单向追溯性。`
   },
   {
     id: '9',
     slug: 'clinical-trial-data-version-control',
     title: '临床试验数据的版本控制和变更管理',
-    description: '介绍如何实现有效的版本控制，确保数据的完整性。',
+    description: '有效的版本控制和变更管理。',
     author: 'HandyCT Expert Team',
     publishedDate: '2026-01-14',
     readingTime: 9,
     category: 'Data Management',
-    tags: ['Version Control', 'Change Management'],
-    seoTitle: '临床数据版本控制与变更管理',
-    seoDescription: '实现数据版本控制：版本命名、变更日志。',
-    keywords: ['版本控制', '变更管理', '数据完整性'],
-    content: `## 应对临床研究的动态性\n\n通过 Git 管理你的转换脚本是现代临床团队的标配。`,
+    tags: ['Git', 'Management'],
+    seoTitle: '临床数据版本管理',
+    seoDescription: '确保数据一致性。',
+    keywords: ['版本控制', '管理'],
+    content: `## 变更审计\n\n每一次数据结构的修改都应在变更日志中记录，以满足监管机构对审计追踪的要求。`
   },
   {
     id: '10',
     slug: 'fda-data-submission-best-practices',
     title: 'FDA 数据提交的最佳实践 - 从准备到提交',
-    description: '提供一个全面的指南，介绍从准备到提交的所有步骤。',
+    description: '全面的数据提交指南。',
     author: 'HandyCT Expert Team',
     publishedDate: '2026-01-15',
     readingTime: 13,
     category: 'FDA Submission',
-    tags: ['FDA Submission', 'Regulatory Affairs'],
+    tags: ['FDA', 'Submission'],
     seoTitle: 'FDA 数据提交最佳实践',
-    seoDescription: '完整的 FDA 数据提交指南。',
-    keywords: ['FDA提交', '监管事务', '最佳实践'],
-    content: `## 赢得评审员的信任\n\n提交包不仅是数据的堆砌，更是一份说服监管机构的技术文档。`,
+    seoDescription: '加速上市流程。',
+    keywords: ['FDA', '提交'],
+    content: `## 成功提交\n\n高质量的 Reviewer's Guide 是说服评审员的关键，应清晰解释所有 Pinnacle 21 的验证结果。`
   },
 ];
 
@@ -180,4 +180,17 @@ export function getAllBlogArticles(): BlogArticle[] {
   return [...BLOG_ARTICLES].sort(
     (a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime()
   );
+}
+
+export function getRelatedArticles(currentSlug: string, limit: number = 3): BlogArticle[] {
+  const current = getBlogArticleBySlug(currentSlug);
+  if (!current) return [];
+
+  const related = BLOG_ARTICLES.filter((article) => {
+    if (article.slug === currentSlug) return false;
+    const commonTags = article.tags.filter((tag) => current.tags.includes(tag));
+    return commonTags.length > 0;
+  });
+
+  return related.slice(0, limit);
 }
