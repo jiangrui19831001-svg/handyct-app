@@ -1,0 +1,69 @@
+{
+  "common": {
+    "language": "语言",
+    "chinese": "中文",
+    "english": "English",
+    "back": "返回",
+    "home": "主页",
+    "blog": "博客",
+    "tools": "工具",
+    "contact": "联系我们"
+  },
+  "nav": {
+    "convert": "转换",
+    "validate": "验证",
+    "report": "报告",
+    "blog": "技术博客",
+    "api": "API 文档",
+    "support": "联系支持"
+  },
+  "home": {
+    "title": "HandyCT 2.0 - 现代化 CDISC 数据转换工具",
+    "subtitle": "自动化 FDA 数据审计，确保临床试验数据合规性",
+    "selectStandard": "选择 CDISC 标准",
+    "selectVersion": "选择版本",
+    "uploadFile": "上传数据文件",
+    "dragDrop": "拖拽文件到此处或点击选择",
+    "startConvert": "开始转换",
+    "sdtmInfo": "SDTM 信息",
+    "currentVersion": "当前版本",
+    "releaseDate": "发布日期",
+    "status": "状态",
+    "current": "当前版本",
+    "quickActions": "快速操作",
+    "learningResources": "学习资源",
+    "readOurBlog": "阅读我们的技术博客，了解 FDA 合规性最佳实践。",
+    "visitBlog": "访问技术博客"
+  },
+  "blog": {
+    "title": "FDA 数据审计与 CDISC 标准化",
+    "subtitle": "深入探讨临床试验数据标准化、FDA 合规性审查和最佳实践。",
+    "search": "搜索文章...",
+    "all": "全部",
+    "readingTime": "分钟阅读",
+    "published": "发布于",
+    "author": "作者",
+    "keywords": "关键词",
+    "relatedArticles": "相关文章",
+    "backToBlog": "返回博客",
+    "backToTools": "返回工具",
+    "notFound": "文章未找到",
+    "returnToBlog": "返回博客列表",
+    "cta": "准备好优化您的临床试验数据了吗？",
+    "ctaDescription": "使用 HandyCT 2.0 自动化 CDISC 数据转换，确保 FDA 合规性。",
+    "tryNow": "立即尝试 HandyCT 2.0 转换工具",
+    "tableOfContents": "目录"
+  },
+  "articles": {
+    "fda-data-submission-best-practices": {
+      "title": "FDA 数据提交的最佳实践 - 从准备到提交",
+      "description": "药企数据提交的最终成功指南，涵盖从数据清洗到最终 eCTD 提交的全流程。",
+      "category": "FDA 提交"
+    },
+    "sdtm-vs-adam-standards": {
+      "title": "SDTM 与 ADaM 的深度博弈：职责、差异与共生",
+      "description": "深入探讨 SDTM 和 ADaM 的技术差异，以及它们如何共同构建监管透明度。",
+      "category": "CDISC 标准"
+    }
+  }
+}

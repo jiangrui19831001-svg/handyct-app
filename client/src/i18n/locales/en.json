@@ -1,0 +1,69 @@
+{
+  "common": {
+    "language": "Language",
+    "chinese": "中文",
+    "english": "English",
+    "back": "Back",
+    "home": "Home",
+    "blog": "Blog",
+    "tools": "Tools",
+    "contact": "Contact Us"
+  },
+  "nav": {
+    "convert": "Convert",
+    "validate": "Validate",
+    "report": "Report",
+    "blog": "Tech Blog",
+    "api": "API Docs",
+    "support": "Support"
+  },
+  "home": {
+    "title": "HandyCT 2.0 - Modern CDISC Data Conversion Tool",
+    "subtitle": "Automate FDA Data Audits and Ensure Clinical Trial Data Compliance",
+    "selectStandard": "Select CDISC Standard",
+    "selectVersion": "Select Version",
+    "uploadFile": "Upload Data File",
+    "dragDrop": "Drag files here or click to select",
+    "startConvert": "Start Conversion",
+    "sdtmInfo": "SDTM Information",
+    "currentVersion": "Current Version",
+    "releaseDate": "Release Date",
+    "status": "Status",
+    "current": "Current",
+    "quickActions": "Quick Actions",
+    "learningResources": "Learning Resources",
+    "readOurBlog": "Read our technical blog to learn FDA compliance best practices.",
+    "visitBlog": "Visit Tech Blog"
+  },
+  "blog": {
+    "title": "FDA Data Audit & CDISC Standardization",
+    "subtitle": "In-depth exploration of clinical trial data standardization, FDA compliance review, and best practices.",
+    "search": "Search articles...",
+    "all": "All",
+    "readingTime": "min read",
+    "published": "Published on",
+    "author": "Author",
+    "keywords": "Keywords",
+    "relatedArticles": "Related Articles",
+    "backToBlog": "Back to Blog",
+    "backToTools": "Back to Tools",
+    "notFound": "Article Not Found",
+    "returnToBlog": "Return to Blog List",
+    "cta": "Ready to optimize your clinical trial data?",
+    "ctaDescription": "Use HandyCT 2.0 to automate CDISC data conversion and ensure FDA compliance.",
+    "tryNow": "Try HandyCT 2.0 Conversion Tool Now",
+    "tableOfContents": "Table of Contents"
+  },
+  "articles": {
+    "fda-data-submission-best-practices": {
+      "title": "FDA Data Submission Best Practices - From Preparation to Submission",
+      "description": "The ultimate success guide for pharmaceutical data submission, covering the entire process from data cleaning to final eCTD submission.",
+      "category": "FDA Submission"
+    },
+    "sdtm-vs-adam-standards": {
+      "title": "SDTM vs ADaM: Deep Dive into Responsibilities, Differences, and Symbiosis",
+      "description": "In-depth exploration of the technical differences between SDTM and ADaM, and how they work together to build regulatory transparency.",
+      "category": "CDISC Standards"
+    }
+  }
+}
