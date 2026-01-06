@@ -3,10 +3,6 @@
   "outputDirectory": "dist",
   "installCommand": "pnpm install",
   "framework": "vite",
-  "env": {
-    "VITE_CDISC_API_URL": "@cdisc_api_url",
-    "VITE_CDISC_API_KEY": "@cdisc_api_key"
-  },
   "regions": ["sin1"],
   "functions": {
     "api/**/*.ts": {
