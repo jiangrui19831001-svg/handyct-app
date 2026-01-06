@@ -33,7 +33,7 @@ export default function Blog() {
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/">
-            <a className="flex items-center gap-3 hover:opacity-80">
+            <div className="flex items-center gap-3 hover:opacity-80 cursor-pointer">
               <div className="rounded-lg bg-emerald-600 p-2">
                 <span className="text-lg font-bold text-white">⚡</span>
               </div>
@@ -41,11 +41,11 @@ export default function Blog() {
                 <h1 className="text-xl font-bold text-slate-900">HandyCT 2.0</h1>
                 <p className="text-xs text-slate-500">技术博客</p>
               </div>
-            </a>
+            </div>
           </Link>
           <div className="flex items-center gap-2">
             <Link href="/">
-              <a className="text-sm font-medium text-slate-600 hover:text-slate-900">返回工具</a>
+              <span className="text-sm font-medium text-slate-600 hover:text-slate-900 cursor-pointer">返回工具</span>
             </Link>
           </div>
         </div>
@@ -100,7 +100,7 @@ export default function Blog() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
             {filteredArticles.map((article) => (
               <Link key={article.id} href={`/blog/${article.slug}`}>
-                <a className="block">
+                <div className="block">
                   <Card className="h-full transition-all hover:shadow-lg hover:border-emerald-200">
                     <CardHeader>
                       <div className="mb-3 flex items-start justify-between">
@@ -135,7 +135,7 @@ export default function Blog() {
                       </div>
                     </CardContent>
                   </Card>
-                </a>
+                </div>
               </Link>
             ))}
           </div>
@@ -154,9 +154,7 @@ export default function Blog() {
             使用 HandyCT 2.0 自动化 CDISC 数据转换，确保 FDA 合规性。
           </p>
           <Link href="/">
-            <a>
-              <Button className="bg-emerald-600 hover:bg-emerald-700">立即尝试 HandyCT 2.0</Button>
-            </a>
+            <Button className="bg-emerald-600 hover:bg-emerald-700">立即尝试 HandyCT 2.0</Button>
           </Link>
         </div>
       </section>
