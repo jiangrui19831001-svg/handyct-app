@@ -7,7 +7,7 @@ import rehypeRaw from 'rehype-raw';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Calendar, Clock, BookOpen, ChevronRight, Mail, Phone } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, BookOpen, ChevronRight, Mail, Phone, Copy, Check } from 'lucide-react';
 import { getBlogArticleBySlug, getRelatedArticles } from '@/lib/blog-data';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
@@ -23,6 +23,8 @@ export default function BlogArticle() {
   const article = match ? getBlogArticleBySlug(params?.slug) : null;
   const relatedArticles = article ? getRelatedArticles(article.slug) : [];
   const [headings, setHeadings] = useState<HeadingNode[]>([]);
+  const [activeHeading, setActiveHeading] = useState<string>('');
+  const [copiedCode, setCopiedCode] = useState<string>('');
 
   // 获取当前语言的内容
   const currentContent = i18n.language === 'en' ? (article?.contentEn || article?.content) : article?.content;
@@ -47,13 +49,42 @@ export default function BlogArticle() {
     setHeadings(extractedHeadings);
   }, [currentContent]);
 
+  // 滚动感应目录
+  useEffect(() => {
+    const handleScroll = () => {
+      const headingElements = headings.map(h => document.getElementById(h.id));
+      let currentActive = '';
+      
+      for (const heading of headingElements) {
+        if (heading) {
+          const rect = heading.getBoundingClientRect();
+          if (rect.top < 200) {
+            currentActive = heading.id;
+          }
+        }
+      }
+      
+      setActiveHeading(currentActive);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [headings]);
+
+  // 代码块复制功能
+  const handleCopyCode = (code: string, id: string) => {
+    navigator.clipboard.writeText(code);
+    setCopiedCode(id);
+    setTimeout(() => setCopiedCode(''), 2000);
+  };
+
   if (!article) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
         <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
           <div className="container flex h-16 items-center justify-between">
             <Link href="/blog">
-              <Button variant="ghost" size="sm" className="flex items-center gap-2">
+              <Button variant="ghost" size="sm" className="flex items-center gap-2 hover:bg-slate-100 transition-all duration-200">
                 <ArrowLeft className="h-4 w-4" />
                 {t('blog.backToBlog')}
               </Button>
@@ -65,7 +96,7 @@ export default function BlogArticle() {
           <div className="text-center">
             <h1 className="mb-4 text-2xl font-bold text-slate-900">{t('blog.notFound')}</h1>
             <Link href="/blog">
-              <Button className="bg-emerald-600 hover:bg-emerald-700">
+              <Button className="bg-emerald-600 hover:bg-emerald-700 transition-all duration-200 hover:shadow-lg">
                 {t('blog.returnToBlog')}
               </Button>
             </Link>
@@ -81,7 +112,7 @@ export default function BlogArticle() {
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/blog">
-            <Button variant="ghost" size="sm" className="flex items-center gap-2 hover:bg-slate-100 transition-colors">
+            <Button variant="ghost" size="sm" className="flex items-center gap-2 hover:bg-slate-100 transition-all duration-200">
               <ArrowLeft className="h-4 w-4" />
               {t('blog.backToBlog')}
             </Button>
@@ -93,11 +124,11 @@ export default function BlogArticle() {
       <main className="container py-12">
         {/* 面包屑导航 */}
         <div className="mb-8 flex items-center gap-2 text-sm text-slate-600">
-          <Link href="/" className="hover:text-emerald-600 transition-colors">
+          <Link href="/" className="hover:text-emerald-600 transition-all duration-200">
             Home
           </Link>
           <ChevronRight className="h-4 w-4" />
-          <Link href="/blog" className="hover:text-emerald-600 transition-colors">
+          <Link href="/blog" className="hover:text-emerald-600 transition-all duration-200">
             Blog
           </Link>
           <ChevronRight className="h-4 w-4" />
@@ -115,9 +146,11 @@ export default function BlogArticle() {
                     <a
                       key={heading.id}
                       href={`#${heading.id}`}
-                      className={`block text-slate-600 hover:text-emerald-600 transition-colors ${
-                        heading.level === 3 ? 'pl-4' : ''
-                      }`}
+                      className={`block transition-all duration-200 ${
+                        activeHeading === heading.id
+                          ? 'text-emerald-600 font-semibold border-l-2 border-emerald-600 pl-3'
+                          : 'text-slate-600 hover:text-emerald-600 pl-3'
+                      } ${heading.level === 3 ? 'pl-6' : ''}`}
                     >
                       {heading.text}
                     </a>
@@ -138,7 +171,7 @@ export default function BlogArticle() {
                 <div className="mb-4 flex flex-wrap gap-2">
                   <Badge variant="secondary" className="bg-emerald-100 text-emerald-800">{article.category}</Badge>
                   {article.tags.map((tag) => (
-                    <Badge key={tag} variant="outline" className="hover:bg-slate-100 transition-colors">
+                    <Badge key={tag} variant="outline" className="hover:bg-slate-100 transition-all duration-200">
                       {tag}
                     </Badge>
                   ))}
@@ -162,7 +195,7 @@ export default function BlogArticle() {
                 </div>
               </div>
 
-              {/* Markdown 内容 - 使用 prose 排版 */}
+              {/* Markdown 内容 */}
               <div className="prose prose-slate lg:prose-lg mx-auto max-w-none">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
@@ -200,14 +233,37 @@ export default function BlogArticle() {
                     blockquote: ({ node, ...props }: any) => (
                       <blockquote className="border-l-4 border-emerald-500 bg-emerald-50 p-5 my-6 italic text-slate-700 rounded-r-lg" {...props} />
                     ),
-                    code: ({ node, inline, ...props }: any) =>
-                      inline ? (
+                    code: ({ node, inline, children, ...props }: any) => {
+                      const codeString = String(children).replace(/\n$/, '');
+                      const codeId = `code-${Math.random().toString(36).substr(2, 9)}`;
+                      
+                      return inline ? (
                         <code className="bg-slate-100 px-2 py-1 rounded text-sm font-mono text-slate-900" {...props} />
                       ) : (
-                        <pre className="bg-slate-900 text-slate-100 p-5 rounded-lg overflow-x-auto my-5">
-                          <code className="font-mono text-sm" {...props} />
-                        </pre>
-                      ),
+                        <div className="relative my-5 group">
+                          <pre className="bg-slate-900 text-slate-100 p-5 rounded-lg overflow-x-auto">
+                            <code className="font-mono text-sm">{codeString}</code>
+                          </pre>
+                          <button
+                            onClick={() => handleCopyCode(codeString, codeId)}
+                            className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-200 bg-slate-700 hover:bg-slate-600 text-white p-2 rounded flex items-center gap-1 text-xs hover:shadow-lg"
+                            title="Copy code"
+                          >
+                            {copiedCode === codeId ? (
+                              <>
+                                <Check className="h-4 w-4" />
+                                Copied
+                              </>
+                            ) : (
+                              <>
+                                <Copy className="h-4 w-4" />
+                                Copy
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      );
+                    },
                     table: ({ node, ...props }: any) => (
                       <table className="w-full border-collapse border border-slate-300 my-5" {...props} />
                     ),
@@ -232,7 +288,7 @@ export default function BlogArticle() {
                   <h3 className="mb-3 text-lg font-semibold text-emerald-900">{t('blog.cta')}</h3>
                   <p className="mb-6 text-emerald-800 leading-relaxed">{t('blog.ctaDescription')}</p>
                   <Link href="/">
-                    <Button className="bg-emerald-600 hover:bg-emerald-700 transition-all hover:shadow-lg">
+                    <Button className="bg-emerald-600 hover:bg-emerald-700 transition-all duration-200 hover:shadow-lg hover:scale-105">
                       <BookOpen className="mr-2 h-4 w-4" />
                       {t('blog.tryNow')}
                     </Button>
@@ -245,7 +301,7 @@ export default function BlogArticle() {
                 <h4 className="mb-4 font-semibold text-slate-900 text-sm uppercase tracking-wide">Keywords</h4>
                 <div className="flex flex-wrap gap-2">
                   {article.keywords.map((keyword) => (
-                    <Badge key={keyword} variant="secondary" className="hover:bg-slate-200 transition-colors">
+                    <Badge key={keyword} variant="secondary" className="hover:bg-slate-200 transition-all duration-200">
                       {keyword}
                     </Badge>
                   ))}
@@ -258,11 +314,11 @@ export default function BlogArticle() {
                   <h3 className="mb-3 text-lg font-semibold">Need Expert Guidance?</h3>
                   <p className="mb-6 text-slate-300">Our CDISC specialists are ready to help optimize your clinical trial data.</p>
                   <div className="flex flex-wrap gap-4">
-                    <Button className="bg-white text-slate-900 hover:bg-slate-100 transition-all">
+                    <Button className="bg-white text-slate-900 hover:bg-slate-100 transition-all duration-200 hover:shadow-lg hover:scale-105">
                       <Mail className="mr-2 h-4 w-4" />
                       Request a Demo
                     </Button>
-                    <Button variant="outline" className="border-white text-white hover:bg-white/10 transition-all">
+                    <Button variant="outline" className="border-white text-white hover:bg-white/10 transition-all duration-200 hover:shadow-lg hover:scale-105">
                       <Phone className="mr-2 h-4 w-4" />
                       Contact Expert
                     </Button>
@@ -278,12 +334,12 @@ export default function BlogArticle() {
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {relatedArticles.map((relArticle) => (
                     <Link key={relArticle.slug} href={`/blog/${relArticle.slug}`}>
-                      <Card className="h-full transition-all hover:shadow-lg hover:border-emerald-200 cursor-pointer group">
+                      <Card className="h-full transition-all duration-200 hover:shadow-lg hover:border-emerald-200 hover:scale-105 cursor-pointer group">
                         <CardHeader>
                           <div className="mb-2 flex gap-2">
-                            <Badge variant="secondary" className="group-hover:bg-emerald-100 transition-colors">{relArticle.category}</Badge>
+                            <Badge variant="secondary" className="group-hover:bg-emerald-100 transition-all duration-200">{relArticle.category}</Badge>
                           </div>
-                          <CardTitle className="line-clamp-2 text-lg group-hover:text-emerald-600 transition-colors">
+                          <CardTitle className="line-clamp-2 text-lg group-hover:text-emerald-600 transition-all duration-200">
                             {i18n.language === 'en' ? (relArticle.titleEn || relArticle.title) : relArticle.title}
                           </CardTitle>
                         </CardHeader>
@@ -308,7 +364,7 @@ export default function BlogArticle() {
             {/* 返回按钮 */}
             <div className="mt-16">
               <Link href="/">
-                <Button variant="outline" className="w-full hover:bg-slate-100 transition-all">
+                <Button variant="outline" className="w-full hover:bg-slate-100 transition-all duration-200 hover:shadow-lg">
                   {t('blog.backToTools')}
                 </Button>
               </Link>
