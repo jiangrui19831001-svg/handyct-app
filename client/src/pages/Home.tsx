@@ -294,9 +294,11 @@ export default function Home() {
                 <CardTitle className="text-lg">快速操作</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button variant="outline" className="w-full justify-start">
-                  📚 查看文档
-                </Button>
+                <a href="/blog" className="block">
+                  <Button variant="outline" className="w-full justify-start">
+                    📚 技术博客
+                  </Button>
+                </a>
                 <Button variant="outline" className="w-full justify-start">
                   🔗 API 文档
                 </Button>
@@ -306,13 +308,18 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            {/* 最近转换 */}
+            {/* 学习资源 */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">最近转换</CardTitle>
+                <CardTitle className="text-lg">学习资源</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-slate-500">暂无历史记录</p>
+                <p className="mb-4 text-sm text-slate-600">阅读我们的技术博客，了解 FDA 合规性最佳实践。</p>
+                <a href="/blog" className="block">
+                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
+                    访问技术博客
+                  </Button>
+                </a>
               </CardContent>
             </Card>
           </div>

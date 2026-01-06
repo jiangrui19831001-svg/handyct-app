@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+
+Sitemap: https://handyct.org/sitemap.xml
+
+# 延迟爬取间隔（毫秒）
+Crawl-delay: 1
+
+# 特定搜索引擎的规则
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
