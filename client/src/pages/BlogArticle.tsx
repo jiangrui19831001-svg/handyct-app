@@ -93,12 +93,12 @@ export default function BlogArticle() {
       <main className="container py-12">
         {/* 面包屑导航 */}
         <div className="mb-8 flex items-center gap-2 text-sm text-slate-600">
-          <Link href="/">
-            <span className="hover:text-emerald-600 cursor-pointer transition-colors">Home</span>
+          <Link href="/" className="hover:text-emerald-600 transition-colors">
+            Home
           </Link>
           <ChevronRight className="h-4 w-4" />
-          <Link href="/blog">
-            <span className="hover:text-emerald-600 cursor-pointer transition-colors">Blog</span>
+          <Link href="/blog" className="hover:text-emerald-600 transition-colors">
+            Blog
           </Link>
           <ChevronRight className="h-4 w-4" />
           <span className="text-slate-900 font-medium">{article.category}</span>
