@@ -28,7 +28,7 @@ export default function BlogArticle() {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
         <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
           <div className="container flex h-16 items-center justify-between">
-            <a href="/blog" className="no-underline">
+            <a href="/#/blog" className="no-underline">
               <Button variant="ghost" size="sm" className="flex items-center gap-2">
                 <ArrowLeft className="h-4 w-4" />
                 {t('blog.backToBlog')}
@@ -40,7 +40,7 @@ export default function BlogArticle() {
         <main className="container py-12">
           <div className="text-center">
             <h1 className="mb-4 text-2xl font-bold text-slate-900">{t('blog.notFound')}</h1>
-            <a href="/blog" className="no-underline">
+            <a href="/#/blog" className="no-underline">
               <Button className="bg-emerald-600 hover:bg-emerald-700">
                 {t('blog.returnToBlog')}
               </Button>
@@ -56,7 +56,7 @@ export default function BlogArticle() {
       {/* 顶部导航 */}
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
         <div className="container flex h-16 items-center justify-between">
-          <a href="/blog" className="no-underline">
+          <a href="/#/blog" className="no-underline">
             <Button variant="ghost" size="sm" className="flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" />
               {t('blog.backToBlog')}

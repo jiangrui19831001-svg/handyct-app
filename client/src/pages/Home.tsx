@@ -76,16 +76,16 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Link href="/blog">
+            <a href="/#/blog" className="no-underline">
               <Button variant="ghost" size="sm">
                 {t('nav.blog')}
               </Button>
-            </Link>
-            <Link href="/">
+            </a>
+            <a href="/" className="no-underline">
               <Button variant="ghost" size="sm">
                 {t('nav.api')}
               </Button>
-            </Link>
+            </a>
             <LanguageSwitcher />
           </div>
         </div>
@@ -308,11 +308,11 @@ export default function Home() {
                 <CardTitle className="text-lg">快速操作</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Link href="/blog" className="block">
+                <a href="/#/blog" className="block no-underline">
                   <Button variant="outline" className="w-full justify-start">
                     📚 技术博客
                   </Button>
-                </Link>
+                </a>
                 <Button variant="outline" className="w-full justify-start">
                   🔗 API 文档
                 </Button>
@@ -329,11 +329,11 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <p className="mb-4 text-sm text-slate-600">阅读我们的技术博客，了解 FDA 合规性最佳实践。</p>
-                <Link href="/blog" className="block">
+                <a href="/#/blog" className="block no-underline">
                   <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
                     访问技术博客
                   </Button>
-                </Link>
+                </a>
               </CardContent>
             </Card>
           </div>
