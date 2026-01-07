@@ -1,7 +1,8 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, Router } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -10,7 +11,7 @@ import i18n from './i18n/config';
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 
-function Router() {
+function AppRouter() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
@@ -39,7 +40,9 @@ function App() {
         >
           <TooltipProvider>
             <Toaster />
-            <Router />
+            <Router hook={useHashLocation}>
+              <AppRouter />
+            </Router>
           </TooltipProvider>
         </ThemeProvider>
       </I18nextProvider>
