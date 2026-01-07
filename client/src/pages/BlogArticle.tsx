@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useRoute, Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
@@ -23,30 +23,28 @@ export default function BlogArticle() {
   const currentTitle = i18n.language === 'en' ? (article?.titleEn || article?.title) : article?.title;
   const currentDescription = i18n.language === 'en' ? (article?.descriptionEn || article?.description) : article?.description;
 
-  // 保护 window 对象访问
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    // 任何需要 window 的逻辑都放在这里
-  }, []);
-
   if (!article) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
         <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
           <div className="container flex h-16 items-center justify-between">
-            <Link href="/blog" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-slate-100 h-8 px-3 py-2">
-              <ArrowLeft className="h-4 w-4" />
-              {t('blog.backToBlog')}
-            </Link>
+            <a href="/blog" className="no-underline">
+              <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                {t('blog.backToBlog')}
+              </Button>
+            </a>
             <LanguageSwitcher />
           </div>
         </header>
         <main className="container py-12">
           <div className="text-center">
             <h1 className="mb-4 text-2xl font-bold text-slate-900">{t('blog.notFound')}</h1>
-            <Link href="/blog" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-emerald-600 text-white shadow hover:bg-emerald-700 h-9 px-4 py-2">
-              {t('blog.returnToBlog')}
-            </Link>
+            <a href="/blog" className="no-underline">
+              <Button className="bg-emerald-600 hover:bg-emerald-700">
+                {t('blog.returnToBlog')}
+              </Button>
+            </a>
           </div>
         </main>
       </div>
@@ -58,10 +56,12 @@ export default function BlogArticle() {
       {/* 顶部导航 */}
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
         <div className="container flex h-16 items-center justify-between">
-          <Link href="/blog" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-slate-100 h-8 px-3 py-2">
-            <ArrowLeft className="h-4 w-4" />
-            {t('blog.backToBlog')}
-          </Link>
+          <a href="/blog" className="no-underline">
+            <Button variant="ghost" size="sm" className="flex items-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              {t('blog.backToBlog')}
+            </Button>
+          </a>
           <LanguageSwitcher />
         </div>
       </header>
@@ -172,10 +172,12 @@ export default function BlogArticle() {
                 <div className="rounded-lg bg-emerald-50 p-6">
                   <h3 className="mb-2 text-lg font-semibold text-emerald-900">{t('blog.cta')}</h3>
                   <p className="mb-4 text-emerald-800">{t('blog.ctaDescription')}</p>
-                  <Link href="/" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-emerald-600 text-white shadow hover:bg-emerald-700 h-9 px-4 py-2">
-                    <BookOpen className="mr-2 h-4 w-4" />
-                    {t('blog.tryNow')}
-                  </Link>
+                  <a href="/" className="no-underline">
+                    <Button className="bg-emerald-600 hover:bg-emerald-700">
+                      <BookOpen className="mr-2 h-4 w-4" />
+                      {t('blog.tryNow')}
+                    </Button>
+                  </a>
                 </div>
               </div>
 
@@ -198,12 +200,8 @@ export default function BlogArticle() {
                 <h2 className="mb-6 text-2xl font-bold text-slate-900">{t('blog.relatedArticles')}</h2>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {relatedArticles.map((relArticle) => (
-                    <Link 
-                      key={relArticle.slug} 
-                      href={`/blog/${relArticle.slug}`}
-                      className="block h-full transition-shadow hover:shadow-lg cursor-pointer"
-                    >
-                      <Card className="h-full">
+                    <a key={relArticle.slug} href={`/blog/${relArticle.slug}`} className="block no-underline">
+                      <Card className="h-full transition-shadow hover:shadow-lg cursor-pointer">
                         <CardHeader>
                           <div className="mb-2 flex gap-2">
                             <Badge variant="secondary">{relArticle.category}</Badge>
@@ -224,7 +222,7 @@ export default function BlogArticle() {
                           </div>
                         </CardContent>
                       </Card>
-                    </Link>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -232,12 +230,11 @@ export default function BlogArticle() {
 
             {/* 返回按钮 */}
             <div className="mt-12">
-              <Link 
-                href="/" 
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent w-full h-9 px-4 py-2"
-              >
-                {t('blog.backToTools')}
-              </Link>
+              <a href="/" className="no-underline">
+                <Button variant="outline" className="w-full">
+                  {t('blog.backToTools')}
+                </Button>
+              </a>
             </div>
           </div>
         </div>
