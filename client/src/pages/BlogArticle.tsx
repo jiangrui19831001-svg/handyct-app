@@ -200,7 +200,7 @@ export default function BlogArticle() {
                 <h2 className="mb-6 text-2xl font-bold text-slate-900">{t('blog.relatedArticles')}</h2>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {relatedArticles.map((relArticle) => (
-                    <a key={relArticle.slug} href={`/blog/${relArticle.slug}`} className="block no-underline">
+                    <a key={relArticle.slug} href={`/#/blog/${relArticle.slug}`} className="block no-underline">
                       <Card className="h-full transition-shadow hover:shadow-lg cursor-pointer">
                         <CardHeader>
                           <div className="mb-2 flex gap-2">

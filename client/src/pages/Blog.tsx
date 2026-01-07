@@ -97,7 +97,7 @@ export default function Blog() {
         {filteredArticles.length > 0 ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
             {filteredArticles.map((article) => (
-              <a key={article.id} href={`/blog/${article.slug}`} className="block no-underline">
+              <a key={article.id} href={`/#/blog/${article.slug}`} className="block no-underline">
                 <Card className="h-full transition-all hover:shadow-lg hover:border-emerald-200">
                   <CardHeader>
                     <div className="mb-3 flex items-start justify-between">
