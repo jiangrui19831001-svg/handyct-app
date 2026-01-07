@@ -1,7 +1,12 @@
 {
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist",
   "trailingSlash": false,
   "cleanUrls": true,
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  ],
+  "env": {
+    "CACHE_BUSTER": "2025-01-07-hashrouter-final"
+  }
 }
