@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'wouter';
+import { useAuth } from '@/_core/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -11,6 +12,10 @@ import { CDISC_STANDARDS, validateSDTMCompliance, convertCSVToSDTM, generateFDAC
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 export default function Home() {
+  // The userAuth hooks provides authentication state
+  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
+  let { user, loading, error, isAuthenticated, logout } = useAuth();
+
   const { t } = useTranslation();
   const [selectedStandard, setSelectedStandard] = useState<string>('sdtm');
   const [selectedVersion, setSelectedVersion] = useState<string>('');

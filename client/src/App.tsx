@@ -10,8 +10,8 @@ import i18n from './i18n/config';
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
