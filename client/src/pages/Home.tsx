@@ -12,26 +12,47 @@ import { CDISC_STANDARDS, validateSDTMCompliance, convertCSVToSDTM, generateFDAC
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 export default function Home() {
-  // The userAuth hooks provides authentication state
-  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
   let { user, loading, error, isAuthenticated, logout } = useAuth();
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [selectedStandard, setSelectedStandard] = useState<string>('sdtm');
-  const [selectedVersion, setSelectedVersion] = useState<string>('sdtm-3.4'); // 默认设为 SDTM 3.4
+  const [selectedVersion, setSelectedVersion] = useState<string>('sdtm-3.4');
   const [csvData, setCsvData] = useState<string>('');
+  const [fileName, setFileName] = useState<string>('');
+  const [rowCount, setRowCount] = useState<number>(0);
   const [conversionResult, setConversionResult] = useState<any>(null);
+  const [validationResult, setValidationResult] = useState<any>(null);
+  const [reportResult, setReportResult] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dragActive, setDragActive] = useState(false);
+  const [uploadHistory, setUploadHistory] = useState<Array<{ id: string; fileName: string; timestamp: string; rowCount: number }>>([]);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const currentStandard = CDISC_STANDARDS.find((s) => s.id === selectedStandard);
+
+  const validateCSVFormat = (csvContent: string): { valid: boolean; error?: string } => {
+    const lines = csvContent.trim().split('\n');
+    if (lines.length < 2) {
+      return { valid: false, error: t('home.csvMinRows') || 'CSV 文件必须至少包含标题行和一行数据' };
+    }
+
+    const headers = lines[0].split(',').map(h => h.trim());
+    const requiredHeaders = ['USUBJID', 'SUBJID', 'RFSTDTC', 'SEX', 'AGE'];
+    const missingHeaders = requiredHeaders.filter(h => !headers.includes(h));
+
+    if (missingHeaders.length > 0) {
+      return { valid: false, error: `${t('home.missingColumns') || '缺少必需的列'}: ${missingHeaders.join(', ')}` };
+    }
+
+    return { valid: true };
+  };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       if (!file.name.endsWith('.csv')) {
-        alert('请上传 CSV 格式的文件');
+        setErrorMessage(t('home.csvFormatError') || '请上传 CSV 格式的文件');
         return;
       }
       const reader = new FileReader();
@@ -39,16 +60,28 @@ export default function Home() {
         const content = e.target?.result as string;
         const validation = validateCSVFormat(content);
         if (!validation.valid) {
-          alert(`文件验证失败: ${validation.error}`);
+          setErrorMessage(`${t('home.validationFailed') || '文件验证失败'}: ${validation.error}`);
           return;
         }
+        setErrorMessage('');
         setCsvData(content);
+        setFileName(file.name);
+        const lines = content.trim().split('\n');
+        setRowCount(lines.length - 1);
+        
+        // 添加到历史记录
+        const newRecord = {
+          id: Date.now().toString(),
+          fileName: file.name,
+          timestamp: new Date().toLocaleString(i18n.language === 'en' ? 'en-US' : 'zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+          rowCount: lines.length - 1
+        };
+        setUploadHistory([newRecord, ...uploadHistory.slice(0, 9)]);
       };
       reader.readAsText(file);
     }
   };
 
-  // 处理拖拽事件
   const handleDrag = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
@@ -73,68 +106,85 @@ export default function Home() {
           const content = event.target?.result as string;
           const validation = validateCSVFormat(content);
           if (!validation.valid) {
-            alert(`文件验证失败: ${validation.error}`);
+            setErrorMessage(`${t('home.validationFailed') || '文件验证失败'}: ${validation.error}`);
             return;
           }
+          setErrorMessage('');
           setCsvData(content);
+          setFileName(file.name);
+          const lines = content.trim().split('\n');
+          setRowCount(lines.length - 1);
+          
+          // 添加到历史记录
+          const newRecord = {
+            id: Date.now().toString(),
+            fileName: file.name,
+            timestamp: new Date().toLocaleString(i18n.language === 'en' ? 'en-US' : 'zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+            rowCount: lines.length - 1
+          };
+          setUploadHistory([newRecord, ...uploadHistory.slice(0, 9)]);
         };
         reader.readAsText(file);
       } else {
-        alert('请上传 CSV 格式的文件');
+        setErrorMessage(t('home.csvFormatError') || '请上传 CSV 格式的文件');
       }
     }
   };
 
   const handleConvert = async () => {
+    if (!csvData) {
+      setErrorMessage(t('home.noDataToConvert') || '请先上传数据');
+      return;
+    }
     setIsLoading(true);
+    setErrorMessage('');
     try {
       const result = convertCSVToSDTM(csvData);
       setConversionResult(result);
+    } catch (err) {
+      setErrorMessage(`${t('home.conversionFailed') || '转换失败'}: ${err instanceof Error ? err.message : '未知错误'}`);
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleValidate = () => {
-    if (!conversionResult?.data) return;
-    const validation = validateSDTMCompliance({ DM: conversionResult.data });
-    setConversionResult(validation);
+    if (!conversionResult?.data) {
+      setErrorMessage(t('home.noDataValidate') || '请先上传并转换数据进行验证');
+      return;
+    }
+    try {
+      const validation = validateSDTMCompliance({ DM: conversionResult.data });
+      setValidationResult(validation);
+      setErrorMessage('');
+    } catch (err) {
+      setErrorMessage(`${t('home.validationFailed') || '验证失败'}: ${err instanceof Error ? err.message : '未知错误'}`);
+    }
   };
 
   const handleGenerateReport = () => {
-    if (!conversionResult?.data) return;
-    const report = generateFDAComplianceReport(
-      { DM: conversionResult.data },
-      { records: conversionResult.data }
-    );
-    setConversionResult(report);
+    if (!conversionResult?.data) {
+      setErrorMessage(t('home.noDataReport') || '请先上传并转换数据生成报告');
+      return;
+    }
+    try {
+      const report = generateFDAComplianceReport(conversionResult.data, {});
+      setReportResult(report);
+      setErrorMessage('');
+    } catch (err) {
+      setErrorMessage(`${t('home.reportGenerationFailed') || '报告生成失败'}: ${err instanceof Error ? err.message : '未知错误'}`);
+    }
   };
 
-  // 验证 CSV 文件格式和列名
-  const validateCSVFormat = (csvContent: string): { valid: boolean; error?: string } => {
-    const lines = csvContent.trim().split('\n');
-    if (lines.length < 2) {
-      return { valid: false, error: 'CSV 文件必须至少包含标题行和一行数据' };
-    }
 
-    const headers = lines[0].split(',').map(h => h.trim());
-    const requiredHeaders = ['USUBJID', 'SUBJID', 'RFSTDTC', 'SEX', 'AGE'];
-    const missingHeaders = requiredHeaders.filter(h => !headers.includes(h));
-
-    if (missingHeaders.length > 0) {
-      return { valid: false, error: `缺少必需的列: ${missingHeaders.join(', ')}` };
-    }
-
-    return { valid: true };
-  };
-
-  // 下载转换结果
   const handleDownloadResult = () => {
-    if (!conversionResult?.data) return;
+    if (!conversionResult?.data) {
+      setErrorMessage(t('home.noDataToDownload') || '没有可下载的数据');
+      return;
+    }
 
-    // 将数据转换为 CSV 格式
     const csvContent = Array.isArray(conversionResult.data)
-      ? conversionResult.data.map((row: any) => Object.values(row).join(',')).join('\n')
+      ? [Object.keys(conversionResult.data[0]).join(','), ...conversionResult.data.map((row: any) => Object.values(row).join(','))].join('\n')
       : csvData;
 
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -150,266 +200,277 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Header Navigation */}
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-            <div className="rounded-lg bg-emerald-600 p-2">
-              <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="text-lg sm:text-xl font-bold text-slate-900">HandyCT 2.0</h1>
-              <p className="text-xs text-slate-500">{t('home.nextGenCDISCConverter')}</p>
-            </div>
-            <div className="sm:hidden">
-              <h1 className="text-base font-bold text-slate-900">HandyCT</h1>
-            </div>
-          </div>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-2">
-            <a href="/#/blog" className="no-underline">
-              <Button variant="ghost" size="sm">
-                {t('nav.blog')}
-              </Button>
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <Link href="/">
+            <a className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center">
+                <Zap className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-slate-900">HandyCT 2.0</h1>
+                <p className="text-xs text-slate-500">{t('home.subtitle') || '下一代 CDISC 转换器'}</p>
+              </div>
             </a>
+          </Link>
+          <div className="hidden md:flex items-center gap-4">
+            <Link href="/blog">
+              <a className="text-slate-600 hover:text-slate-900">{t('home.techBlog') || 'Tech Blog'}</a>
+            </Link>
             <LanguageSwitcher />
           </div>
-          
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-2">
-            <LanguageSwitcher />
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
-          </div>
+          <button
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X /> : <Menu />}
+          </button>
         </div>
-        
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden border-t border-slate-200 bg-white">
-            <div className="container py-3 space-y-2">
-              <a href="/#/blog" className="block no-underline" onClick={() => setMobileMenuOpen(false)}>
-                <Button variant="ghost" className="w-full justify-start">
-                  {t('nav.blog')}
-                </Button>
-              </a>
-            </div>
-          </div>
-        )}
       </header>
 
-      {/* Main Content Area */}
-      <main className="container py-8">
-        <div className="grid gap-8 lg:grid-cols-3">
-          {/* Left Side: Conversion Configuration */}
-          <div className="lg:col-span-2">
-            <Tabs defaultValue="convert" className="w-full">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="convert">{t('home.convert')}</TabsTrigger>
-                <TabsTrigger value="validate">{t('home.validate')}</TabsTrigger>
-                <TabsTrigger value="report">{t('home.report')}</TabsTrigger>
-              </TabsList>
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Tabs defaultValue="convert" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 mb-8">
+            <TabsTrigger value="convert">{t('home.convert') || '转换'}</TabsTrigger>
+            <TabsTrigger value="validate">{t('home.validate') || '验证'}</TabsTrigger>
+            <TabsTrigger value="report">{t('home.report') || '报告'}</TabsTrigger>
+          </TabsList>
 
-              {/* Convert Tab */}
-              <TabsContent value="convert" className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{t('home.selectCDISCStandard')}</CardTitle>
-                    <CardDescription>{t('home.selectDataStandardVersion')}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-700">{t('home.standard')}</label>
-                        <Select value={selectedStandard} onValueChange={setSelectedStandard}>
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {CDISC_STANDARDS.map((std) => (
-                              <SelectItem key={std.id} value={std.id}>
-                                {std.name}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <p className="text-xs text-slate-500">{currentStandard?.description}</p>
-                      </div>
+          {/* Error Message */}
+          {errorMessage && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex gap-3">
+              <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+              <p className="text-red-700">{errorMessage}</p>
+            </div>
+          )}
 
-                      <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-700">{t('home.version')}</label>
-                        <Select value={selectedVersion} onValueChange={setSelectedVersion}>
-                          <SelectTrigger>
-                            <SelectValue placeholder={t('home.selectVersionPlaceholder')} />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {currentStandard?.versions.map((ver) => (
-                              <SelectItem key={ver.id} value={ver.id}>
-                                {ver.version} ({ver.status})
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{t('home.uploadFile')}</CardTitle>
-                    <CardDescription>{t('home.clinicalTrialData')}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <label
-                      onDragEnter={handleDrag}
-                      onDragLeave={handleDrag}
-                      onDragOver={handleDrag}
-                      onDrop={handleDrop}
-                      className={`flex items-center justify-center rounded-lg border-2 border-dashed p-8 cursor-pointer transition-colors ${
-                        dragActive
-                          ? 'border-emerald-500 bg-emerald-50'
-                          : 'border-slate-300 hover:border-slate-400'
-                      }`}
-                    >
-                      <div className="text-center">
-                        <Upload className="mx-auto h-12 w-12 text-slate-400" />
-                        <p className="mt-2 text-sm text-slate-600">
-                          {t('home.dragDrop')}
-                        </p>
-                        <p className="mt-1 text-xs text-emerald-600 font-medium">
-                          或点击此处选择文件
-                        </p>
-                        <input
-                          type="file"
-                          accept=".csv"
-                          onChange={handleFileUpload}
-                          className="hidden"
-                        />
-                      </div>
-                    </label>
-
-                    {csvData && (
-                      <div className="rounded-lg bg-emerald-50 p-4">
-                        <p className="text-sm text-emerald-800">
-                          ✓ {csvData.split('\n').length - 1} {t('home.rowsUploaded')}
-                        </p>
-                      </div>
-                    )}
-
-                    <Button
-                      onClick={handleConvert}
-                      disabled={!csvData || !selectedVersion || isLoading}
-                      className="w-full bg-emerald-600 hover:bg-emerald-700"
-                    >
-                      {isLoading ? `${t('home.startConverting')}...` : t('home.startConverting')}
-                    </Button>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              {/* Validate Tab */}
-              <TabsContent value="validate" className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{t('home.complianceValidation')}</CardTitle>
-                    <CardDescription>{t('home.checkDataCompliance')}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {conversionResult ? (
-                      <div className="space-y-4">
-                        <div
-                          className={`rounded-lg p-4 ${
-                            conversionResult.status === 'success'
-                              ? 'bg-emerald-50'
-                              : conversionResult.status === 'warning'
-                                ? 'bg-amber-50'
-                                : 'bg-red-50'
-                          }`}
-                        >
-                          <div className="flex items-start gap-3">
-                            {conversionResult.status === 'success' ? (
-                              <CheckCircle2 className="h-5 w-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                            ) : (
-                              <AlertCircle className="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" />
-                            )}
-                            <div>
-                              <p className="font-medium text-slate-900">{conversionResult.message}</p>
-                              {conversionResult.data?.errors?.length > 0 && (
-                                <ul className="mt-2 space-y-1 text-sm text-slate-700">
-                                  {conversionResult.data.errors.map((error: string, i: number) => (
-                                    <li key={i}>• {error}</li>
-                                  ))}
-                                </ul>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                        <Button onClick={handleValidate} className="w-full">
-                          {t('home.revalidate')}
-                        </Button>
-                      </div>
-                    ) : (
-                      <p className="text-center text-slate-500">{t('home.noDataValidate')}</p>
-                    )}
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              {/* Report Tab */}
-              <TabsContent value="report" className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{t('home.fdaComplianceReport')}</CardTitle>
-                    <CardDescription>{t('home.generateReport')}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {conversionResult?.report ? (
-                      <div className="space-y-4">
-                        <div className="rounded-lg border border-slate-200 p-4">
-                          <p className="text-sm text-slate-700">{conversionResult.report}</p>
-                        </div>
-                        <Button onClick={handleGenerateReport} className="w-full">
-                          {t('home.regenerateReport')}
-                        </Button>
-                        <Button onClick={handleDownloadResult} variant="outline" className="w-full">
-                          <Download className="mr-2 h-4 w-4" />
-                          {t('home.downloadResult')}
-                        </Button>
-                      </div>
-                    ) : (
-                      <p className="text-center text-slate-500">{t('home.noDataReport')}</p>
-                    )}
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </div>
-
-          {/* Right Side: Quick Reference */}
-          <div className="space-y-6">
+          {/* Convert Tab */}
+          <TabsContent value="convert" className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">{t('home.learningResources')}</CardTitle>
+                <CardTitle>{t('home.selectCDISCStandard') || '选择 CDISC 标准'}</CardTitle>
+                <CardDescription>{t('home.selectDataStandardVersion') || '选择要转换的数据标准和版本'}</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-3">
-                <p className="text-sm text-slate-600">
-                  {t('home.readTechBlog')}
-                </p>
-                <a href="/#/blog" className="no-underline">
-                  <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
-                    {t('home.visitTechBlog')}
-                  </Button>
-                </a>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">{t('home.standard') || '标准'}</label>
+                    <Select value={selectedStandard} onValueChange={setSelectedStandard}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {CDISC_STANDARDS.map((s) => (
+                          <SelectItem key={s.id} value={s.id}>
+                            {s.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">{t('home.version') || '版本'}</label>
+                    <Select value={selectedVersion} onValueChange={setSelectedVersion}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {currentStandard?.versions.map((ver) => (
+                          <SelectItem key={ver.id} value={ver.id}>
+                            {ver.version} ({ver.status})
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
               </CardContent>
             </Card>
-          </div>
-        </div>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>{t('home.uploadFile') || '上传数据文件'}</CardTitle>
+                <CardDescription>{t('home.clinicalTrialData') || 'CSV 格式的临床试验数据'}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <label
+                  onDragEnter={handleDrag}
+                  onDragLeave={handleDrag}
+                  onDragOver={handleDrag}
+                  onDrop={handleDrop}
+                  className={`flex items-center justify-center rounded-lg border-2 border-dashed p-8 cursor-pointer transition-colors ${
+                    dragActive
+                      ? 'border-emerald-500 bg-emerald-50'
+                      : 'border-slate-300 hover:border-slate-400'
+                  }`}
+                >
+                  <div className="text-center">
+                    <Upload className="w-12 h-12 text-slate-400 mx-auto mb-2" />
+                    <p className="text-slate-600">{t('home.dragDropOrClick') || '拖拽文件到此处或点击选择'}</p>
+                  </div>
+                  <Input
+                    type="file"
+                    accept=".csv"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+                </label>
+
+                {/* File Info Display */}
+                {fileName && (
+                  <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-medium text-blue-900">{fileName}</p>
+                        <p className="text-sm text-blue-700">{t('home.rowCount') || '行数'}: {rowCount}</p>
+                        <div className="mt-2 text-xs text-blue-700 bg-white p-2 rounded border border-blue-200 max-h-24 overflow-auto">
+                          <p className="font-mono">{csvData.split('\n').slice(0, 3).join('\n')}</p>
+                          {csvData.split('\n').length > 3 && <p className="text-blue-600 mt-1">...</p>}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            <Button
+              onClick={handleConvert}
+              disabled={!csvData || isLoading}
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-6 text-lg"
+            >
+              {isLoading ? `${t('home.converting') || '转换中'}...` : t('home.startConverting') || '开始转换'}
+            </Button>
+
+            {/* Conversion Result */}
+            {conversionResult && (
+              <Card className="border-emerald-200 bg-emerald-50">
+                <CardHeader>
+                  <CardTitle className="text-emerald-900">{t('home.conversionSuccess') || '转换成功'}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-emerald-800">{t('home.dataRows') || '数据行数'}: {Array.isArray(conversionResult.data) ? conversionResult.data.length : 0}</p>
+                  <Button
+                    onClick={handleDownloadResult}
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    {t('home.downloadResult') || '下载结果'}
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
+          </TabsContent>
+
+          {/* Validate Tab */}
+          <TabsContent value="validate" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>{t('home.validateCompliance') || 'CDISC 合规性验证'}</CardTitle>
+                <CardDescription>{t('home.validateDataCompliance') || '检查数据是否符合 CDISC 标准'}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button
+                  onClick={handleValidate}
+                  disabled={!conversionResult?.data}
+                  className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+                >
+                  {t('home.runValidation') || '运行验证'}
+                </Button>
+
+                {validationResult && (
+                  <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-medium text-blue-900">{t('home.validationPassed') || '验证通过'}</p>
+                        <p className="text-sm text-blue-700 mt-2">{validationResult.message || t('home.dataCompliant') || '数据符合 CDISC 标准'}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {!conversionResult?.data && (
+                  <p className="text-center text-slate-500 mt-4">{t('home.noDataValidate') || '请先上传并转换数据进行验证'}</p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Report Tab */}
+          <TabsContent value="report" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>{t('home.generateReport') || '生成详细的 FDA 数据审计报告'}</CardTitle>
+                <CardDescription>{t('home.reportDescription') || '生成符合 FDA 要求的合规性报告'}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button
+                  onClick={handleGenerateReport}
+                  disabled={!conversionResult?.data}
+                  className="w-full bg-purple-500 hover:bg-purple-600 text-white"
+                >
+                  {t('home.generateReport') || '生成报告'}
+                </Button>
+
+                {reportResult && (
+                  <div className="mt-6 p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-medium text-purple-900">{t('home.reportGenerated') || '报告已生成'}</p>
+                        <p className="text-sm text-purple-700 mt-2">{reportResult.message || t('home.reportContent') || '报告内容已准备好'}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {!conversionResult?.data && (
+                  <p className="text-center text-slate-500 mt-4">{t('home.noDataReport') || '请先上传并转换数据生成报告'}</p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+
+        {/* Upload History */}
+        {uploadHistory.length > 0 && (
+          <Card className="mt-8">
+            <CardHeader>
+              <CardTitle>{t('home.uploadHistory') || '上传历史'}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {uploadHistory.map((record) => (
+                  <div key={record.id} className="flex items-center justify-between p-3 bg-slate-50 rounded border border-slate-200">
+                    <div>
+                      <p className="font-medium text-slate-900">{record.fileName}</p>
+                      <p className="text-xs text-slate-500">{record.timestamp} · {record.rowCount} {t('home.rows') || '行'}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Learning Resources */}
+        <Card className="mt-8 bg-gradient-to-br from-emerald-50 to-teal-50">
+          <CardHeader>
+            <CardTitle>{t('home.learningResources') || '学习资源'}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-slate-700 mb-4">{t('home.readTechBlog') || '阅读我们的技术博客，了解 FDA 合规性最佳实践。'}</p>
+            <Link href="/blog">
+              <a className="inline-block px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700">
+                {t('home.visitTechBlog') || '访问技术博客'}
+              </a>
+            </Link>
+          </CardContent>
+        </Card>
       </main>
     </div>
   );
