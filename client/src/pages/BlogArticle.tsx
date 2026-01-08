@@ -25,10 +25,12 @@ export default function BlogArticle() {
     window.scrollTo(0, 0);
   }, [article?.slug]);
 
-  // Generate table of contents from markdown headings
+  // Generate table of contents from markdown headings - 根据当前语言生成
   useEffect(() => {
-    if (article?.content) {
-      const headings = article.content.match(/^#{2,3} .+$/gm) || [];
+    // 根据当前语言选择要使用的内容
+    const contentForTOC = i18n.language === 'en' ? (article?.contentEn || article?.content) : article?.content;
+    if (contentForTOC) {
+      const headings = contentForTOC.match(/^#{2,3} .+$/gm) || [];
       const toc = headings.map((heading, index) => {
         const match = heading.match(/^#+/);
         const level = match ? match[0].length : 2;
@@ -39,7 +41,7 @@ export default function BlogArticle() {
       });
       setTableOfContents(toc);
     }
-  }, [article?.content]);
+  }, [article?.content, article?.contentEn, i18n.language]);
 
   // 调试：打印 TOC 和实际标题的 ID
   useEffect(() => {
@@ -47,8 +49,9 @@ export default function BlogArticle() {
       const headings = document.querySelectorAll('h2[id], h3[id]');
       console.log('实际标题 IDs:', Array.from(headings).map(h => h.id));
       console.log('TOC IDs:', tableOfContents.map(t => t.id));
+      console.log('当前语言:', i18n.language);
     }
-  }, [tableOfContents]);
+  }, [tableOfContents, i18n.language]);
 
   // Handle TOC link clicks with smooth scroll
   const handleTOCClick = (id: string) => {
