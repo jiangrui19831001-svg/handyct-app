@@ -64,22 +64,22 @@ export default function Contact() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-slate-900">HandyCT 2.0</h1>
-                <p className="text-xs text-slate-500">下一代 CDISC 转换器</p>
+                <p className="text-xs text-slate-500">{t('home.subtitle')}</p>
               </div>
             </a>
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">Home</a>
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.home')}</a>
             </Link>
             <Link href="/services">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">Services</a>
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.services')}</a>
             </Link>
             <Link href="/security">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">Security</a>
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.security')}</a>
             </Link>
             <Link href="/contact">
-              <a className="text-emerald-600 font-medium text-sm">Contact</a>
+              <a className="text-emerald-600 font-medium text-sm">{t('common.contact')}</a>
             </Link>
             <LanguageSwitcher />
           </div>
@@ -89,9 +89,9 @@ export default function Contact() {
       {/* Hero Section */}
       <section className="border-b border-slate-200 bg-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-slate-900">Get in Touch</h1>
+          <h1 className="mb-4 text-4xl font-bold text-slate-900">{t('contact.title')}</h1>
           <p className="mb-8 text-lg text-slate-600">
-            Tell us about your clinical trial data conversion needs
+            {t('contact.subtitle')}
           </p>
         </div>
       </section>
@@ -106,21 +106,21 @@ export default function Contact() {
                 <div className="flex justify-center mb-4">
                   <CheckCircle2 className="w-16 h-16 text-emerald-600" />
                 </div>
-                <h2 className="text-2xl font-bold text-emerald-900 mb-2">Thank You!</h2>
+                <h2 className="text-2xl font-bold text-emerald-900 mb-2">{t('contact.thankYou')}</h2>
                 <p className="text-emerald-700 mb-4">
-                  Your inquiry has been received. Our compliance expert will contact you within 24 hours.
+                  {t('contact.inquiryReceived')}
                 </p>
                 <p className="text-sm text-emerald-600">
-                  We look forward to helping you streamline your CDISC data conversion process.
+                  {t('contact.lookingForward')}
                 </p>
               </CardContent>
             </Card>
           ) : (
             <Card>
               <CardHeader>
-                <CardTitle>Clinical Trial Inquiry Form</CardTitle>
+                <CardTitle>{t('contact.inquiryForm')}</CardTitle>
                 <CardDescription>
-                  Help us understand your requirements so we can provide the best solution
+                  {t('contact.inquiryFormDesc')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -128,14 +128,14 @@ export default function Contact() {
                   {/* Name */}
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Full Name *
+                      {t('contact.fullName')}
                     </label>
                     <Input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      placeholder="John Doe"
+                      placeholder={t('contact.fullNamePlaceholder')}
                       required
                       className="w-full"
                     />
@@ -144,14 +144,14 @@ export default function Contact() {
                   {/* Company */}
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Company Name *
+                      {t('contact.companyName')}
                     </label>
                     <Input
                       type="text"
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      placeholder="Pharmaceutical Corp"
+                      placeholder={t('contact.companyNamePlaceholder')}
                       required
                       className="w-full"
                     />
@@ -160,17 +160,17 @@ export default function Contact() {
                   {/* Study Phase */}
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Study Phase *
+                      {t('contact.studyPhase')}
                     </label>
                     <Select value={formData.studyPhase} onValueChange={(value) => handleSelectChange('studyPhase', value)}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select study phase" />
+                        <SelectValue placeholder={t('contact.selectStudyPhase')} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="phase1">Phase I</SelectItem>
-                        <SelectItem value="phase2">Phase II</SelectItem>
-                        <SelectItem value="phase3">Phase III</SelectItem>
-                        <SelectItem value="phase4">Phase IV</SelectItem>
+                        <SelectItem value="phase1">{t('contact.phaseI')}</SelectItem>
+                        <SelectItem value="phase2">{t('contact.phaseII')}</SelectItem>
+                        <SelectItem value="phase3">{t('contact.phaseIII')}</SelectItem>
+                        <SelectItem value="phase4">{t('contact.phaseIV')}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -178,14 +178,14 @@ export default function Contact() {
                   {/* Estimated Subjects */}
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Estimated Number of Subjects *
+                      {t('contact.estimatedSubjects')}
                     </label>
                     <Input
                       type="number"
                       name="estimatedSubjects"
                       value={formData.estimatedSubjects}
                       onChange={handleInputChange}
-                      placeholder="500"
+                      placeholder={t('contact.estimatedSubjectsPlaceholder')}
                       required
                       className="w-full"
                     />
@@ -194,17 +194,17 @@ export default function Contact() {
                   {/* Project Timeline */}
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Project Timeline *
+                      {t('contact.projectTimeline')}
                     </label>
                     <Select value={formData.projectTimeline} onValueChange={(value) => handleSelectChange('projectTimeline', value)}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select timeline" />
+                        <SelectValue placeholder={t('contact.selectTimeline')} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="urgent">Urgent (1-2 weeks)</SelectItem>
-                        <SelectItem value="short">Short term (1-3 months)</SelectItem>
-                        <SelectItem value="medium">Medium term (3-6 months)</SelectItem>
-                        <SelectItem value="long">Long term (6+ months)</SelectItem>
+                        <SelectItem value="urgent">{t('contact.urgent')}</SelectItem>
+                        <SelectItem value="short">{t('contact.shortTerm')}</SelectItem>
+                        <SelectItem value="medium">{t('contact.mediumTerm')}</SelectItem>
+                        <SelectItem value="long">{t('contact.longTerm')}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -215,11 +215,11 @@ export default function Contact() {
                     disabled={isLoading}
                     className="w-full bg-emerald-600 hover:bg-emerald-700"
                   >
-                    {isLoading ? 'Submitting...' : 'Submit Inquiry'}
+                    {isLoading ? t('contact.submitting') : t('contact.submitInquiry')}
                   </Button>
 
                   <p className="text-xs text-slate-500 text-center">
-                    We respect your privacy. Your information will only be used to contact you about your inquiry.
+                    {t('contact.privacyNote')}
                   </p>
                 </form>
               </CardContent>
@@ -233,39 +233,39 @@ export default function Contact() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Product</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.product')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link href="/"><a className="hover:text-slate-900">Converter</a></Link></li>
-                <li><Link href="/services"><a className="hover:text-slate-900">Services</a></Link></li>
-                <li><Link href="/security"><a className="hover:text-slate-900">Security</a></Link></li>
+                <li><Link href="/"><a className="hover:text-slate-900">{t('footer.converter')}</a></Link></li>
+                <li><Link href="/services"><a className="hover:text-slate-900">{t('footer.services')}</a></Link></li>
+                <li><Link href="/security"><a className="hover:text-slate-900">{t('footer.security')}</a></Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Company</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.company')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link href="/blog"><a className="hover:text-slate-900">Blog</a></Link></li>
-                <li><Link href="/contact"><a className="hover:text-slate-900">Contact</a></Link></li>
+                <li><Link href="/blog"><a className="hover:text-slate-900">{t('footer.blog')}</a></Link></li>
+                <li><Link href="/contact"><a className="hover:text-slate-900">{t('footer.contact')}</a></Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Legal</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.legal')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><a href="#" className="hover:text-slate-900">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-slate-900">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-slate-900">{t('footer.privacyPolicy')}</a></li>
+                <li><a href="#" className="hover:text-slate-900">{t('footer.termsOfService')}</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Standards</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.standards')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li>FDA Compliant</li>
-                <li>CDISC Standards</li>
-                <li>GDPR & HIPAA Ready</li>
+                <li>{t('footer.fdaCompliant')}</li>
+                <li>{t('footer.cdisc')}</li>
+                <li>{t('footer.gdprHipaa')}</li>
               </ul>
             </div>
           </div>
           <div className="border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
-            <p>&copy; 2026 HandyCT. All rights reserved. | <a href="#" className="hover:text-slate-900">Privacy</a> | <a href="#" className="hover:text-slate-900">Terms</a></p>
-            <p className="mt-2">HandyCT is a tool for CDISC data conversion. Always verify converted data before submission.</p>
+            <p>&copy; 2026 HandyCT. {t('footer.allRightsReserved')} | <a href="#" className="hover:text-slate-900">{t('footer.privacy')}</a> | <a href="#" className="hover:text-slate-900">{t('footer.terms')}</a></p>
+            <p className="mt-2">{t('footer.disclaimer')}</p>
           </div>
         </div>
       </footer>

@@ -10,54 +10,73 @@ export default function Services() {
 
   const services = [
     {
-      title: 'Free Tool',
-      description: 'For individual researchers and small teams',
-      price: 'Free',
+      title: t('services.freeTool'),
+      description: t('services.freeToolDesc'),
+      price: t('services.free'),
       features: [
-        'Unlimited SDTM conversions',
-        'CSV file upload and download',
-        'Basic data validation',
-        'Local browser processing',
-        'No registration required',
+        t('services.unlimitedConversions'),
+        t('services.csvUploadDownload'),
+        t('services.basicValidation'),
+        t('services.localProcessing'),
+        t('services.noRegistration'),
       ],
-      cta: 'Start Converting',
+      cta: t('services.startConverting'),
       ctaLink: '/',
       highlighted: false,
     },
     {
-      title: 'Validation Reports',
-      description: 'For compliance teams and QA departments',
+      title: t('services.validationReports'),
+      description: t('services.validationReportsDesc'),
       price: '$99',
-      period: '/month',
+      period: t('services.month'),
       features: [
-        'Everything in Free Tool',
-        'Detailed compliance reports',
-        'FDA audit trail generation',
-        'Data quality metrics',
-        'Priority email support',
-        'Monthly updates',
+        t('services.everythingInFree'),
+        t('services.detailedReports'),
+        t('services.fdaAuditTrail'),
+        t('services.dataQualityMetrics'),
+        t('services.prioritySupport'),
+        t('services.monthlyUpdates'),
       ],
-      cta: 'Get Started',
+      cta: t('services.getStarted'),
       ctaLink: '/contact',
       highlighted: true,
     },
     {
-      title: 'Full Mapping Support',
-      description: 'For enterprises and clinical trial sponsors',
+      title: t('services.fullMappingSupport'),
+      description: t('services.fullMappingSupportDesc'),
       price: '$499',
-      period: '/month',
+      period: t('services.month'),
       features: [
-        'Everything in Validation Reports',
-        'Custom mapping templates',
-        'Dedicated compliance expert',
-        'API integration support',
-        'Multi-user collaboration',
-        '24/7 priority support',
-        'Custom training sessions',
+        t('services.everythingInFree'),
+        t('services.customMappings'),
+        t('services.dedicatedExpert'),
+        t('services.apiIntegration'),
+        t('services.multiUserCollaboration'),
+        t('services.24Support'),
+        t('services.trainingSession'),
       ],
-      cta: 'Schedule Demo',
+      cta: t('services.scheduleDemo'),
       ctaLink: '/contact',
       highlighted: false,
+    },
+  ];
+
+  const faqs = [
+    {
+      question: t('services.canUpgradeAnytime'),
+      answer: t('services.canUpgradeAnyTimeAnswer'),
+    },
+    {
+      question: t('services.isThereTrial'),
+      answer: t('services.isThereTrialAnswer'),
+    },
+    {
+      question: t('services.whatAboutSecurity'),
+      answer: t('services.whatAboutSecurityAnswer'),
+    },
+    {
+      question: t('services.customEnterprise'),
+      answer: t('services.customEnterpriseAnswer'),
     },
   ];
 
@@ -73,22 +92,22 @@ export default function Services() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-slate-900">HandyCT 2.0</h1>
-                <p className="text-xs text-slate-500">下一代 CDISC 转换器</p>
+                <p className="text-xs text-slate-500">{t('home.subtitle')}</p>
               </div>
             </a>
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">Home</a>
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.home')}</a>
             </Link>
             <Link href="/services">
-              <a className="text-emerald-600 font-medium text-sm">Services</a>
+              <a className="text-emerald-600 font-medium text-sm">{t('footer.services')}</a>
             </Link>
             <Link href="/security">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">Security</a>
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.security')}</a>
             </Link>
             <Link href="/contact">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">Contact</a>
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.contact')}</a>
             </Link>
             <LanguageSwitcher />
           </div>
@@ -98,9 +117,9 @@ export default function Services() {
       {/* Hero Section */}
       <section className="border-b border-slate-200 bg-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-slate-900">Simple, Transparent Pricing</h1>
+          <h1 className="mb-4 text-4xl font-bold text-slate-900">{t('services.title')}</h1>
           <p className="mb-8 text-lg text-slate-600">
-            Choose the plan that fits your organization's needs
+            {t('services.subtitle')}
           </p>
         </div>
       </section>
@@ -147,69 +166,41 @@ export default function Services() {
 
         {/* FAQ Section */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">{t('services.faq')}</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Can I upgrade or downgrade anytime?</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-600">
-                  Yes, you can change your plan at any time. Changes take effect immediately, and we'll prorate your billing.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Is there a free trial for paid plans?</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-600">
-                  We offer a 14-day free trial for Validation Reports and Full Mapping Support. No credit card required.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">What about data security?</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-600">
-                  All plans include local browser processing and zero server storage. Your data never leaves your device.
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Do you offer custom enterprise plans?</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-slate-600">
-                  Yes! Contact our sales team for custom pricing and dedicated support tailored to your organization.
-                </p>
-              </CardContent>
-            </Card>
+            {faqs.map((faq, index) => (
+              <Card key={index}>
+                <CardHeader>
+                  <CardTitle className="text-lg">{faq.question}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-slate-600">
+                    {faq.answer}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </section>
 
         {/* CTA */}
         <div className="text-center bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg p-12">
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">Ready to get started?</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('services.readyToGetStarted')}</h2>
           <p className="text-slate-600 mb-8">
-            Start with our free tool, or contact us to learn more about our enterprise solutions.
+            {t('services.readyToGetStartedDesc')}
           </p>
           <div className="flex gap-4 justify-center">
             <Link href="/">
               <a>
                 <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700">
-                  Try Free Tool
+                  {t('services.tryFreeTool')}
                 </Button>
               </a>
             </Link>
             <Link href="/contact">
               <a>
                 <Button size="lg" variant="outline">
-                  Schedule Demo
+                  {t('services.scheduleDemo')}
                 </Button>
               </a>
             </Link>
@@ -222,39 +213,39 @@ export default function Services() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Product</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.product')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link href="/"><a className="hover:text-slate-900">Converter</a></Link></li>
-                <li><Link href="/services"><a className="hover:text-slate-900">Services</a></Link></li>
-                <li><Link href="/security"><a className="hover:text-slate-900">Security</a></Link></li>
+                <li><Link href="/"><a className="hover:text-slate-900">{t('footer.converter')}</a></Link></li>
+                <li><Link href="/services"><a className="hover:text-slate-900">{t('footer.services')}</a></Link></li>
+                <li><Link href="/security"><a className="hover:text-slate-900">{t('footer.security')}</a></Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Company</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.company')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link href="/blog"><a className="hover:text-slate-900">Blog</a></Link></li>
-                <li><Link href="/contact"><a className="hover:text-slate-900">Contact</a></Link></li>
+                <li><Link href="/blog"><a className="hover:text-slate-900">{t('footer.blog')}</a></Link></li>
+                <li><Link href="/contact"><a className="hover:text-slate-900">{t('footer.contact')}</a></Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Legal</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.legal')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><a href="#" className="hover:text-slate-900">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-slate-900">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-slate-900">{t('footer.privacyPolicy')}</a></li>
+                <li><a href="#" className="hover:text-slate-900">{t('footer.termsOfService')}</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Standards</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.standards')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li>FDA Compliant</li>
-                <li>CDISC Standards</li>
-                <li>GDPR & HIPAA Ready</li>
+                <li>{t('footer.fdaCompliant')}</li>
+                <li>{t('footer.cdisc')}</li>
+                <li>{t('footer.gdprHipaa')}</li>
               </ul>
             </div>
           </div>
           <div className="border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
-            <p>&copy; 2026 HandyCT. All rights reserved. | <a href="#" className="hover:text-slate-900">Privacy</a> | <a href="#" className="hover:text-slate-900">Terms</a></p>
-            <p className="mt-2">HandyCT is a tool for CDISC data conversion. Always verify converted data before submission.</p>
+            <p>&copy; 2026 HandyCT. {t('footer.allRightsReserved')} | <a href="#" className="hover:text-slate-900">{t('footer.privacy')}</a> | <a href="#" className="hover:text-slate-900">{t('footer.terms')}</a></p>
+            <p className="mt-2">{t('footer.disclaimer')}</p>
           </div>
         </div>
       </footer>

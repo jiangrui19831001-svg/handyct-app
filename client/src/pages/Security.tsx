@@ -20,22 +20,22 @@ export default function Security() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-slate-900">HandyCT 2.0</h1>
-                <p className="text-xs text-slate-500">下一代 CDISC 转换器</p>
+                <p className="text-xs text-slate-500">{t('home.subtitle')}</p>
               </div>
             </a>
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">Home</a>
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.home')}</a>
             </Link>
             <Link href="/services">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">Services</a>
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.services')}</a>
             </Link>
             <Link href="/security">
-              <a className="text-emerald-600 font-medium text-sm">Security</a>
+              <a className="text-emerald-600 font-medium text-sm">{t('footer.security')}</a>
             </Link>
             <Link href="/contact">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">Contact</a>
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.contact')}</a>
             </Link>
             <LanguageSwitcher />
           </div>
@@ -45,9 +45,9 @@ export default function Security() {
       {/* Hero Section */}
       <section className="border-b border-slate-200 bg-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-slate-900">Security First</h1>
+          <h1 className="mb-4 text-4xl font-bold text-slate-900">{t('security.title')}</h1>
           <p className="mb-8 text-lg text-slate-600">
-            Your clinical trial data stays completely under your control. No uploads, no servers, no risks.
+            {t('security.subtitle')}
           </p>
         </div>
       </section>
@@ -62,26 +62,26 @@ export default function Security() {
                 <div className="p-3 bg-emerald-100 rounded-lg">
                   <Lock className="w-6 h-6 text-emerald-600" />
                 </div>
-                <CardTitle>Local Browser Processing</CardTitle>
+                <CardTitle>{t('security.localBrowserProcessing')}</CardTitle>
               </div>
-              <CardDescription>All processing happens on your device</CardDescription>
+              <CardDescription>{t('security.localBrowserProcessingDesc')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-slate-600">
-                HandyCT runs entirely in your browser. Your CSV files are processed locally on your computer, never transmitted to any server.
+                {t('security.localBrowserProcessingContent')}
               </p>
               <ul className="space-y-2 text-sm text-slate-600">
                 <li className="flex items-start gap-2">
                   <span className="text-emerald-600 font-bold">✓</span>
-                  <span>No network transmission of sensitive data</span>
+                  <span>{t('security.noNetworkTransmission')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-emerald-600 font-bold">✓</span>
-                  <span>Works offline - no internet required</span>
+                  <span>{t('security.worksOffline')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-emerald-600 font-bold">✓</span>
-                  <span>Instant processing - no server latency</span>
+                  <span>{t('security.instantProcessing')}</span>
                 </li>
               </ul>
             </CardContent>
@@ -94,26 +94,26 @@ export default function Security() {
                 <div className="p-3 bg-blue-100 rounded-lg">
                   <Server className="w-6 h-6 text-blue-600" />
                 </div>
-                <CardTitle>Zero Server Storage</CardTitle>
+                <CardTitle>{t('security.zeroServerStorage')}</CardTitle>
               </div>
-              <CardDescription>Your data never touches our servers</CardDescription>
+              <CardDescription>{t('security.zeroServerStorageDesc')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-slate-600">
-                We don't store, cache, or log any of your clinical trial data. Every conversion is temporary and deleted immediately after download.
+                {t('security.zeroServerStorageContent')}
               </p>
               <ul className="space-y-2 text-sm text-slate-600">
                 <li className="flex items-start gap-2">
                   <span className="text-blue-600 font-bold">✓</span>
-                  <span>No database storage of your files</span>
+                  <span>{t('security.noDatabaseStorage')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-600 font-bold">✓</span>
-                  <span>No audit logs of your data</span>
+                  <span>{t('security.noAuditLogs')}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-blue-600 font-bold">✓</span>
-                  <span>Compliant with GDPR, HIPAA, and FDA regulations</span>
+                  <span>{t('security.compliantWithGDPR')}</span>
                 </li>
               </ul>
             </CardContent>
@@ -127,27 +127,27 @@ export default function Security() {
               <div className="p-3 bg-purple-100 rounded-lg">
                 <Shield className="w-6 h-6 text-purple-600" />
               </div>
-              <CardTitle>Compliance & Standards</CardTitle>
+              <CardTitle>{t('security.complianceStandards')}</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-3 gap-8">
               <div>
-                <h3 className="font-bold text-slate-900 mb-2">FDA Compliant</h3>
+                <h3 className="font-bold text-slate-900 mb-2">{t('security.fdaCompliant')}</h3>
                 <p className="text-sm text-slate-600">
-                  Follows FDA guidance for SDTM and ADaM data standards. Your converted data meets regulatory requirements.
+                  {t('security.fdaCompliantDesc')}
                 </p>
               </div>
               <div>
-                <h3 className="font-bold text-slate-900 mb-2">CDISC Standards</h3>
+                <h3 className="font-bold text-slate-900 mb-2">{t('security.cdisc')}</h3>
                 <p className="text-sm text-slate-600">
-                  Implements CDISC SDTM, ADaM, and Define-XML standards. Ensures data consistency across your organization.
+                  {t('security.cdiscDesc')}
                 </p>
               </div>
               <div>
-                <h3 className="font-bold text-slate-900 mb-2">Data Privacy</h3>
+                <h3 className="font-bold text-slate-900 mb-2">{t('security.dataPrivacy')}</h3>
                 <p className="text-sm text-slate-600">
-                  No personal data collection. No tracking. No third-party integrations. Complete privacy by design.
+                  {t('security.dataPrivacyDesc')}
                 </p>
               </div>
             </div>
@@ -156,11 +156,11 @@ export default function Security() {
 
         {/* CTA */}
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">Ready to convert your data securely?</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">{t('security.readyToConvert')}</h2>
           <Link href="/">
             <a>
               <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700">
-                Start Converting Now
+                {t('security.startConvertingNow')}
               </Button>
             </a>
           </Link>
@@ -172,39 +172,39 @@ export default function Security() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Product</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.product')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link href="/"><a className="hover:text-slate-900">Converter</a></Link></li>
-                <li><Link href="/services"><a className="hover:text-slate-900">Services</a></Link></li>
-                <li><Link href="/security"><a className="hover:text-slate-900">Security</a></Link></li>
+                <li><Link href="/"><a className="hover:text-slate-900">{t('footer.converter')}</a></Link></li>
+                <li><Link href="/services"><a className="hover:text-slate-900">{t('footer.services')}</a></Link></li>
+                <li><Link href="/security"><a className="hover:text-slate-900">{t('footer.security')}</a></Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Company</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.company')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link href="/blog"><a className="hover:text-slate-900">Blog</a></Link></li>
-                <li><Link href="/contact"><a className="hover:text-slate-900">Contact</a></Link></li>
+                <li><Link href="/blog"><a className="hover:text-slate-900">{t('footer.blog')}</a></Link></li>
+                <li><Link href="/contact"><a className="hover:text-slate-900">{t('footer.contact')}</a></Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Legal</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.legal')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><a href="#" className="hover:text-slate-900">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-slate-900">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-slate-900">{t('footer.privacyPolicy')}</a></li>
+                <li><a href="#" className="hover:text-slate-900">{t('footer.termsOfService')}</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Standards</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.standards')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li>FDA Compliant</li>
-                <li>CDISC Standards</li>
-                <li>GDPR & HIPAA Ready</li>
+                <li>{t('footer.fdaCompliant')}</li>
+                <li>{t('footer.cdisc')}</li>
+                <li>{t('footer.gdprHipaa')}</li>
               </ul>
             </div>
           </div>
           <div className="border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
-            <p>&copy; 2026 HandyCT. All rights reserved. | <a href="#" className="hover:text-slate-900">Privacy</a> | <a href="#" className="hover:text-slate-900">Terms</a></p>
-            <p className="mt-2">HandyCT is a tool for CDISC data conversion. Always verify converted data before submission.</p>
+            <p>&copy; 2026 HandyCT. {t('footer.allRightsReserved')} | <a href="#" className="hover:text-slate-900">{t('footer.privacy')}</a> | <a href="#" className="hover:text-slate-900">{t('footer.terms')}</a></p>
+            <p className="mt-2">{t('footer.disclaimer')}</p>
           </div>
         </div>
       </footer>
