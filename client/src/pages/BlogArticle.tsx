@@ -33,12 +33,20 @@ export default function BlogArticle() {
         const match = heading.match(/^#+/);
         const level = match ? match[0].length : 2;
         const text = heading.replace(/^#+\s+/, '');
-        const id = `heading-${index}`;
+        const id = `heading-${text.replace(/\s+/g, '-').toLowerCase()}`;
         return { id, text, level };
       });
       setTableOfContents(toc);
     }
   }, [article?.content]);
+
+  // Handle TOC link clicks with smooth scroll
+  const handleTOCClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   // 获取当前语言的内容
   const currentContent = i18n.language === 'en' ? (article?.contentEn || article?.content) : article?.content;
@@ -97,15 +105,15 @@ export default function BlogArticle() {
               <nav className="space-y-2 text-sm">
                 {tableOfContents.length > 0 ? (
                   tableOfContents.map((item) => (
-                    <a
+                    <button
                       key={item.id}
-                      href={`#${item.id}`}
-                      className={`block text-slate-600 hover:text-emerald-600 transition-colors ${
+                      onClick={() => handleTOCClick(item.id)}
+                      className={`block w-full text-left text-slate-600 hover:text-emerald-600 transition-colors ${
                         item.level === 3 ? 'ml-4' : ''
                       }`}
                     >
                       {item.text}
-                    </a>
+                    </button>
                   ))
                 ) : (
                   <p className="text-slate-500">No headings</p>
