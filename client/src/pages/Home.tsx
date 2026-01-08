@@ -30,9 +30,19 @@ export default function Home() {
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      if (!file.name.endsWith('.csv')) {
+        alert('请上传 CSV 格式的文件');
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (e) => {
-        setCsvData(e.target?.result as string);
+        const content = e.target?.result as string;
+        const validation = validateCSVFormat(content);
+        if (!validation.valid) {
+          alert(`文件验证失败: ${validation.error}`);
+          return;
+        }
+        setCsvData(content);
       };
       reader.readAsText(file);
     }
@@ -60,9 +70,17 @@ export default function Home() {
       if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
         const reader = new FileReader();
         reader.onload = (event) => {
-          setCsvData(event.target?.result as string);
+          const content = event.target?.result as string;
+          const validation = validateCSVFormat(content);
+          if (!validation.valid) {
+            alert(`文件验证失败: ${validation.error}`);
+            return;
+          }
+          setCsvData(content);
         };
         reader.readAsText(file);
+      } else {
+        alert('请上传 CSV 格式的文件');
       }
     }
   };
@@ -90,6 +108,44 @@ export default function Home() {
       { records: conversionResult.data }
     );
     setConversionResult(report);
+  };
+
+  // 验证 CSV 文件格式和列名
+  const validateCSVFormat = (csvContent: string): { valid: boolean; error?: string } => {
+    const lines = csvContent.trim().split('\n');
+    if (lines.length < 2) {
+      return { valid: false, error: 'CSV 文件必须至少包含标题行和一行数据' };
+    }
+
+    const headers = lines[0].split(',').map(h => h.trim());
+    const requiredHeaders = ['USUBJID', 'SUBJID', 'RFSTDTC', 'SEX', 'AGE'];
+    const missingHeaders = requiredHeaders.filter(h => !headers.includes(h));
+
+    if (missingHeaders.length > 0) {
+      return { valid: false, error: `缺少必需的列: ${missingHeaders.join(', ')}` };
+    }
+
+    return { valid: true };
+  };
+
+  // 下载转换结果
+  const handleDownloadResult = () => {
+    if (!conversionResult?.data) return;
+
+    // 将数据转换为 CSV 格式
+    const csvContent = Array.isArray(conversionResult.data)
+      ? conversionResult.data.map((row: any) => Object.values(row).join(',')).join('\n')
+      : csvData;
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'HandyCT_SDTM_Output.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -321,9 +377,9 @@ export default function Home() {
                         <Button onClick={handleGenerateReport} className="w-full">
                           {t('home.regenerateReport')}
                         </Button>
-                        <Button variant="outline" className="w-full">
+                        <Button onClick={handleDownloadResult} variant="outline" className="w-full">
                           <Download className="mr-2 h-4 w-4" />
-                          {t('home.downloadReport')}
+                          {t('home.downloadResult')}
                         </Button>
                       </div>
                     ) : (
