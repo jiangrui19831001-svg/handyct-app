@@ -83,7 +83,10 @@
     "noDataToDownload": "没有可下载的数据",
     "dragDropOrClick": "拖拽文件到此处或点击选择",
     "rowCount": "行数",
-    "techBlog": "技术博客"
+    "techBlog": "技术博客",
+    "heroTitle": "CDISC 数据转换工具",
+    "heroSubtitle": "快速、安全、合规的临床试验数据标准化转换",
+    "learnMore": "了解更多"
   },
   "services": {
     "title": "简单透明的定价",

@@ -74,7 +74,10 @@
     "noDataToDownload": "No data available for download",
     "dragDropOrClick": "Drag files here or click to select",
     "rowCount": "Row count",
-    "techBlog": "Tech Blog"
+    "techBlog": "Tech Blog",
+    "heroTitle": "CDISC Data Conversion Tool",
+    "heroSubtitle": "Fast, secure, and compliant clinical trial data standardization conversion",
+    "learnMore": "Learn More"
   },
   "services": {
     "title": "Simple, Transparent Pricing",

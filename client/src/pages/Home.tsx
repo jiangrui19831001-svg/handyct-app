@@ -247,10 +247,20 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Hero Section */}
+      <section className="border-b border-slate-200 bg-white py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="mb-4 text-4xl font-bold text-slate-900">{t('home.heroTitle') || 'CDISC 数据转换工具'}</h1>
+          <p className="mb-8 text-lg text-slate-600">
+            {t('home.heroSubtitle') || '快速、安全、合规的临床试验数据标准化转换'}
+          </p>
+        </div>
+      </section>
+
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-16">
         <Tabs defaultValue="convert" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
+          <TabsList className="grid w-full grid-cols-3 mb-8 bg-slate-100">
             <TabsTrigger value="convert">{t('home.convert') || '转换'}</TabsTrigger>
             <TabsTrigger value="validate">{t('home.validate') || '验证'}</TabsTrigger>
             <TabsTrigger value="report">{t('home.report') || '报告'}</TabsTrigger>
@@ -266,7 +276,7 @@ export default function Home() {
 
           {/* Convert Tab */}
           <TabsContent value="convert" className="space-y-6">
-            <Card>
+            <Card className="shadow-md border-slate-200">
               <CardHeader>
                 <CardTitle>{t('home.selectCDISCStandard') || '选择 CDISC 标准'}</CardTitle>
                 <CardDescription>{t('home.selectDataStandardVersion') || '选择要转换的数据标准和版本'}</CardDescription>
@@ -307,7 +317,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="shadow-md border-slate-200">
               <CardHeader>
                 <CardTitle>{t('home.uploadFile') || '上传数据文件'}</CardTitle>
                 <CardDescription>{t('home.clinicalTrialData') || 'CSV 格式的临床试验数据'}</CardDescription>
@@ -385,9 +395,9 @@ export default function Home() {
 
           {/* Validate Tab */}
           <TabsContent value="validate" className="space-y-6">
-            <Card>
+            <Card className="shadow-md border-slate-200">
               <CardHeader>
-                <CardTitle>{t('home.validateCompliance') || 'CDISC 合规性验证'}</CardTitle>
+                <CardTitle>{t('home.complianceValidation') || 'CDISC 合规性验证'}</CardTitle>
                 <CardDescription>{t('home.validateDataCompliance') || '检查数据是否符合 CDISC 标准'}</CardDescription>
               </CardHeader>
               <CardContent>
@@ -420,9 +430,9 @@ export default function Home() {
 
           {/* Report Tab */}
           <TabsContent value="report" className="space-y-6">
-            <Card>
+            <Card className="shadow-md border-slate-200">
               <CardHeader>
-                <CardTitle>{t('home.generateReport') || '生成详细的 FDA 数据审计报告'}</CardTitle>
+                <CardTitle>{t('home.fdaComplianceReport') || 'FDA 合规性报告'}</CardTitle>
                 <CardDescription>{t('home.reportDescription') || '生成符合 FDA 要求的合规性报告'}</CardDescription>
               </CardHeader>
               <CardContent>
