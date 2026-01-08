@@ -9,8 +9,21 @@ import { ArrowRight, Calendar, Clock, Search } from 'lucide-react';
 import { getAllBlogArticles, BLOG_ARTICLES } from '@/lib/blog-data';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
+// 分类翻译映射
+const CATEGORY_TRANSLATIONS: { [key: string]: { zh: string; en: string } } = {
+  'FDA Compliance': { zh: 'FDA 合规性', en: 'FDA Compliance' },
+  'CDISC Standards': { zh: 'CDISC 标准', en: 'CDISC Standards' },
+  'Data Standards': { zh: '数据标准', en: 'Data Standards' },
+  'Data Quality': { zh: '数据质量', en: 'Data Quality' },
+  'API Integration': { zh: 'API 集成', en: 'API Integration' },
+  'Data Management': { zh: '数据管理', en: 'Data Management' },
+  'Regulatory Compliance': { zh: '监管合规性', en: 'Regulatory Compliance' },
+  'Best Practices': { zh: '最佳实践', en: 'Best Practices' },
+  'Technical Guide': { zh: '技术指南', en: 'Technical Guide' },
+};
+
 export default function Blog() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const articles = getAllBlogArticles();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -18,11 +31,32 @@ export default function Blog() {
   // 获取所有分类
   const categories = Array.from(new Set(BLOG_ARTICLES.map((a) => a.category)));
 
-  // 过滤文章
+  // 获取当前语言的文章标题和描述
+  const getArticleTitle = (article: any) => {
+    return i18n.language === 'en' ? (article.titleEn || article.title) : article.title;
+  };
+
+  const getArticleDescription = (article: any) => {
+    return i18n.language === 'en' ? (article.descriptionEn || article.description) : article.description;
+  };
+
+  // 获取当前语言的分类名称
+  const getCategoryName = (category: string) => {
+    const translation = CATEGORY_TRANSLATIONS[category];
+    if (translation) {
+      return i18n.language === 'en' ? translation.en : translation.zh;
+    }
+    return category;
+  };
+
+  // 过滤文章 - 支持中英文搜索
   const filteredArticles = articles.filter((article) => {
+    const title = getArticleTitle(article);
+    const description = getArticleDescription(article);
+    
     const matchesSearch =
-      article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      article.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       article.tags.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const matchesCategory = !selectedCategory || article.category === selectedCategory;
@@ -89,7 +123,7 @@ export default function Blog() {
                 onClick={() => setSelectedCategory(category)}
                 className={selectedCategory === category ? 'bg-emerald-600 hover:bg-emerald-700' : ''}
               >
-                {category}
+                {getCategoryName(category)}
               </Button>
             ))}
           </div>
@@ -106,9 +140,9 @@ export default function Blog() {
                   <CardHeader>
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
-                        <CardTitle className="line-clamp-2">{article.title}</CardTitle>
+                        <CardTitle className="line-clamp-2">{getArticleTitle(article)}</CardTitle>
                         <CardDescription className="mt-2 line-clamp-2">
-                          {article.description}
+                          {getArticleDescription(article)}
                         </CardDescription>
                       </div>
                       <ArrowRight className="h-5 w-5 text-emerald-600 flex-shrink-0 mt-1" />
@@ -126,7 +160,7 @@ export default function Blog() {
                       </div>
                     </div>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      <Badge variant="secondary">{article.category}</Badge>
+                      <Badge variant="secondary">{getCategoryName(article.category)}</Badge>
                       {article.tags.slice(0, 2).map((tag) => (
                         <Badge key={tag} variant="outline">
                           {tag}
