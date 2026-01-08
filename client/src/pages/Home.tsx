@@ -64,7 +64,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* 顶部导航栏 */}
+      {/* Header Navigation */}
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
@@ -73,14 +73,14 @@ export default function Home() {
             </div>
             <div className="hidden sm:block">
               <h1 className="text-lg sm:text-xl font-bold text-slate-900">HandyCT 2.0</h1>
-              <p className="text-xs text-slate-500">Next Gen CDISC Converter</p>
+              <p className="text-xs text-slate-500">{t('home.nextGenCDISCConverter')}</p>
             </div>
             <div className="sm:hidden">
               <h1 className="text-base font-bold text-slate-900">HandyCT</h1>
             </div>
           </div>
           
-          {/* 桌面端导航 */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-2">
             <a href="/#/blog" className="no-underline">
               <Button variant="ghost" size="sm">
@@ -90,7 +90,7 @@ export default function Home() {
             <LanguageSwitcher />
           </div>
           
-          {/* 移动端菜单按钮 */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-2">
             <LanguageSwitcher />
             <Button
@@ -103,7 +103,7 @@ export default function Home() {
           </div>
         </div>
         
-        {/* 移动端菜单 */}
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-slate-200 bg-white">
             <div className="container py-3 space-y-2">
@@ -117,29 +117,29 @@ export default function Home() {
         )}
       </header>
 
-      {/* 主内容区域 */}
+      {/* Main Content Area */}
       <main className="container py-8">
         <div className="grid gap-8 lg:grid-cols-3">
-          {/* 左侧：转换配置 */}
+          {/* Left Side: Conversion Configuration */}
           <div className="lg:col-span-2">
             <Tabs defaultValue="convert" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="convert">转换</TabsTrigger>
-                <TabsTrigger value="validate">验证</TabsTrigger>
-                <TabsTrigger value="report">报告</TabsTrigger>
+                <TabsTrigger value="convert">{t('home.convert')}</TabsTrigger>
+                <TabsTrigger value="validate">{t('home.validate')}</TabsTrigger>
+                <TabsTrigger value="report">{t('home.report')}</TabsTrigger>
               </TabsList>
 
-              {/* 转换标签页 */}
+              {/* Convert Tab */}
               <TabsContent value="convert" className="space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>选择 CDISC 标准</CardTitle>
-                    <CardDescription>选择要转换的数据标准和版本</CardDescription>
+                    <CardTitle>{t('home.selectCDISCStandard')}</CardTitle>
+                    <CardDescription>{t('home.selectDataStandardVersion')}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-700">标准</label>
+                        <label className="text-sm font-medium text-slate-700">{t('home.standard')}</label>
                         <Select value={selectedStandard} onValueChange={setSelectedStandard}>
                           <SelectTrigger>
                             <SelectValue />
@@ -156,10 +156,10 @@ export default function Home() {
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-700">版本</label>
+                        <label className="text-sm font-medium text-slate-700">{t('home.version')}</label>
                         <Select value={selectedVersion} onValueChange={setSelectedVersion}>
                           <SelectTrigger>
-                            <SelectValue placeholder="选择版本" />
+                            <SelectValue placeholder={t('home.selectVersionPlaceholder')} />
                           </SelectTrigger>
                           <SelectContent>
                             {currentStandard?.versions.map((ver) => (
@@ -176,17 +176,16 @@ export default function Home() {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>上传数据文件</CardTitle>
-                    <CardDescription>支持 CSV 格式的临床试验数据</CardDescription>
+                    <CardTitle>{t('home.uploadFile')}</CardTitle>
+                    <CardDescription>{t('home.clinicalTrialData')}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center justify-center rounded-lg border-2 border-dashed border-slate-300 p-8">
                       <div className="text-center">
                         <Upload className="mx-auto h-12 w-12 text-slate-400" />
                         <p className="mt-2 text-sm text-slate-600">
-                          拖拽文件到此处或
+                          {t('home.dragDrop')}
                           <label className="cursor-pointer font-medium text-emerald-600 hover:text-emerald-700">
-                            点击选择
                             <input
                               type="file"
                               accept=".csv"
@@ -201,7 +200,7 @@ export default function Home() {
                     {csvData && (
                       <div className="rounded-lg bg-emerald-50 p-4">
                         <p className="text-sm text-emerald-800">
-                          ✓ 已上传 {csvData.split('\n').length - 1} 行数据
+                          ✓ {csvData.split('\n').length - 1} {t('home.rowsUploaded')}
                         </p>
                       </div>
                     )}
@@ -211,18 +210,18 @@ export default function Home() {
                       disabled={!csvData || !selectedVersion || isLoading}
                       className="w-full bg-emerald-600 hover:bg-emerald-700"
                     >
-                      {isLoading ? '转换中...' : '开始转换'}
+                      {isLoading ? `${t('home.startConverting')}...` : t('home.startConverting')}
                     </Button>
                   </CardContent>
                 </Card>
               </TabsContent>
 
-              {/* 验证标签页 */}
+              {/* Validate Tab */}
               <TabsContent value="validate" className="space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>CDISC 合规性验证</CardTitle>
-                    <CardDescription>检查数据是否符合 CDISC 标准</CardDescription>
+                    <CardTitle>{t('home.complianceValidation')}</CardTitle>
+                    <CardDescription>{t('home.checkDataCompliance')}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {conversionResult ? (
@@ -255,43 +254,43 @@ export default function Home() {
                           </div>
                         </div>
                         <Button onClick={handleValidate} className="w-full">
-                          重新验证
+                          {t('home.revalidate')}
                         </Button>
                       </div>
                     ) : (
-                      <p className="text-sm text-slate-500">请先上传并转换数据</p>
+                      <p className="text-sm text-slate-500">{t('home.pleaseUploadAndConvert')}</p>
                     )}
                   </CardContent>
                 </Card>
               </TabsContent>
 
-              {/* 报告标签页 */}
+              {/* Report Tab */}
               <TabsContent value="report" className="space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>FDA 合规性报告</CardTitle>
-                    <CardDescription>生成详细的 FDA 数据审计报告</CardDescription>
+                    <CardTitle>{t('home.fdaComplianceReport')}</CardTitle>
+                    <CardDescription>{t('home.generateDetailedAuditReport')}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {conversionResult ? (
                       <div className="space-y-4">
                         <div className="rounded-lg bg-slate-50 p-4">
                           <p className="text-sm text-slate-600">
-                            合规评分: <span className="font-bold text-emerald-600">
+                            {t('home.complianceScore')}: <span className="font-bold text-emerald-600">
                               {conversionResult.data?.summary?.complianceScore || 0}%
                             </span>
                           </p>
                         </div>
                         <Button onClick={handleGenerateReport} className="w-full">
-                          生成报告
+                          {t('home.generateReport')}
                         </Button>
                         <Button variant="outline" className="w-full">
                           <Download className="mr-2 h-4 w-4" />
-                          下载为 PDF
+                          {t('home.downloadAsPDF')}
                         </Button>
                       </div>
                     ) : (
-                      <p className="text-sm text-slate-500">请先上传并转换数据</p>
+                      <p className="text-sm text-slate-500">{t('home.pleaseUploadAndConvert')}</p>
                     )}
                   </CardContent>
                 </Card>
@@ -299,18 +298,18 @@ export default function Home() {
             </Tabs>
           </div>
 
-          {/* 右侧：学习资源（仅桌面端显示） */}
+          {/* Right Side: Learning Resources (Desktop Only) */}
           <div className="hidden lg:block space-y-6">
-            {/* 学习资源 */}
+            {/* Learning Resources */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">学习资源</CardTitle>
+                <CardTitle className="text-lg">{t('home.learningResources')}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="mb-4 text-sm text-slate-600">阅读我们的技术博客，了解 FDA 合规性最佳实践。</p>
+                <p className="mb-4 text-sm text-slate-600">{t('home.readTechBlog')}</p>
                 <a href="/#/blog" className="block no-underline">
                   <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
-                    访问技术博客
+                    {t('home.visitTechBlog')}
                   </Button>
                 </a>
               </CardContent>
@@ -319,10 +318,10 @@ export default function Home() {
         </div>
       </main>
 
-      {/* 底部状态栏 */}
+      {/* Footer Status Bar */}
       <footer className="border-t border-slate-200 bg-white py-4">
         <div className="container flex flex-col sm:flex-row items-center justify-between text-sm text-slate-600 gap-2">
-          <p>HandyCT 2.0 - 现代化 CDISC 数据转换工具</p>
+          <p>HandyCT 2.0 - {t('home.nextGenCDISCConverter')}</p>
         </div>
       </footer>
     </div>
