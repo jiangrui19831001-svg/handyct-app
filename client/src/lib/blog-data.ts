@@ -12,6 +12,7 @@ export interface BlogArticle {
   readingTime: number;
   category: string;
   tags: string[];
+  tagsZh?: string[];
   seoTitle: string;
   seoDescription: string;
   keywords: string[];
@@ -35,6 +36,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     readingTime: 12,
     category: 'FDA Compliance',
     tags: ['FDA', 'SDTM', 'Compliance'],
+    tagsZh: ['FDA', 'SDTM', '合规性'],
     seoTitle: 'FDA 临床试验数据审计完整指南',
     seoDescription: '学习如何通过 FDA 审计：SDTM 数据标准化、质量检查、审计追踪。',
     keywords: ['FDA审计', 'SDTM', '合规'],
@@ -117,6 +119,7 @@ A: Select the SDTM version consistent with the latest version at trial initiatio
     readingTime: 10,
     category: 'CDISC Standards',
     tags: ['SDTM', 'ADaM', 'CDISC'],
+    tagsZh: ['SDTM', 'ADaM', 'CDISC'],
     seoTitle: 'SDTM vs ADaM：完全对比',
     seoDescription: 'SDTM 和 ADaM 的关键区别与各自用途。',
     keywords: ['SDTM', 'ADaM'],
@@ -197,6 +200,7 @@ Source Data → SDTM (Standardization) → ADaM (Analysis Optimization) → Stat
     readingTime: 9,
     category: 'Data Standards',
     tags: ['Define-XML', 'Metadata'],
+    tagsZh: ['Define-XML', '元数据'],
     seoTitle: 'Define-XML 2.1 标准指南',
     seoDescription: '掌握 Define-XML 2.1 新特性。',
     keywords: ['Define-XML', '元数据'],
@@ -277,6 +281,7 @@ A: Use Pinnacle 21 or other validation tools for checking.`
     readingTime: 11,
     category: 'Data Quality',
     tags: ['Data Quality', 'Validation'],
+    tagsZh: ['数据质量', '验证'],
     seoTitle: '临床数据质量检查清单',
     seoDescription: '确保提交前的质量。',
     keywords: ['质量检查', '数据验证'],
@@ -365,6 +370,7 @@ Pinnacle 21 is the FDA-recommended validation tool with hundreds of rules:
     readingTime: 10,
     category: 'API Integration',
     tags: ['API', 'Integration'],
+    tagsZh: ['API', '集成'],
     seoTitle: 'CDISC API 集成指南',
     seoDescription: '自动化术语查询。',
     keywords: ['CDISC API', '自动化'],
@@ -461,6 +467,7 @@ latest_version = response.json()['packages'][0]['version']
     readingTime: 11,
     category: 'Data Security',
     tags: ['Privacy', 'GDPR'],
+    tagsZh: ['隐私', 'GDPR'],
     seoTitle: '临床数据安全指南',
     seoDescription: '实现隐私保护最佳实践。',
     keywords: ['数据安全', '隐私保护'],
@@ -555,6 +562,7 @@ Conduct regular data security risk assessments, including:
     readingTime: 10,
     category: 'Data Conversion',
     tags: ['Excel', 'SDTM'],
+    tagsZh: ['Excel', 'SDTM'],
     seoTitle: 'Excel 转 SDTM 陷阱',
     seoDescription: '避免常见的转换错误。',
     keywords: ['Excel转换', 'SDTM'],
@@ -689,6 +697,7 @@ Different encodings may result in:
     readingTime: 12,
     category: 'Data Analysis',
     tags: ['ADaM', 'Analysis'],
+    tagsZh: ['ADaM', '分析'],
     seoTitle: 'ADaM 创建指南',
     seoDescription: '从 SDTM 到分析。',
     keywords: ['ADaM', '分析'],
@@ -819,6 +828,7 @@ A: In principle, analysis-related derived variables should be created in ADaM to
     readingTime: 9,
     category: 'Data Management',
     tags: ['Version Control', 'Audit Trail'],
+    tagsZh: ['版本控制', '审计追踪'],
     seoTitle: '临床数据版本管理',
     seoDescription: '确保数据一致性。',
     keywords: ['版本控制', '变更管理'],
@@ -939,6 +949,7 @@ Perform regular data backups, including:
     readingTime: 13,
     category: 'FDA Submission',
     tags: ['FDA', 'Submission'],
+    tagsZh: ['FDA', 'Submission'],
     seoTitle: 'FDA 数据提交最佳实践',
     seoDescription: '加速上市流程。',
     keywords: ['FDA提交', '提交策略'],

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Calendar, Clock, Search } from 'lucide-react';
+import { ArrowRight, Calendar, Clock, Search, Zap } from 'lucide-react';
 import { getAllBlogArticles, BLOG_ARTICLES } from '@/lib/blog-data';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
@@ -54,6 +54,11 @@ export default function Blog() {
     return category;
   };
 
+  // 获取当前语言的标签
+  const getArticleTags = (article: any) => {
+    return i18n.language === 'en' ? article.tags : (article.tagsZh || article.tags);
+  };
+
   // 过滤文章 - 支持中英文搜索
   const filteredArticles = articles.filter((article) => {
     const currentTitle = getArticleTitle(article);
@@ -62,6 +67,7 @@ export default function Blog() {
     const chineseDescription = article.description;
     const englishTitle = article.titleEn || article.title;
     const englishDescription = article.descriptionEn || article.description;
+    const currentTags = getArticleTags(article);
     
     const matchesSearch =
       currentTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -70,7 +76,9 @@ export default function Blog() {
       chineseDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
       englishTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
       englishDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      article.tags.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+      article.tags.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (article.tagsZh || []).some((tag: string) => tag.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      currentTags.some((tag: string) => tag.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const matchesCategory = !selectedCategory || article.category === selectedCategory;
 
@@ -80,15 +88,15 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       {/* Header Navigation */}
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
-        <div className="container flex h-16 items-center justify-between">
+      <header className="sticky top-0 z-50 bg-white shadow-sm">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <a href="/#/" className="flex items-center gap-3 hover:opacity-80 cursor-pointer no-underline">
-            <div className="rounded-lg bg-emerald-600 p-2">
-              <span className="text-lg font-bold text-white">⚡</span>
+            <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center">
+              <Zap className="w-6 h-6 text-white" />
             </div>
             <div>
               <h1 className="text-xl font-bold text-slate-900">HandyCT 2.0</h1>
-              <p className="text-xs text-slate-500">{t('blog.title')}</p>
+              <p className="text-xs text-slate-500">{t('blog.subtitle')}</p>
             </div>
           </a>
           <div className="flex items-center gap-2">
@@ -174,8 +182,8 @@ export default function Blog() {
                     </div>
                     <div className="mt-4 flex flex-wrap gap-2">
                       <Badge variant="secondary">{getCategoryName(article.category)}</Badge>
-                      {article.tags.slice(0, 2).map((tag) => (
-                        <Badge key={tag} variant="outline">
+                      {getArticleTags(article).map((tag: string) => (
+                        <Badge key={tag} variant="secondary">
                           {tag}
                         </Badge>
                       ))}
