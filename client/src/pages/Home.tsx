@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'wouter';
 import { useAuth } from '@/_core/hooks/useAuth';
@@ -12,6 +12,10 @@ import { CDISC_STANDARDS, validateSDTMCompliance, convertCSVToSDTM, generateFDAC
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 export default function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   let { user, loading, error, isAuthenticated, logout } = useAuth();
 
   const { t, i18n } = useTranslation();
@@ -213,12 +217,10 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-white shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/">
-            <a className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center">
-                <Zap className="w-6 h-6 text-white" />
-              </div>
+            <a className="flex items-center gap-2">
+              <img src="/logo-icon.png" alt="HandyCT" className="w-10 h-10" />
               <div>
-                <h1 className="text-xl font-bold text-slate-900">HandyCT 2.0</h1>
+                <h1 className="text-lg font-bold text-slate-900">HandyCT</h1>
                 <p className="text-xs text-slate-500">{t('home.subtitle') || '下一代 CDISC 转换器'}</p>
               </div>
             </a>

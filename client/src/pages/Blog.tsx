@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
@@ -23,6 +23,10 @@ const CATEGORY_TRANSLATIONS: { [key: string]: { zh: string; en: string } } = {
 };
 
 export default function Blog() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { t, i18n } = useTranslation();
   const articles = getAllBlogArticles();
   const [searchTerm, setSearchTerm] = useState('');
