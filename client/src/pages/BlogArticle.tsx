@@ -240,7 +240,7 @@ export default function BlogArticle() {
                 <div className="rounded-lg bg-emerald-50 p-6">
                   <h3 className="mb-2 text-lg font-semibold text-emerald-900">{t('blog.cta')}</h3>
                   <p className="mb-4 text-emerald-800">{t('blog.ctaDescription')}</p>
-                  <a href="/" className="no-underline">
+                  <a href="/#/" className="no-underline">
                     <Button className="bg-emerald-600 hover:bg-emerald-700">
                       <BookOpen className="mr-2 h-4 w-4" />
                       {t('blog.tryNow')}
@@ -298,7 +298,7 @@ export default function BlogArticle() {
 
             {/* 返回按钮 */}
             <div className="mt-12">
-              <a href="/" className="no-underline">
+              <a href="/#/" className="no-underline">
                 <Button variant="outline" className="w-full">
                   {t('blog.backToTools')}
                 </Button>
