@@ -310,6 +310,48 @@ export default function BlogArticle() {
           </div>
         </div>
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-200 bg-white py-12 mt-16">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h3 className="font-bold text-slate-900 mb-4">Product</h3>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li><Link href="/"><a className="hover:text-slate-900">Converter</a></Link></li>
+                <li><Link href="/services"><a className="hover:text-slate-900">Services</a></Link></li>
+                <li><Link href="/security"><a className="hover:text-slate-900">Security</a></Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-900 mb-4">Company</h3>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li><Link href="/blog"><a className="hover:text-slate-900">Blog</a></Link></li>
+                <li><Link href="/contact"><a className="hover:text-slate-900">Contact</a></Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-900 mb-4">Legal</h3>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li><a href="#" className="hover:text-slate-900">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-slate-900">Terms of Service</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-900 mb-4">Standards</h3>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li>FDA Compliant</li>
+                <li>CDISC Standards</li>
+                <li>GDPR & HIPAA Ready</li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
+            <p>&copy; 2026 HandyCT. All rights reserved. | <a href="#" className="hover:text-slate-900">Privacy</a> | <a href="#" className="hover:text-slate-900">Terms</a></p>
+            <p className="mt-2">HandyCT is a tool for CDISC data conversion. Always verify converted data before submission.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

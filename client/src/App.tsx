@@ -10,6 +10,9 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n/config';
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
+import Services from "./pages/Services";
+import Security from "./pages/Security";
+import Contact from "./pages/Contact";
 
 function AppRouter() {
   // make sure to consider if you need authentication for certain routes
@@ -18,6 +21,9 @@ function AppRouter() {
       <Route path={"/"} component={Home} />
       <Route path={"/blog"} component={Blog} />
       <Route path={"/blog/:slug"} component={BlogArticle} />
+      <Route path={"/services"} component={Services} />
+      <Route path={"/security"} component={Security} />
+      <Route path={"/contact"} component={Contact} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
