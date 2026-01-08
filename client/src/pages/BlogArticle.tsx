@@ -33,6 +33,7 @@ export default function BlogArticle() {
         const match = heading.match(/^#+/);
         const level = match ? match[0].length : 2;
         const text = heading.replace(/^#+\s+/, '');
+        // 使用与 ReactMarkdown 组件相同的 ID 生成方式
         const id = `heading-${text.replace(/\s+/g, '-').toLowerCase()}`;
         return { id, text, level };
       });
@@ -40,11 +41,24 @@ export default function BlogArticle() {
     }
   }, [article?.content]);
 
+  // 调试：打印 TOC 和实际标题的 ID
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const headings = document.querySelectorAll('h2[id], h3[id]');
+      console.log('实际标题 IDs:', Array.from(headings).map(h => h.id));
+      console.log('TOC IDs:', tableOfContents.map(t => t.id));
+    }
+  }, [tableOfContents]);
+
   // Handle TOC link clicks with smooth scroll
   const handleTOCClick = (id: string) => {
+    console.log('尝试滚动到 ID:', id);
     const element = document.getElementById(id);
     if (element) {
+      console.log('找到元素，执行滚动');
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      console.log('未找到 ID 为', id, '的元素');
     }
   };
 
