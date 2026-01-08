@@ -33,7 +33,14 @@
     "quickActions": "Quick Actions",
     "learningResources": "Learning Resources",
     "readOurBlog": "Read our technical blog to learn FDA compliance best practices.",
-    "visitBlog": "Visit Tech Blog"
+    "visitBlog": "Visit Tech Blog",
+    "uploadData": "Upload Data",
+    "chooseStandard": "Choose Standard",
+    "chooseVersion": "Choose Version",
+    "startConverting": "Start Converting",
+    "validateCompliance": "Validate Compliance",
+    "generateReport": "Generate Report",
+    "downloadPDF": "Download as PDF"
   },
   "blog": {
     "title": "FDA Data Audit & CDISC Standardization",
@@ -52,7 +59,11 @@
     "cta": "Ready to optimize your clinical trial data?",
     "ctaDescription": "Use HandyCT 2.0 to automate CDISC data conversion and ensure FDA compliance.",
     "tryNow": "Try HandyCT 2.0 Conversion Tool Now",
-    "tableOfContents": "Table of Contents"
+    "tableOfContents": "Table of Contents",
+    "category": "Category",
+    "categories": "Categories",
+    "readMore": "Read More",
+    "viewAll": "View All Articles"
   },
   "articles": {
     "fda-data-submission-best-practices": {

@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { AlertCircle, CheckCircle2, Download, Upload, Zap } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Download, Upload, Zap, Menu, X } from 'lucide-react';
 import { CDISC_STANDARDS, validateSDTMCompliance, convertCSVToSDTM, generateFDAComplianceReport } from '@/lib/cdisc';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
@@ -22,6 +22,7 @@ export default function Home() {
   const [csvData, setCsvData] = useState<string>('');
   const [conversionResult, setConversionResult] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const currentStandard = CDISC_STANDARDS.find((s) => s.id === selectedStandard);
 
@@ -66,29 +67,54 @@ export default function Home() {
       {/* 顶部导航栏 */}
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
         <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <div className="rounded-lg bg-emerald-600 p-2">
-              <Zap className="h-6 w-6 text-white" />
+              <Zap className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-slate-900">HandyCT 2.0</h1>
+            <div className="hidden sm:block">
+              <h1 className="text-lg sm:text-xl font-bold text-slate-900">HandyCT 2.0</h1>
               <p className="text-xs text-slate-500">Next Gen CDISC Converter</p>
             </div>
+            <div className="sm:hidden">
+              <h1 className="text-base font-bold text-slate-900">HandyCT</h1>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
+          
+          {/* 桌面端导航 */}
+          <div className="hidden md:flex items-center gap-2">
             <a href="/#/blog" className="no-underline">
               <Button variant="ghost" size="sm">
                 {t('nav.blog')}
               </Button>
             </a>
-            <a href="/" className="no-underline">
-              <Button variant="ghost" size="sm">
-                {t('nav.api')}
-              </Button>
-            </a>
             <LanguageSwitcher />
           </div>
+          
+          {/* 移动端菜单按钮 */}
+          <div className="md:hidden flex items-center gap-2">
+            <LanguageSwitcher />
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </Button>
+          </div>
         </div>
+        
+        {/* 移动端菜单 */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-slate-200 bg-white">
+            <div className="container py-3 space-y-2">
+              <a href="/#/blog" className="block no-underline" onClick={() => setMobileMenuOpen(false)}>
+                <Button variant="ghost" className="w-full justify-start">
+                  {t('nav.blog')}
+                </Button>
+              </a>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* 主内容区域 */}
@@ -273,55 +299,8 @@ export default function Home() {
             </Tabs>
           </div>
 
-          {/* 右侧：快速信息面板 */}
-          <div className="space-y-6">
-            {/* 标准信息卡片 */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">{currentStandard?.name}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm">
-                <div>
-                  <p className="font-medium text-slate-700">当前版本</p>
-                  <p className="text-slate-600">
-                    {currentStandard?.versions[0]?.version || 'N/A'}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-medium text-slate-700">发布日期</p>
-                  <p className="text-slate-600">
-                    {currentStandard?.versions[0]?.publishedDate || 'N/A'}
-                  </p>
-                </div>
-                <div>
-                  <p className="font-medium text-slate-700">状态</p>
-                  <p className="inline-block rounded-full bg-emerald-100 px-2 py-1 text-xs font-medium text-emerald-700">
-                    {currentStandard?.versions[0]?.status}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* 快速操作卡片 */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">快速操作</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <a href="/#/blog" className="block no-underline">
-                  <Button variant="outline" className="w-full justify-start">
-                    📚 技术博客
-                  </Button>
-                </a>
-                <Button variant="outline" className="w-full justify-start">
-                  🔗 API 文档
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  📧 联系支持
-                </Button>
-              </CardContent>
-            </Card>
-
+          {/* 右侧：学习资源（仅桌面端显示） */}
+          <div className="hidden lg:block space-y-6">
             {/* 学习资源 */}
             <Card>
               <CardHeader>
@@ -342,9 +321,8 @@ export default function Home() {
 
       {/* 底部状态栏 */}
       <footer className="border-t border-slate-200 bg-white py-4">
-        <div className="container flex items-center justify-between text-sm text-slate-600">
+        <div className="container flex flex-col sm:flex-row items-center justify-between text-sm text-slate-600 gap-2">
           <p>HandyCT 2.0 - 现代化 CDISC 数据转换工具</p>
-          <p>API 状态: <span className="text-emerald-600 font-medium">✓ 正常</span></p>
         </div>
       </footer>
     </div>

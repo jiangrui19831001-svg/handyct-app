@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useRoute, Link } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
@@ -17,6 +17,28 @@ export default function BlogArticle() {
   const article = match ? getBlogArticleBySlug(params?.slug) : null;
   const relatedArticles = article ? getRelatedArticles(article.slug) : [];
   const [showTOC, setShowTOC] = useState(false);
+  const [tableOfContents, setTableOfContents] = useState<Array<{id: string, text: string, level: number}>>([]);
+  const [headingIndex, setHeadingIndex] = useState(0);
+
+  // Scroll to top when article changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [article?.slug]);
+
+  // Generate table of contents from markdown headings
+  useEffect(() => {
+    if (article?.content) {
+      const headings = article.content.match(/^#{2,3} .+$/gm) || [];
+      const toc = headings.map((heading, index) => {
+        const match = heading.match(/^#+/);
+        const level = match ? match[0].length : 2;
+        const text = heading.replace(/^#+\s+/, '');
+        const id = `heading-${index}`;
+        return { id, text, level };
+      });
+      setTableOfContents(toc);
+    }
+  }, [article?.content]);
 
   // 获取当前语言的内容
   const currentContent = i18n.language === 'en' ? (article?.contentEn || article?.content) : article?.content;
@@ -66,14 +88,28 @@ export default function BlogArticle() {
         </div>
       </header>
 
-      <main className="container py-12">
+      <main className="container py-8 md:py-12">
         <div className="grid gap-8 lg:grid-cols-4">
           {/* 浮动目录（大屏幕固定） */}
           <aside className="hidden lg:block lg:col-span-1">
             <div className="sticky top-20 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
               <h3 className="mb-4 font-semibold text-slate-900">{t('blog.tableOfContents')}</h3>
               <nav className="space-y-2 text-sm">
-                <p className="text-slate-500">{t('blog.tableOfContents')}</p>
+                {tableOfContents.length > 0 ? (
+                  tableOfContents.map((item) => (
+                    <a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      className={`block text-slate-600 hover:text-emerald-600 transition-colors ${
+                        item.level === 3 ? 'ml-4' : ''
+                      }`}
+                    >
+                      {item.text}
+                    </a>
+                  ))
+                ) : (
+                  <p className="text-slate-500">No headings</p>
+                )}
               </nav>
             </div>
           </aside>
@@ -81,7 +117,7 @@ export default function BlogArticle() {
           {/* 主要内容 */}
           <div className="lg:col-span-3">
             {/* 文章头部 */}
-            <article className="rounded-lg border border-slate-200 bg-white p-8 shadow-sm">
+            <article className="rounded-lg border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
               {/* 元信息 */}
               <div className="mb-6 border-b border-slate-200 pb-6">
                 <div className="mb-4 flex flex-wrap gap-2">
@@ -93,10 +129,10 @@ export default function BlogArticle() {
                   ))}
                 </div>
 
-                <h1 className="mb-4 text-4xl font-bold text-slate-900">{currentTitle}</h1>
-                <p className="mb-4 text-lg text-slate-600">{currentDescription}</p>
+                <h1 className="mb-3 text-3xl md:text-4xl font-bold text-slate-900">{currentTitle}</h1>
+                <p className="mb-4 text-base md:text-lg text-slate-600">{currentDescription}</p>
 
-                <div className="flex flex-wrap gap-6 text-sm text-slate-600">
+                <div className="flex flex-wrap gap-4 md:gap-6 text-sm text-slate-600">
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
                     <span>{new Date(article.publishedDate).toLocaleDateString()}</span>
@@ -112,20 +148,30 @@ export default function BlogArticle() {
               </div>
 
               {/* Markdown 内容 - 使用 prose 排版 */}
-              <div className="prose prose-slate lg:prose-xl mx-auto max-w-none">
+              <div className="prose prose-slate lg:prose-lg mx-auto max-w-none">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   rehypePlugins={[rehypeRaw]}
                   components={{
                     h1: ({ node, ...props }: any) => (
-                      <h1 className="text-3xl font-bold mt-8 mb-4 text-slate-900" {...props} />
+                      <h1 className="text-3xl font-bold mt-8 mb-4 text-slate-900 scroll-mt-20" {...props} />
                     ),
-                    h2: ({ node, ...props }: any) => (
-                      <h2 className="text-2xl font-bold mt-6 mb-3 text-slate-900" {...props} />
-                    ),
-                    h3: ({ node, ...props }: any) => (
-                      <h3 className="text-xl font-semibold mt-4 mb-2 text-slate-900" {...props} />
-                    ),
+                    h2: ({ node, children, ...props }: any) => {
+                      const id = `heading-${String(children || '').replace(/\s+/g, '-').toLowerCase()}`;
+                      return (
+                        <h2 id={id} className="text-2xl font-bold mt-6 mb-3 text-slate-900 scroll-mt-20" {...props}>
+                          {children}
+                        </h2>
+                      );
+                    },
+                    h3: ({ node, children, ...props }: any) => {
+                      const id = `heading-${String(children || '').replace(/\s+/g, '-').toLowerCase()}`;
+                      return (
+                        <h3 id={id} className="text-xl font-semibold mt-4 mb-2 text-slate-900 scroll-mt-20" {...props}>
+                          {children}
+                        </h3>
+                      );
+                    },
                     p: ({ node, ...props }: any) => (
                       <p className="text-slate-700 leading-relaxed mb-4" {...props} />
                     ),
