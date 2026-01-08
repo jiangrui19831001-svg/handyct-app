@@ -225,13 +225,13 @@ export default function Home() {
           </Link>
           <div className="hidden md:flex items-center gap-4">
             <Link href="/">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">Home</a>
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.home')}</a>
             </Link>
             <Link href="/services">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">Services</a>
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.services')}</a>
             </Link>
             <Link href="/security">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">Security</a>
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.security')}</a>
             </Link>
             <Link href="/blog">
               <a className="text-slate-600 hover:text-slate-900 text-sm">{t('home.techBlog') || 'Tech Blog'}</a>
@@ -496,39 +496,39 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Product</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.product')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link href="/"><a className="hover:text-slate-900">Converter</a></Link></li>
-                <li><Link href="/services"><a className="hover:text-slate-900">Services</a></Link></li>
-                <li><Link href="/security"><a className="hover:text-slate-900">Security</a></Link></li>
+                <li><Link href="/"><a className="hover:text-slate-900">{t('footer.converter')}</a></Link></li>
+                <li><Link href="/services"><a className="hover:text-slate-900">{t('footer.services')}</a></Link></li>
+                <li><Link href="/security"><a className="hover:text-slate-900">{t('footer.security')}</a></Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Company</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.company')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link href="/blog"><a className="hover:text-slate-900">Blog</a></Link></li>
-                <li><Link href="/contact"><a className="hover:text-slate-900">Contact</a></Link></li>
+                <li><Link href="/blog"><a className="hover:text-slate-900">{t('footer.blog')}</a></Link></li>
+                <li><Link href="/contact"><a className="hover:text-slate-900">{t('footer.contact')}</a></Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Legal</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.legal')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><a href="#" className="hover:text-slate-900">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-slate-900">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-slate-900">{t('footer.privacyPolicy')}</a></li>
+                <li><a href="#" className="hover:text-slate-900">{t('footer.termsOfService')}</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 mb-4">Standards</h3>
+              <h3 className="font-bold text-slate-900 mb-4">{t('footer.standards')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li>FDA Compliant</li>
-                <li>CDISC Standards</li>
-                <li>GDPR & HIPAA Ready</li>
+                <li>{t('footer.fdaCompliant')}</li>
+                <li>{t('footer.cdisc')}</li>
+                <li>{t('footer.gdprHipaa')}</li>
               </ul>
             </div>
           </div>
           <div className="border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
-            <p>&copy; 2026 HandyCT. All rights reserved. | <a href="#" className="hover:text-slate-900">Privacy</a> | <a href="#" className="hover:text-slate-900">Terms</a></p>
-            <p className="mt-2">HandyCT is a tool for CDISC data conversion. Always verify converted data before submission.</p>
+            <p>&copy; 2026 HandyCT. {t('footer.allRightsReserved')} | <a href="#" className="hover:text-slate-900">{t('footer.privacy')}</a> | <a href="#" className="hover:text-slate-900">{t('footer.terms')}</a></p>
+            <p className="mt-2">{t('footer.disclaimer')}</p>
           </div>
         </div>
       </footer>
