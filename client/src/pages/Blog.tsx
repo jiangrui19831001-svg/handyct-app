@@ -51,12 +51,20 @@ export default function Blog() {
 
   // 过滤文章 - 支持中英文搜索
   const filteredArticles = articles.filter((article) => {
-    const title = getArticleTitle(article);
-    const description = getArticleDescription(article);
+    const currentTitle = getArticleTitle(article);
+    const currentDescription = getArticleDescription(article);
+    const chineseTitle = article.title;
+    const chineseDescription = article.description;
+    const englishTitle = article.titleEn || article.title;
+    const englishDescription = article.descriptionEn || article.description;
     
     const matchesSearch =
-      title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      currentTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      currentDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      chineseTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      chineseDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      englishTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      englishDescription.toLowerCase().includes(searchTerm.toLowerCase()) ||
       article.tags.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const matchesCategory = !selectedCategory || article.category === selectedCategory;

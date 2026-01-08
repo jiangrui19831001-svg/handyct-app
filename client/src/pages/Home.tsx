@@ -15,7 +15,7 @@ export default function Home() {
   let { user, loading, error, isAuthenticated, logout } = useAuth();
 
   const { t, i18n } = useTranslation();
-  const [selectedStandard, setSelectedStandard] = useState<string>('sdtm');
+  const [selectedStandard, setSelectedStandard] = useState<string>('sdtm'); // 默认选中 SDTM
   const [selectedVersion, setSelectedVersion] = useState<string>('sdtm-3.4');
   const [csvData, setCsvData] = useState<string>('');
   const [fileName, setFileName] = useState<string>('');
