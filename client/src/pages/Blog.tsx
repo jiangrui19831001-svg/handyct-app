@@ -94,21 +94,33 @@ export default function Blog() {
       {/* Header Navigation */}
       <header className="sticky top-0 z-50 bg-white shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <a href="/#/" className="flex items-center gap-3 hover:opacity-80 cursor-pointer no-underline">
-            <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center">
-              <Zap className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-slate-900">HandyCT 2.0</h1>
-              <p className="text-xs text-slate-500">{t('blog.subtitle')}</p>
-            </div>
-          </a>
-          <div className="flex items-center gap-2">
-            <LanguageSwitcher />
-            <a href="/#/" className="text-sm font-medium text-slate-600 hover:text-slate-900 cursor-pointer no-underline">
-              {t('blog.backToTools')}
+          <Link href="/">
+            <a className="flex items-center gap-2">
+              <img src="/logo-icon.png" alt="HandyCT" className="w-10 h-10" />
+              <div>
+                <h1 className="text-lg font-bold text-slate-900">HandyCT</h1>
+                <p className="text-xs text-slate-500">{t('home.subtitle') || '下一代 CDISC 转换器'}</p>
+              </div>
             </a>
+          </Link>
+          <div className="hidden md:flex items-center gap-4">
+            <Link href="/">
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.home')}</a>
+            </Link>
+            <Link href="/services">
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.services')}</a>
+            </Link>
+            <Link href="/security">
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.security')}</a>
+            </Link>
+            <Link href="/blog">
+              <a className="text-slate-600 hover:text-slate-900 text-sm font-medium text-emerald-600">{t('home.techBlog') || 'Tech Blog'}</a>
+            </Link>
+            <LanguageSwitcher />
           </div>
+          <button className="md:hidden">
+            <LanguageSwitcher />
+          </button>
         </div>
       </header>
 

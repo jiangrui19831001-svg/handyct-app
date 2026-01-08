@@ -73,3 +73,7 @@
 - [x] 更新 Favicon - 与 LOGO 保持一致
 - [x] 验证 LOGO 在 Header 中的显示效果
 - [x] 完整测试所有页面的品牌一致性
+
+## 13. Bug 修复
+- [x] 修复主页 Logo 显示错误 - 应显示新的蓝色 H+CT LOGO
+- [x] 修复 Blog 页面 Header 菜单不一致 - 应与其他页面保持一致

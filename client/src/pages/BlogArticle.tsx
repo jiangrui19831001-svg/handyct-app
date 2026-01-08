@@ -100,16 +100,36 @@ export default function BlogArticle() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* 顶部导航 */}
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
-        <div className="container flex h-16 items-center justify-between">
-          <a href="/#/blog" className="no-underline">
-            <Button variant="ghost" size="sm" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              {t('blog.backToBlog')}
-            </Button>
-          </a>
-          <LanguageSwitcher />
+      {/* Header Navigation */}
+      <header className="sticky top-0 z-50 bg-white shadow-sm">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/">
+            <a className="flex items-center gap-2">
+              <img src="/logo-icon.png" alt="HandyCT" className="w-10 h-10" />
+              <div>
+                <h1 className="text-lg font-bold text-slate-900">HandyCT</h1>
+                <p className="text-xs text-slate-500">{t('home.subtitle')}</p>
+              </div>
+            </a>
+          </Link>
+          <div className="hidden md:flex items-center gap-4">
+            <Link href="/">
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.home')}</a>
+            </Link>
+            <Link href="/services">
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.services')}</a>
+            </Link>
+            <Link href="/security">
+              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.security')}</a>
+            </Link>
+            <Link href="/blog">
+              <a className="text-slate-600 hover:text-slate-900 text-sm font-medium text-emerald-600">{t('home.techBlog')}</a>
+            </Link>
+            <LanguageSwitcher />
+          </div>
+          <button className="md:hidden">
+            <LanguageSwitcher />
+          </button>
         </div>
       </header>
 
