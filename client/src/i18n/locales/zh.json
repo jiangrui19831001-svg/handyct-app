@@ -54,7 +54,12 @@
     "standard": "标准",
     "version": "版本",
     "selectVersionPlaceholder": "选择版本",
-    "cdisc": "CDISC"
+    "cdisc": "CDISC",
+    "noDataValidate": "请先上传并转换数据进行验证",
+    "noDataReport": "请先上传并转换数据生成报告",
+    "downloadResult": "下载结果",
+    "generateReport": "生成详细的 FDA 数据审计报告",
+    "regenerateReport": "重新生成报告"
   },
   "blog": {
     "title": "FDA 数据审计与 CDISC 标准化",

@@ -44,7 +44,16 @@
     "report": "Report",
     "learningResources": "Learning Resources",
     "readTechBlog": "Read our technical blog to learn FDA compliance best practices.",
-    "visitTechBlog": "Visit Tech Blog"
+    "visitTechBlog": "Visit Tech Blog",
+    "standard": "Standard",
+    "version": "Version",
+    "selectVersionPlaceholder": "Select Version",
+    "cdisc": "CDISC",
+    "noDataValidate": "Please upload and convert data first for validation",
+    "noDataReport": "Please upload and convert data first to generate report",
+    "downloadResult": "Download Result",
+    "generateReport": "Generate detailed FDA data audit report",
+    "regenerateReport": "Regenerate Report"
   },
   "blog": {
     "title": "FDA Data Audit & CDISC Standardization",
