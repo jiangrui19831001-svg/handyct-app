@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
@@ -27,6 +27,11 @@ export default function Blog() {
   const articles = getAllBlogArticles();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  
+  // 进入页面时滚动到顶部
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // 获取所有分类
   const categories = Array.from(new Set(BLOG_ARTICLES.map((a) => a.category)));

@@ -17,6 +17,15 @@ export default function Home() {
   const { t, i18n } = useTranslation();
   const [selectedStandard, setSelectedStandard] = useState<string>('sdtm'); // 默认选中 SDTM
   const [selectedVersion, setSelectedVersion] = useState<string>('sdtm-3.4');
+  
+  // 当标准列表变化时，自动设置默认版本
+  const handleStandardChange = (standard: string) => {
+    setSelectedStandard(standard);
+    const newStandard = CDISC_STANDARDS.find((s) => s.id === standard);
+    if (newStandard && newStandard.versions.length > 0) {
+      setSelectedVersion(newStandard.versions[0].id);
+    }
+  };
   const [csvData, setCsvData] = useState<string>('');
   const [fileName, setFileName] = useState<string>('');
   const [rowCount, setRowCount] = useState<number>(0);
@@ -202,7 +211,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/">
             <a className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center">
@@ -230,7 +239,7 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="convert" className="w-full">
           <TabsList className="grid w-full grid-cols-3 mb-8">
             <TabsTrigger value="convert">{t('home.convert') || '转换'}</TabsTrigger>
@@ -257,7 +266,7 @@ export default function Home() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">{t('home.standard') || '标准'}</label>
-                    <Select value={selectedStandard} onValueChange={setSelectedStandard}>
+                    <Select value={selectedStandard} onValueChange={handleStandardChange}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
