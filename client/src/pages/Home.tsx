@@ -18,11 +18,12 @@ export default function Home() {
 
   const { t } = useTranslation();
   const [selectedStandard, setSelectedStandard] = useState<string>('sdtm');
-  const [selectedVersion, setSelectedVersion] = useState<string>('');
+  const [selectedVersion, setSelectedVersion] = useState<string>('sdtm-3.4'); // 默认设为 SDTM 3.4
   const [csvData, setCsvData] = useState<string>('');
   const [conversionResult, setConversionResult] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [dragActive, setDragActive] = useState(false);
 
   const currentStandard = CDISC_STANDARDS.find((s) => s.id === selectedStandard);
 
@@ -34,6 +35,35 @@ export default function Home() {
         setCsvData(e.target?.result as string);
       };
       reader.readAsText(file);
+    }
+  };
+
+  // 处理拖拽事件
+  const handleDrag = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setDragActive(true);
+    } else if (e.type === 'dragleave') {
+      setDragActive(false);
+    }
+  };
+
+  const handleDrop = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    
+    const files = e.dataTransfer.files;
+    if (files && files[0]) {
+      const file = files[0];
+      if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          setCsvData(event.target?.result as string);
+        };
+        reader.readAsText(file);
+      }
     }
   };
 
@@ -180,22 +210,33 @@ export default function Home() {
                     <CardDescription>{t('home.clinicalTrialData')}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="flex items-center justify-center rounded-lg border-2 border-dashed border-slate-300 p-8">
+                    <label
+                      onDragEnter={handleDrag}
+                      onDragLeave={handleDrag}
+                      onDragOver={handleDrag}
+                      onDrop={handleDrop}
+                      className={`flex items-center justify-center rounded-lg border-2 border-dashed p-8 cursor-pointer transition-colors ${
+                        dragActive
+                          ? 'border-emerald-500 bg-emerald-50'
+                          : 'border-slate-300 hover:border-slate-400'
+                      }`}
+                    >
                       <div className="text-center">
                         <Upload className="mx-auto h-12 w-12 text-slate-400" />
                         <p className="mt-2 text-sm text-slate-600">
                           {t('home.dragDrop')}
-                          <label className="cursor-pointer font-medium text-emerald-600 hover:text-emerald-700">
-                            <input
-                              type="file"
-                              accept=".csv"
-                              onChange={handleFileUpload}
-                              className="hidden"
-                            />
-                          </label>
                         </p>
+                        <p className="mt-1 text-xs text-emerald-600 font-medium">
+                          或点击此处选择文件
+                        </p>
+                        <input
+                          type="file"
+                          accept=".csv"
+                          onChange={handleFileUpload}
+                          className="hidden"
+                        />
                       </div>
-                    </div>
+                    </label>
 
                     {csvData && (
                       <div className="rounded-lg bg-emerald-50 p-4">
@@ -258,7 +299,7 @@ export default function Home() {
                         </Button>
                       </div>
                     ) : (
-                      <p className="text-sm text-slate-500">{t('home.pleaseUploadAndConvert')}</p>
+                      <p className="text-center text-slate-500">{t('home.noDataValidate')}</p>
                     )}
                   </CardContent>
                 </Card>
@@ -269,28 +310,24 @@ export default function Home() {
                 <Card>
                   <CardHeader>
                     <CardTitle>{t('home.fdaComplianceReport')}</CardTitle>
-                    <CardDescription>{t('home.generateDetailedAuditReport')}</CardDescription>
+                    <CardDescription>{t('home.generateReport')}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    {conversionResult ? (
+                    {conversionResult?.report ? (
                       <div className="space-y-4">
-                        <div className="rounded-lg bg-slate-50 p-4">
-                          <p className="text-sm text-slate-600">
-                            {t('home.complianceScore')}: <span className="font-bold text-emerald-600">
-                              {conversionResult.data?.summary?.complianceScore || 0}%
-                            </span>
-                          </p>
+                        <div className="rounded-lg border border-slate-200 p-4">
+                          <p className="text-sm text-slate-700">{conversionResult.report}</p>
                         </div>
                         <Button onClick={handleGenerateReport} className="w-full">
-                          {t('home.generateReport')}
+                          {t('home.regenerateReport')}
                         </Button>
                         <Button variant="outline" className="w-full">
                           <Download className="mr-2 h-4 w-4" />
-                          {t('home.downloadAsPDF')}
+                          {t('home.downloadReport')}
                         </Button>
                       </div>
                     ) : (
-                      <p className="text-sm text-slate-500">{t('home.pleaseUploadAndConvert')}</p>
+                      <p className="text-center text-slate-500">{t('home.noDataReport')}</p>
                     )}
                   </CardContent>
                 </Card>
@@ -298,16 +335,17 @@ export default function Home() {
             </Tabs>
           </div>
 
-          {/* Right Side: Learning Resources (Desktop Only) */}
-          <div className="hidden lg:block space-y-6">
-            {/* Learning Resources */}
+          {/* Right Side: Quick Reference */}
+          <div className="space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">{t('home.learningResources')}</CardTitle>
               </CardHeader>
-              <CardContent>
-                <p className="mb-4 text-sm text-slate-600">{t('home.readTechBlog')}</p>
-                <a href="/#/blog" className="block no-underline">
+              <CardContent className="space-y-3">
+                <p className="text-sm text-slate-600">
+                  {t('home.readTechBlog')}
+                </p>
+                <a href="/#/blog" className="no-underline">
                   <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
                     {t('home.visitTechBlog')}
                   </Button>
@@ -317,13 +355,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-
-      {/* Footer Status Bar */}
-      <footer className="border-t border-slate-200 bg-white py-4">
-        <div className="container flex flex-col sm:flex-row items-center justify-between text-sm text-slate-600 gap-2">
-          <p>HandyCT 2.0 - {t('home.nextGenCDISCConverter')}</p>
-        </div>
-      </footer>
     </div>
   );
 }
