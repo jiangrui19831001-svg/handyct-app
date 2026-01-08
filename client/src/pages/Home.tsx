@@ -141,7 +141,7 @@ export default function Home() {
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.setAttribute('href', url);
-    link.setAttribute('download', 'HandyCT_SDTM_Output.csv');
+    link.setAttribute('download', 'HandyCT_SDTM.csv');
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
