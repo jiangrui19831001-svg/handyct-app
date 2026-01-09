@@ -17,12 +17,15 @@ import LogoComparison from "./pages/LogoComparison";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import SecurityWhitepaper from "./pages/SecurityWhitepaper";
+import LandingPage from "./pages/LandingPage";
+import Converter from "./pages/Converter";
 
 function AppRouter() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+      <Route path={"/"} component={LandingPage} />
+      <Route path={"/converter"} component={Converter} />
       <Route path={"/blog"} component={Blog} />
       <Route path={"/blog/:slug"} component={BlogArticle} />
       <Route path={"/services"} component={Services} />
@@ -32,6 +35,7 @@ function AppRouter() {
       <Route path={"/privacy"} component={Privacy} />
       <Route path={"/terms"} component={Terms} />
       <Route path={"/security-whitepaper"} component={SecurityWhitepaper} />
+      <Route path={"/_home"} component={Home} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

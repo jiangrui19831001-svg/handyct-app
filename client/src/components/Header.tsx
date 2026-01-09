@@ -27,6 +27,9 @@ export default function Header() {
           <Link href="/">
             <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.home')}</a>
           </Link>
+          <Link href="/converter">
+            <a className="text-slate-600 hover:text-slate-900 text-sm">{t('home.converter') || '转换器'}</a>
+          </Link>
           <Link href="/services">
             <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.services')}</a>
           </Link>
@@ -58,6 +61,11 @@ export default function Header() {
             <Link href="/">
               <a className="block text-slate-600 hover:text-slate-900 text-sm py-2" onClick={() => setMobileMenuOpen(false)}>
                 {t('common.home')}
+              </a>
+            </Link>
+            <Link href="/converter">
+              <a className="block text-slate-600 hover:text-slate-900 text-sm py-2" onClick={() => setMobileMenuOpen(false)}>
+                {t('home.converter') || '转换器'}
               </a>
             </Link>
             <Link href="/services">
