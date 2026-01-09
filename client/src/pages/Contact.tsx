@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { CheckCircle2 } from 'lucide-react';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function Contact() {
   useEffect(() => {
@@ -203,47 +204,7 @@ export default function Contact() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-200 bg-white py-12 mt-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="font-bold text-slate-900 mb-4">{t('footer.product')}</h3>
-              <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link href="/"><a className="hover:text-slate-900">{t('footer.converter')}</a></Link></li>
-                <li><Link href="/services"><a className="hover:text-slate-900">{t('footer.services')}</a></Link></li>
-                <li><Link href="/security"><a className="hover:text-slate-900">{t('footer.security')}</a></Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold text-slate-900 mb-4">{t('footer.company')}</h3>
-              <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link href="/blog"><a className="hover:text-slate-900">{t('footer.blog')}</a></Link></li>
-                <li><Link href="/contact"><a className="hover:text-slate-900">{t('footer.contact')}</a></Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold text-slate-900 mb-4">{t('footer.legal')}</h3>
-              <ul className="space-y-2 text-sm text-slate-600">
-                <li><Link href="/privacy"><a className="hover:text-slate-900">{t('footer.privacyPolicy')}</a></Link></li>
-                <li><Link href="/terms"><a className="hover:text-slate-900">{t('footer.termsOfService')}</a></Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold text-slate-900 mb-4">{t('footer.standards')}</h3>
-              <ul className="space-y-2 text-sm text-slate-600">
-                <li>{t('footer.fdaCompliant')}</li>
-                <li>{t('footer.cdisc')}</li>
-                <li>{t('footer.gdprHipaa')}</li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
-            <p>&copy; 2026 HandyCT. {t('footer.allRightsReserved')} | <a href="#" className="hover:text-slate-900">{t('footer.privacy')}</a> | <a href="#" className="hover:text-slate-900">{t('footer.terms')}</a></p>
-            <p className="mt-2">{t('footer.disclaimer')}</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
