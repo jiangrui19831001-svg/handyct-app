@@ -77,3 +77,43 @@
 ## 13. Bug 修复
 - [x] 修复主页 Logo 显示错误 - 应显示新的蓝色 H+CT LOGO
 - [x] 修复 Blog 页面 Header 菜单不一致 - 应与其他页面保持一致
+
+## 14. 🚨 终极任务：架构正规化与技术自证
+
+### 14.1 Footer 全站组件化
+- [x] 创建 src/components/Footer.tsx 组件
+- [x] 包含四个板块：产品、公司、法律、标准
+- [ ] 在 Home 页面删除原 footer，调用组件
+- [ ] 在 Services 页面删除原 footer，调用组件
+- [ ] 在 Security 页面删除原 footer，调用组件
+- [ ] 在 Blog 页面删除原 footer，调用组件
+- [ ] 在 Contact 页面删除原 footer，调用组件
+- [ ] 在 Privacy 页面删除原 footer，调用组件
+- [ ] 在 Terms 页面删除原 footer，调用组件
+- [x] 配置锚点链接：#/security#fda, #/security#cdisc, #/security#compliance
+
+### 14.2 端侧 AI 安全自证
+- [x] 在首页转换器区域添加"断网可用"说明
+- [x] 在 Security 页面添加"隐私雷达"说明
+- [x] 添加"安全自检 1-2-3"步骤说明
+- [x] 标注"Web-AI 技术，100% 物理断网可用"
+- [x] 说明数据处理为"Client-side JavaScript"
+
+### 14.3 法律与合规内容填充
+- [x] 填充 Privacy.tsx 专业法律文案
+- [x] 填充 Terms.tsx 专业法律文案
+- [x] 强调"数据主权归用户所有"
+- [x] 强调"本站无存储/访问/泄露能力"
+
+### 14.4 Security 页面专业化升级
+- [x] 添加物理锚点 id="fda"
+- [x] 添加物理锚点 id="cdisc"
+- [x] 添加物理锚点 id="compliance"
+- [x] 为合规标准配上 Lucide 图标
+- [x] 添加 scroll-margin-top 防止遮挡
+
+### 14.5 强制审计与交付
+- [ ] 截图 A：Footer 组件在多页面调用成功
+- [ ] 截图 B：首页"断网可用"安全自检文案
+- [ ] 截图 C：填充后的《隐私政策》页面
+- [ ] 视频演示：Footer 跳转到 Security 锚点

@@ -247,6 +247,28 @@ export default function Home() {
 
           {/* Convert Tab */}
           <TabsContent value="convert" className="space-y-6">
+            {/* Privacy Radar - 安全自检说明 */}
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-6">
+              <div className="flex gap-4">
+                <div className="text-2xl">🔒</div>
+                <div className="flex-1">
+                  <p className="font-bold text-green-900 mb-2">隐私雷达：100% 物理断网可用</p>
+                  <p className="text-sm text-green-800 mb-3">
+                    HandyCT 采用 Web-AI 技术。所有 CDISC 转换（SDTM、ADaM、Define-XML）均在您的浏览器本地内存运行。您的数据永不上传服务器。
+                  </p>
+                  <div className="bg-white border border-green-200 rounded p-3 text-xs text-green-800">
+                    <p className="font-semibold mb-2">✅ 安全自检 1-2-3：</p>
+                    <ol className="space-y-1 ml-4 list-decimal">
+                      <li><strong>打开网页</strong> → 上传您的 CSV 文件</li>
+                      <li><strong>断开网络</strong> → 禁用浏览器网络或拔掉网线</li>
+                      <li><strong>照常转换</strong> → 转换仍可进行。证明您的数据从未触网。</li>
+                    </ol>
+                  </div>
+                  <p className="text-xs text-green-700 mt-2 font-semibold">💡 数据处理逻辑：Client-side JavaScript，无任何后端接收接口</p>
+                </div>
+              </div>
+            </div>
+
             <Card className="shadow-md border-slate-200">
               <CardHeader>
                 <CardTitle>{t('home.selectCDISCStandard') || '选择 CDISC 标准'}</CardTitle>
@@ -335,6 +357,13 @@ export default function Home() {
                 )}
               </CardContent>
             </Card>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+              <p className="text-xs text-blue-800 font-semibold mb-2">🌐 Web-AI 技术说明</p>
+              <p className="text-xs text-blue-700">
+                HandyCT 采用客户端 JavaScript 处理。所有转换在您的浏览器中进行，无需服务器参与。即使断网，转换功能仍可正常使用。
+              </p>
+            </div>
 
             <Button
               onClick={handleConvert}

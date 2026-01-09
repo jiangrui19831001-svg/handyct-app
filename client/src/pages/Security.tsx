@@ -145,8 +145,27 @@ export default function Security() {
           </div>
         </section>
 
-        {/* Compliance & Standards */}
-        <Card className="mb-16" id="compliance">
+        {/* Privacy Radar */}
+        <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-lg p-6 mb-8">
+          <div className="flex gap-4">
+            <div className="text-2xl">🔍</div>
+            <div className="flex-1">
+              <p className="font-bold text-purple-900 mb-2">隐私雷达：端侧 AI 技术透明化</p>
+              <p className="text-sm text-purple-800 mb-3">
+                HandyCT 采用 Web-AI 技术。所有 CDISC 标准转换均在您的浏览器本地内存运行，100% 物理断网可用。您的数据永不上传到任何服务器。
+              </p>
+              <ul className="text-xs text-purple-700 space-y-1 ml-4 list-disc">
+                <li><strong>数据处理：</strong>Client-side JavaScript，无任何后端接收接口</li>
+                <li><strong>数据存储：</strong>零服务器存储，浏览器关闭后自动删除</li>
+                <li><strong>离线可用：</strong>断网状态下仍可继续转换，证明数据从未触网</li>
+                <li><strong>数据主权：</strong>您的数据完全归您所有，HandyCT 无访问能力</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Compliance Standards */}
+        <Card className="shadow-md border-slate-200">
           <CardHeader>
             <div className="flex items-center gap-3 mb-2">
               <div className="p-3 bg-purple-100 rounded-lg">
@@ -156,9 +175,9 @@ export default function Security() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">{t('security.fdaCompliant')}</h3>
+            <div className="grid md:grid-cols-3 gap-8" id="compliance" style={{ scrollMarginTop: '100px' }}>
+              <div id="fda" style={{ scrollMarginTop: '100px' }}>
+                <h3 className="font-bold text-slate-900 mb-2">🏛️ {t('security.fdaCompliant')}</h3>
                 <p className="text-sm text-slate-600">
                   {t('security.fdaCompliantDesc')}
                 </p>
@@ -168,8 +187,8 @@ export default function Security() {
                   <p className="text-xs text-purple-600">ICH-GCP E6(R2)</p>
                 </div>
               </div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">{t('security.cdisc')}</h3>
+              <div id="cdisc" style={{ scrollMarginTop: '100px' }}>
+                <h3 className="font-bold text-slate-900 mb-2">📊 {t('security.cdisc')}</h3>
                 <p className="text-sm text-slate-600">
                   {t('security.cdiscDesc')}
                 </p>
@@ -179,8 +198,8 @@ export default function Security() {
                   <p className="text-xs text-purple-600">Define-XML v2.1</p>
                 </div>
               </div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">{t('security.dataPrivacy')}</h3>
+              <div id="compliance-privacy" style={{ scrollMarginTop: '100px' }}>
+                <h3 className="font-bold text-slate-900 mb-2">🔐 {t('security.dataPrivacy')}</h3>
                 <p className="text-sm text-slate-600">
                   {t('security.dataPrivacyDesc')}
                 </p>

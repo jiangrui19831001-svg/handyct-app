@@ -1,8 +1,13 @@
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
   const { t } = useTranslation();
+  const [location, setLocation] = useLocation();
+
+  const handleStandardsLink = (anchor: string) => {
+    setLocation(`/security#${anchor}`);
+  };
 
   return (
     <footer className="border-t border-slate-200 bg-white py-12 mt-16">
@@ -40,9 +45,9 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-slate-900 mb-4">{t('footer.standards')}</h3>
             <ul className="space-y-2 text-sm text-slate-600">
-              <li><Link href="/security#fda"><a className="hover:text-slate-900">{t('footer.fdaCompliant')}</a></Link></li>
-              <li><Link href="/security#cdisc"><a className="hover:text-slate-900">{t('footer.cdisc')}</a></Link></li>
-              <li><Link href="/security#compliance"><a className="hover:text-slate-900">{t('footer.gdprHipaa')}</a></Link></li>
+              <li><button onClick={() => handleStandardsLink('fda')} className="hover:text-slate-900 text-left">{t('footer.fdaCompliant')}</button></li>
+              <li><button onClick={() => handleStandardsLink('cdisc')} className="hover:text-slate-900 text-left">{t('footer.cdisc')}</button></li>
+              <li><button onClick={() => handleStandardsLink('compliance')} className="hover:text-slate-900 text-left">{t('footer.gdprHipaa')}</button></li>
             </ul>
           </div>
         </div>
