@@ -47,6 +47,13 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Disclaimer Section */}
+        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8">
+          <p className="text-xs text-amber-900">
+            <strong>⚠️ 免责声明 / Disclaimer:</strong> HandyCT 是一款辅助工具。所有转换后的数据必须经过具备资质的临床数据专家验证后方可用于监管申报。开发者不对数据的绝对准确性及后续法律后果负责。
+          </p>
+        </div>
+
         {/* Bottom Section */}
         <div className="border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
           <p>&copy; 2026 HandyCT. {t('footer.allRightsReserved')} | <Link href="/privacy"><a className="hover:text-slate-900">{t('footer.privacy')}</a></Link> | <Link href="/terms"><a className="hover:text-slate-900">{t('footer.terms')}</a></Link></p>

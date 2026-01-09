@@ -43,6 +43,7 @@ export default function Home() {
   const [dragActive, setDragActive] = useState(false);
   const [uploadHistory, setUploadHistory] = useState<Array<{ id: string; fileName: string; timestamp: string; rowCount: number }>>([]);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [disclaimerAgreed, setDisclaimerAgreed] = useState<boolean>(false);
 
   const currentStandard = CDISC_STANDARDS.find((s) => s.id === selectedStandard);
 
@@ -351,9 +352,25 @@ export default function Home() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-emerald-800">{t('home.dataRows') || '数据行数'}: {Array.isArray(conversionResult.data) ? conversionResult.data.length : 0}</p>
+                  
+                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={disclaimerAgreed}
+                        onChange={(e) => setDisclaimerAgreed(e.target.checked)}
+                        className="mt-1 w-4 h-4"
+                      />
+                      <span className="text-xs text-amber-900">
+                        我已了解并确认：本数据由 AI 辅助生成，我将履行最终核查义务，确保数据符合 CDISC/FDA 规范。
+                      </span>
+                    </label>
+                  </div>
+                  
                   <Button
                     onClick={handleDownloadResult}
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                    disabled={!disclaimerAgreed}
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Download className="w-4 h-4 mr-2" />
                     {t('home.downloadResult') || '下载结果'}

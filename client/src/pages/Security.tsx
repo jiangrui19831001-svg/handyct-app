@@ -78,6 +78,11 @@ export default function Security() {
               <p className="text-slate-600">
                 {t('security.zeroServerStorageContent')}
               </p>
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 my-3">
+                <p className="text-xs text-blue-900 font-semibold">
+                  🔐 <strong>法律保障：</strong>因为我们不存储任何用户数据，所以我们无法泄露数据。这是最强的数据保护承诺——没有数据留在我们的服务器上，就没有数据泄露的法律风险。
+                </p>
+              </div>
               <ul className="space-y-2 text-sm text-slate-600">
                 <li className="flex items-start gap-2">
                   <span className="text-blue-600 font-bold">✓</span>
