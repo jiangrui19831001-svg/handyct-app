@@ -7,9 +7,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { AlertCircle, CheckCircle2, Download, Upload, Zap, Menu, X } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Download, Upload } from 'lucide-react';
 import { CDISC_STANDARDS, validateSDTMCompliance, convertCSVToSDTM, generateFDAComplianceReport } from '@/lib/cdisc';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import Header from '@/components/Header';
 
 export default function Home() {
   useEffect(() => {
@@ -213,41 +214,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/">
-            <a className="flex items-center gap-2">
-              <img src="/logo-icon.png" alt="HandyCT" className="w-10 h-10" />
-              <div>
-                <h1 className="text-lg font-bold text-slate-900">HandyCT</h1>
-                <p className="text-xs text-slate-500">{t('home.subtitle') || '下一代 CDISC 转换器'}</p>
-              </div>
-            </a>
-          </Link>
-          <div className="hidden md:flex items-center gap-4">
-            <Link href="/">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.home')}</a>
-            </Link>
-            <Link href="/services">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.services')}</a>
-            </Link>
-            <Link href="/security">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.security')}</a>
-            </Link>
-            <Link href="/blog">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('home.techBlog') || 'Tech Blog'}</a>
-            </Link>
-            <LanguageSwitcher />
-          </div>
-          <button
-            className="md:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X /> : <Menu />}
-          </button>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="border-b border-slate-200 bg-white py-16">

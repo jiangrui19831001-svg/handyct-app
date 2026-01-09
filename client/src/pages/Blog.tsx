@@ -5,9 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Calendar, Clock, Search, Zap } from 'lucide-react';
+import { ArrowRight, Calendar, Clock, Search } from 'lucide-react';
 import { getAllBlogArticles, BLOG_ARTICLES } from '@/lib/blog-data';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import Header from '@/components/Header';
 
 // 分类翻译映射
 const CATEGORY_TRANSLATIONS: { [key: string]: { zh: string; en: string } } = {
@@ -91,38 +92,7 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Header Navigation */}
-      <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/">
-            <a className="flex items-center gap-2">
-              <img src="/logo-icon.png" alt="HandyCT" className="w-10 h-10" />
-              <div>
-                <h1 className="text-lg font-bold text-slate-900">HandyCT</h1>
-                <p className="text-xs text-slate-500">{t('home.subtitle') || '下一代 CDISC 转换器'}</p>
-              </div>
-            </a>
-          </Link>
-          <div className="hidden md:flex items-center gap-4">
-            <Link href="/">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.home')}</a>
-            </Link>
-            <Link href="/services">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.services')}</a>
-            </Link>
-            <Link href="/security">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.security')}</a>
-            </Link>
-            <Link href="/blog">
-              <a className="text-slate-600 hover:text-slate-900 text-sm font-medium text-emerald-600">{t('home.techBlog') || 'Tech Blog'}</a>
-            </Link>
-            <LanguageSwitcher />
-          </div>
-          <button className="md:hidden">
-            <LanguageSwitcher />
-          </button>
-        </div>
-      </header>
+      <Header />
 
       {/* Blog Title Section */}
       <section className="border-b border-slate-200 bg-white py-12">

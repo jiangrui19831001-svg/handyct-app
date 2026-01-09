@@ -13,6 +13,7 @@ import BlogArticle from "./pages/BlogArticle";
 import Services from "./pages/Services";
 import Security from "./pages/Security";
 import Contact from "./pages/Contact";
+import LogoComparison from "./pages/LogoComparison";
 
 function AppRouter() {
   // make sure to consider if you need authentication for certain routes
@@ -24,6 +25,7 @@ function AppRouter() {
       <Route path={"/services"} component={Services} />
       <Route path={"/security"} component={Security} />
       <Route path={"/contact"} component={Contact} />
+      <Route path={"/logo-comparison"} component={LogoComparison} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Calendar, Clock, BookOpen } from 'lucide-react';
 import { getBlogArticleBySlug, getRelatedArticles } from '@/lib/blog-data';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import Header from '@/components/Header';
 
 export default function BlogArticle() {
   const [match, params] = useRoute('/blog/:slug');
@@ -100,38 +101,7 @@ export default function BlogArticle() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Header Navigation */}
-      <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/">
-            <a className="flex items-center gap-2">
-              <img src="/logo-icon.png" alt="HandyCT" className="w-10 h-10" />
-              <div>
-                <h1 className="text-lg font-bold text-slate-900">HandyCT</h1>
-                <p className="text-xs text-slate-500">{t('home.subtitle')}</p>
-              </div>
-            </a>
-          </Link>
-          <div className="hidden md:flex items-center gap-4">
-            <Link href="/">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.home')}</a>
-            </Link>
-            <Link href="/services">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.services')}</a>
-            </Link>
-            <Link href="/security">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.security')}</a>
-            </Link>
-            <Link href="/blog">
-              <a className="text-slate-600 hover:text-slate-900 text-sm font-medium text-emerald-600">{t('home.techBlog')}</a>
-            </Link>
-            <LanguageSwitcher />
-          </div>
-          <button className="md:hidden">
-            <LanguageSwitcher />
-          </button>
-        </div>
-      </header>
+      <Header />
 
       <main className="container py-8 md:py-12">
         <div className="grid gap-8 lg:grid-cols-4">

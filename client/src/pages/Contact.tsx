@@ -5,8 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { CheckCircle2, Zap } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import Header from '@/components/Header';
 
 export default function Contact() {
   useEffect(() => {
@@ -58,37 +59,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/">
-            <a className="flex items-center gap-3 hover:opacity-80">
-              <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center">
-                <Zap className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-slate-900">HandyCT 2.0</h1>
-                <p className="text-xs text-slate-500">{t('home.subtitle')}</p>
-              </div>
-            </a>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link href="/">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('common.home')}</a>
-            </Link>
-            <Link href="/services">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.services')}</a>
-            </Link>
-            <Link href="/security">
-              <a className="text-slate-600 hover:text-slate-900 text-sm">{t('footer.security')}</a>
-            </Link>
-            <Link href="/contact">
-              <a className="text-emerald-600 font-medium text-sm">{t('common.contact')}</a>
-            </Link>
-            <LanguageSwitcher />
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="border-b border-slate-200 bg-white py-16">
