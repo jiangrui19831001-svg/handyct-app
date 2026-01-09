@@ -4,7 +4,6 @@ import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Lock, Server, Shield } from 'lucide-react';
-import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Header from '@/components/Header';
 
 export default function Security() {
@@ -30,7 +29,7 @@ export default function Security() {
 
       {/* Security Features */}
       <main className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 gap-8 mb-16" id="fda">
           {/* Local Browser Processing */}
           <Card>
             <CardHeader>
@@ -64,7 +63,7 @@ export default function Security() {
           </Card>
 
           {/* Zero Server Storage */}
-          <Card>
+          <Card id="cdisc">
             <CardHeader>
               <div className="flex items-center gap-3 mb-2">
                 <div className="p-3 bg-blue-100 rounded-lg">
@@ -97,7 +96,7 @@ export default function Security() {
         </div>
 
         {/* Compliance & Standards */}
-        <Card className="mb-16">
+        <Card className="mb-16" id="compliance">
           <CardHeader>
             <div className="flex items-center gap-3 mb-2">
               <div className="p-3 bg-purple-100 rounded-lg">
@@ -108,19 +107,19 @@ export default function Security() {
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-3 gap-8">
-              <div id="fda">
+              <div>
                 <h3 className="font-bold text-slate-900 mb-2">{t('security.fdaCompliant')}</h3>
                 <p className="text-sm text-slate-600">
                   {t('security.fdaCompliantDesc')}
                 </p>
               </div>
-              <div id="cdisc">
+              <div>
                 <h3 className="font-bold text-slate-900 mb-2">{t('security.cdisc')}</h3>
                 <p className="text-sm text-slate-600">
                   {t('security.cdiscDesc')}
                 </p>
               </div>
-              <div id="data-privacy">
+              <div>
                 <h3 className="font-bold text-slate-900 mb-2">{t('security.dataPrivacy')}</h3>
                 <p className="text-sm text-slate-600">
                   {t('security.dataPrivacyDesc')}
@@ -174,7 +173,7 @@ export default function Security() {
               <ul className="space-y-2 text-sm text-slate-600">
                 <li><a href="#fda" className="hover:text-slate-900">{t('footer.fdaCompliant')}</a></li>
                 <li><a href="#cdisc" className="hover:text-slate-900">{t('footer.cdisc')}</a></li>
-                <li><a href="#data-privacy" className="hover:text-slate-900">{t('footer.gdprHipaa')}</a></li>
+                <li><a href="#compliance" className="hover:text-slate-900">{t('footer.gdprHipaa')}</a></li>
               </ul>
             </div>
           </div>

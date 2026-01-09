@@ -14,7 +14,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/">
           <a className="flex items-center gap-2">
-            <img src="/logo-icon.png" alt="HandyCT" className="w-10 h-10" />
+            <div className="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-sm">H</div>
             <div>
               <h1 className="text-lg font-bold text-slate-900">HandyCT</h1>
               <p className="text-xs text-slate-500">{t('home.subtitle') || '下一代 CDISC 转换器'}</p>

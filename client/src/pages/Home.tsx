@@ -501,7 +501,7 @@ export default function Home() {
               <ul className="space-y-2 text-sm text-slate-600">
                 <li><Link href="/security#fda"><a className="hover:text-slate-900">{t('footer.fdaCompliant')}</a></Link></li>
                 <li><Link href="/security#cdisc"><a className="hover:text-slate-900">{t('footer.cdisc')}</a></Link></li>
-                <li><Link href="/security#data-privacy"><a className="hover:text-slate-900">{t('footer.gdprHipaa')}</a></Link></li>
+                <li><Link href="/security#compliance"><a className="hover:text-slate-900">{t('footer.gdprHipaa')}</a></Link></li>
               </ul>
             </div>
           </div>
