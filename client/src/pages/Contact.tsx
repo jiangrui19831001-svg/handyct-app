@@ -225,8 +225,8 @@ export default function Contact() {
             <div>
               <h3 className="font-bold text-slate-900 mb-4">{t('footer.legal')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><a href="#" className="hover:text-slate-900">{t('footer.privacyPolicy')}</a></li>
-                <li><a href="#" className="hover:text-slate-900">{t('footer.termsOfService')}</a></li>
+                <li><Link href="/privacy"><a className="hover:text-slate-900">{t('footer.privacyPolicy')}</a></Link></li>
+                <li><Link href="/terms"><a className="hover:text-slate-900">{t('footer.termsOfService')}</a></Link></li>
               </ul>
             </div>
             <div>

@@ -492,21 +492,21 @@ export default function Home() {
             <div>
               <h3 className="font-bold text-slate-900 mb-4">{t('footer.legal')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li><a href="#" className="hover:text-slate-900">{t('footer.privacyPolicy')}</a></li>
-                <li><a href="#" className="hover:text-slate-900">{t('footer.termsOfService')}</a></li>
+                <li><Link href="/privacy"><a className="hover:text-slate-900">{t('footer.privacyPolicy')}</a></Link></li>
+                <li><Link href="/terms"><a className="hover:text-slate-900">{t('footer.termsOfService')}</a></Link></li>
               </ul>
             </div>
             <div>
               <h3 className="font-bold text-slate-900 mb-4">{t('footer.standards')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li>{t('footer.fdaCompliant')}</li>
-                <li>{t('footer.cdisc')}</li>
-                <li>{t('footer.gdprHipaa')}</li>
+                <li><Link href="/security#fda"><a className="hover:text-slate-900">{t('footer.fdaCompliant')}</a></Link></li>
+                <li><Link href="/security#cdisc"><a className="hover:text-slate-900">{t('footer.cdisc')}</a></Link></li>
+                <li><Link href="/security#compliance"><a className="hover:text-slate-900">{t('footer.gdprHipaa')}</a></Link></li>
               </ul>
             </div>
           </div>
           <div className="border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
-            <p>&copy; 2026 HandyCT. {t('footer.allRightsReserved')} | <a href="#" className="hover:text-slate-900">{t('footer.privacy')}</a> | <a href="#" className="hover:text-slate-900">{t('footer.terms')}</a></p>
+            <p>&copy; 2026 HandyCT. {t('footer.allRightsReserved')} | <Link href="/privacy"><a className="hover:text-slate-900">{t('footer.privacy')}</a></Link> | <Link href="/terms"><a className="hover:text-slate-900">{t('footer.terms')}</a></Link></p>
             <p className="mt-2">{t('footer.disclaimer')}</p>
           </div>
         </div>
