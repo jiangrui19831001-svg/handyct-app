@@ -22,32 +22,21 @@ export default function LandingPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative flex-1 py-24 px-4 overflow-hidden" style={{
-        background: 'linear-gradient(135deg, #0F172A 0%, #1e293b 50%, #0F172A 100%)',
-        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(16, 185, 129, 0.03) 35px, rgba(16, 185, 129, 0.03) 70px), repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(16, 185, 129, 0.03) 35px, rgba(16, 185, 129, 0.03) 70px)'
-      }}>
-        <div className="max-w-6xl mx-auto text-center relative z-10">
-          <h1 className="text-6xl md:text-7xl font-black mb-8 leading-tight tracking-tight" style={{'color': '#ffffff'}}>
+      <section className="flex-1 bg-gradient-to-br from-slate-50 via-white to-emerald-50 py-20 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
             {t('home.landing.heroTitle') || 'AI 驱动的临床数据合规引擎'}
           </h1>
-          <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed" style={{'color': '#e2e8f0'}}>
+          <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-3xl mx-auto">
             {t('home.landing.heroSubtitle') || '让 CDISC 转换告别手动映射。从数天到数分钟，端侧 AI 实现 100% 数据隐私。'}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
-              onClick={handleStartConversion}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white text-lg font-bold rounded-2xl transition shadow-soft-lg"
-            >
-              <Zap className="w-5 h-5" />
-              {t('home.landing.startButton') || '立即开始转换'}
-            </button>
-            <a
-              href="/#/security-whitepaper"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 glass text-white text-lg font-bold rounded-2xl transition shadow-soft-lg hover:shadow-soft-lg"
-            >
-              📄 {t('home.landing.whitepaper') || '查看安全白皮书'}
-            </a>
-          </div>
+          <button
+            onClick={handleStartConversion}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-600 to-green-600 text-white text-lg font-bold rounded-lg hover:from-emerald-700 hover:to-green-700 transition shadow-lg"
+          >
+            <Zap className="w-5 h-5" />
+            {t('home.landing.startButton') || '立即开始转换'}
+          </button>
         </div>
       </section>
 
