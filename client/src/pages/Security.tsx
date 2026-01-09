@@ -108,19 +108,19 @@ export default function Security() {
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-3 gap-8">
-              <div>
+              <div id="fda">
                 <h3 className="font-bold text-slate-900 mb-2">{t('security.fdaCompliant')}</h3>
                 <p className="text-sm text-slate-600">
                   {t('security.fdaCompliantDesc')}
                 </p>
               </div>
-              <div>
+              <div id="cdisc">
                 <h3 className="font-bold text-slate-900 mb-2">{t('security.cdisc')}</h3>
                 <p className="text-sm text-slate-600">
                   {t('security.cdiscDesc')}
                 </p>
               </div>
-              <div>
+              <div id="data-privacy">
                 <h3 className="font-bold text-slate-900 mb-2">{t('security.dataPrivacy')}</h3>
                 <p className="text-sm text-slate-600">
                   {t('security.dataPrivacyDesc')}
@@ -172,14 +172,14 @@ export default function Security() {
             <div>
               <h3 className="font-bold text-slate-900 mb-4">{t('footer.standards')}</h3>
               <ul className="space-y-2 text-sm text-slate-600">
-                <li>{t('footer.fdaCompliant')}</li>
-                <li>{t('footer.cdisc')}</li>
-                <li>{t('footer.gdprHipaa')}</li>
+                <li><a href="#fda" className="hover:text-slate-900">{t('footer.fdaCompliant')}</a></li>
+                <li><a href="#cdisc" className="hover:text-slate-900">{t('footer.cdisc')}</a></li>
+                <li><a href="#data-privacy" className="hover:text-slate-900">{t('footer.gdprHipaa')}</a></li>
               </ul>
             </div>
           </div>
           <div className="border-t border-slate-200 pt-8 text-center text-sm text-slate-600">
-            <p>&copy; 2026 HandyCT. {t('footer.allRightsReserved')} | <a href="#" className="hover:text-slate-900">{t('footer.privacy')}</a> | <a href="#" className="hover:text-slate-900">{t('footer.terms')}</a></p>
+            <p>&copy; 2026 HandyCT. {t('footer.allRightsReserved')} | <Link href="/privacy"><a className="hover:text-slate-900">{t('footer.privacy')}</a></Link> | <Link href="/terms"><a className="hover:text-slate-900">{t('footer.terms')}</a></Link></p>
             <p className="mt-2">{t('footer.disclaimer')}</p>
           </div>
         </div>
