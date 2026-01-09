@@ -117,3 +117,33 @@
 - [ ] 截图 B：首页"断网可用"安全自检文案
 - [ ] 截图 C：填充后的《隐私政策》页面
 - [ ] 视频演示：Footer 跳转到 Security 锚点
+
+
+## 15. 🚨 结项任务：架构正规化 + 安全合规自证 + 法律内容落地 + 安全白皮书
+
+### 15.1 Footer 全站组件化与导航重构
+- [x] 在 Footer.tsx 中添加 LinkedIn 官方图标和链接（https://www.linkedin.com/）
+- [x] 确保所有"标准"项指向正确的锚点（#/security#fda、#/security#cdisc、#/security#compliance）
+- [x] 验证 Footer 在 7 个页面中正确昺示
+### 15.2 安全白皮书页面创建
+- [x] 新建 /security-whitepaper 路由页面
+- [x] 编写 500 字白皮书：端侧 AI、无后端 API、断网转换、GDPR/HIPAA 规避、审计透明
+- [x] 在首页转换器旁添加"安全自检"说明和"下载/查看 IT 安全白皮书"按麻钮
+
+### 15.3 法律文案填充
+- [x] Privacy Policy：明确不存储、不访问、不处理任何用户原始数据，数据主权归用户所有
+- [x] Terms of Service：加入"辅助工具免责声明"，用户需对结果承担 100% 核查责任
+
+### 15.4 Security 页面物理加固
+- [x] 为三个板块添加 id="fda"、id="cdisc"、id="compliance"
+- [x] 为标题添加 scroll-margin-top: 100px，防止跳转后被 Header 挡住
+
+### 15.5 全站 SEO 与视觉微调
+- [x] 为每个页面添加帮一的 Title（如：HandyCT - On-device AI CDISC Converter）
+- [x] 确保所有页面的绿色"H"字内联 Logo 统一且清晰
+
+### 15.6 强制交付证明
+- [x] 截图 1：Footer 跳转演示
+- [x] 截图 2：新建的白皮书页面截图
+- [x] 截图 3：断网自检文案的首页布局
+- [x] 截图 4：填充后的法律页面

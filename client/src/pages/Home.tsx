@@ -264,7 +264,11 @@ export default function Home() {
                       <li><strong>照常转换</strong> → 转换仍可进行。证明您的数据从未触网。</li>
                     </ol>
                   </div>
-                  <p className="text-xs text-green-700 mt-2 font-semibold">💡 数据处理逻辑：Client-side JavaScript，无任何后端接收接口</p>
+                  <p className="text-xs text-green-700 mt-2 mb-3 font-semibold">💡 数据处理逻辑：Client-side JavaScript，无任何后端接收接口</p>
+                  <a href="/#/security-whitepaper" className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white text-xs font-semibold rounded hover:bg-green-700 transition">
+                    <span>📄</span>
+                    查看 IT 安全白皮书
+                  </a>
                 </div>
               </div>
             </div>
