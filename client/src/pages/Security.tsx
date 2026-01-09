@@ -101,6 +101,50 @@ export default function Security() {
           </Card>
         </div>
 
+        {/* Why Choose HandyCT vs Generic AI */}
+        <section className="mb-16 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200 p-8">
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">为什么选择 HandyCT 而非通用 AI？</h2>
+          <p className="text-slate-600 mb-8">HandyCT 专为 CDISC 数据标准化设计，相比通用大模型具有显著优势</p>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Advantage A */}
+            <div className="bg-white rounded-lg p-6 border border-blue-100 shadow-sm hover:shadow-md transition">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">A</div>
+                <h3 className="font-bold text-slate-900">垂直领域模型</h3>
+              </div>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                HandyCT 深度集成 CDISC IG 最新标准库，无需反复调试 Prompt。开箱即用的 SDTM、ADaM、Define-XML 转换规则，省去 CRO 程序员 80% 的调试时间。
+              </p>
+              <p className="text-xs text-blue-600 font-semibold mt-3">✓ 专业级精度 | ✓ 零学习曲线</p>
+            </div>
+
+            {/* Advantage B */}
+            <div className="bg-white rounded-lg p-6 border border-blue-100 shadow-sm hover:shadow-md transition">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">B</div>
+                <h3 className="font-bold text-slate-900">实时合规校验</h3>
+              </div>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                内置 FDA 级验证规则库，直接指出格式错误、缺失字段、数据类型不匹配等问题。规避通用 AI 的幻觉风险，确保数据 100% 符合监管要求。
+              </p>
+              <p className="text-xs text-blue-600 font-semibold mt-3">✓ FDA 级验证 | ✓ 零风险交付</p>
+            </div>
+
+            {/* Advantage C */}
+            <div className="bg-white rounded-lg p-6 border border-blue-100 shadow-sm hover:shadow-md transition">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">C</div>
+                <h3 className="font-bold text-slate-900">零集成成本</h3>
+              </div>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                无需公司 IT 部门部署、无需 API 密钥配置、无需服务器维护。浏览器本地运行，立即可用。对标内网大模型的部署成本，HandyCT 成本为零。
+              </p>
+              <p className="text-xs text-blue-600 font-semibold mt-3">✓ 即插即用 | ✓ 无维护成本</p>
+            </div>
+          </div>
+        </section>
+
         {/* Compliance & Standards */}
         <Card className="mb-16" id="compliance">
           <CardHeader>
@@ -118,18 +162,33 @@ export default function Security() {
                 <p className="text-sm text-slate-600">
                   {t('security.fdaCompliantDesc')}
                 </p>
+                <div className="mt-3 p-2 bg-purple-50 rounded border border-purple-200">
+                  <p className="text-xs text-purple-700 font-semibold">📋 规则库版本</p>
+                  <p className="text-xs text-purple-600 mt-1">FDA 21 CFR Part 11</p>
+                  <p className="text-xs text-purple-600">ICH-GCP E6(R2)</p>
+                </div>
               </div>
               <div>
                 <h3 className="font-bold text-slate-900 mb-2">{t('security.cdisc')}</h3>
                 <p className="text-sm text-slate-600">
                   {t('security.cdiscDesc')}
                 </p>
+                <div className="mt-3 p-2 bg-purple-50 rounded border border-purple-200">
+                  <p className="text-xs text-purple-700 font-semibold">📋 规则库版本</p>
+                  <p className="text-xs text-purple-600 mt-1">SDTM v1.7 / ADaM v1.1</p>
+                  <p className="text-xs text-purple-600">Define-XML v2.1</p>
+                </div>
               </div>
               <div>
                 <h3 className="font-bold text-slate-900 mb-2">{t('security.dataPrivacy')}</h3>
                 <p className="text-sm text-slate-600">
                   {t('security.dataPrivacyDesc')}
                 </p>
+                <div className="mt-3 p-2 bg-purple-50 rounded border border-purple-200">
+                  <p className="text-xs text-purple-700 font-semibold">📋 规则库版本</p>
+                  <p className="text-xs text-purple-600 mt-1">GDPR 2018/679</p>
+                  <p className="text-xs text-purple-600">HIPAA 45 CFR 164</p>
+                </div>
               </div>
             </div>
           </CardContent>
