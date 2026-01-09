@@ -27,10 +27,10 @@ export default function LandingPage() {
         backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(16, 185, 129, 0.03) 35px, rgba(16, 185, 129, 0.03) 70px), repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(16, 185, 129, 0.03) 35px, rgba(16, 185, 129, 0.03) 70px)'
       }}>
         <div className="max-w-6xl mx-auto text-center relative z-10">
-          <h1 className="text-6xl md:text-7xl font-black text-white mb-8 leading-tight tracking-tight">
+          <h1 className="text-6xl md:text-7xl font-black mb-8 leading-tight tracking-tight" style={{'color': '#ffffff'}}>
             {t('home.landing.heroTitle') || 'AI 驱动的临床数据合规引擎'}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed" style={{'color': '#e2e8f0'}}>
             {t('home.landing.heroSubtitle') || '让 CDISC 转换告别手动映射。从数天到数分钟，端侧 AI 实现 100% 数据隐私。'}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
